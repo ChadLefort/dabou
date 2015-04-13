@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dabou</title>
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/vendor/angular-toastr/css/angular-toastr.min.css">
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+{{> nav}}
+
+<div class="container">
+    {{{ body }}}
+</div>
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/vendor/jquery/js/jquery.min.js"></script>
+<script src="/vendor/angular/js/angular.min.js"></script>
+<script src="/vendor/angular-bootstrap/js/ui-bootstrap-tpls.min.js"></script>
+<script src="/vendor/angular-bootstrap/js/ui-bootstrap.min.js"></script>
+<script src="/vendor/angular-toastr/js/angular-toastr.min.js"></script>
+<script src="/vendor/angular-toastr/js/angular-toastr.tpls.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/vendor/ui-router/js/angular-ui-router.min.js"></script>
+<script src="/vendor/xtform/xtForm.js"></script>
+<script src="/js/custom.js"></script>
+<!--SCRIPTS END-->
+
+<!--TEMPLATES-->
+
+<!--TEMPLATES END-->
+
+{{#if sails.config.livereloadPath}}
+    <script src="{{sails.config.livereloadPath}}"></script>
+{{/if}}
+
+</body>
+</html>
