@@ -1,0 +1,9 @@
+{{#if error}}
+    {{error}}
+{{/if}}
+
+{{#each passport}}
+	<div class="col-md-4">
+      	<a href="/user/unlink/{{provider}}" role="button" class="btn btn-{{provider}} auth-btn"><i class="fa fa-{{provider}}"></i> unlink {{provider}}</a>
+    </div>
+{{/each}}
