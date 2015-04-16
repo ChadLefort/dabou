@@ -26,20 +26,25 @@
 
 {{> nav}}
 
-{{{ body }}}
+{{!-- {{{ body }}} --}}
+
+<div ui-view ng-app="dabou.auth"></div>
 
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js"></script>
 <script src="/vendor/jquery/js/jquery.min.js"></script>
 <script src="/vendor/angular/js/angular.min.js"></script>
 <script src="/vendor/angular-bootstrap/js/ui-bootstrap-tpls.min.js"></script>
-<script src="/vendor/angular-bootstrap/js/ui-bootstrap.min.js"></script>
-<script src="/vendor/angular-toastr/js/angular-toastr.min.js"></script>
 <script src="/vendor/angular-toastr/js/angular-toastr.tpls.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/vendor/ui-router/js/angular-ui-router.min.js"></script>
 <script src="/vendor/xtform/xtForm.js"></script>
 <script src="/js/custom.js"></script>
+<script src="/spa/auth/auth.module.js"></script>
+<script src="/spa/auth/auth.route.js"></script>
+<script src="/spa/auth/controllers/index.js"></script>
+<script src="/spa/auth/controllers/login.js"></script>
+<script src="/spa/auth/controllers/register.js"></script>
 <!--SCRIPTS END-->
 
 <!--TEMPLATES-->

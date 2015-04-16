@@ -43,11 +43,11 @@
       "js": "release/angular-ui-router.min.js"
     },
     "angular-toastr": {
-      "js": "dist/*.min.js",
+      "js": "dist/angular-toastr.tpls.min.js",
       "css": "dist/*.min.css"
     },
     "angular-bootstrap": {
-      "js": "*.min.js"
+      "js": "ui-bootstrap-tpls.min.js"
     },
     "xtorm": {
       "js": "xtForm.js"
