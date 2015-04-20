@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="dabou.auth">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,9 +26,13 @@
 
 {{> nav}}
 
-{{!-- {{{ body }}} --}}
-
-<div ui-view ng-app="dabou.auth"></div>
+<div ui-view>
+    {{#if errors}}
+      {{#each errors}}
+          <div ng-init="vm.errors('{{this}}')"></div>
+      {{/each}}
+    {{/if}}
+</div>
 
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js"></script>
@@ -36,15 +40,19 @@
 <script src="/vendor/angular/js/angular.min.js"></script>
 <script src="/vendor/angular-bootstrap/js/ui-bootstrap-tpls.min.js"></script>
 <script src="/vendor/angular-toastr/js/angular-toastr.tpls.min.js"></script>
+<script src="/vendor/angular-ui-router/angular-ui-router.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/vendor/ui-router-extras/ct-ui-router-extras.js"></script>
 <script src="/vendor/ui-router/js/angular-ui-router.min.js"></script>
 <script src="/vendor/xtform/xtForm.js"></script>
 <script src="/js/custom.js"></script>
 <script src="/spa/auth/auth.module.js"></script>
 <script src="/spa/auth/auth.route.js"></script>
+<script src="/spa/auth/controllers/errors.js"></script>
 <script src="/spa/auth/controllers/index.js"></script>
 <script src="/spa/auth/controllers/login.js"></script>
 <script src="/spa/auth/controllers/register.js"></script>
+<script src="/spa/auth/services/auth.service.js"></script>
 <!--SCRIPTS END-->
 
 <!--TEMPLATES-->

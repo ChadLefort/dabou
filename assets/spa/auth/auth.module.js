@@ -9,14 +9,14 @@
       *
       */
     angular.module('dabou.auth', [
-        // Angular modules        
+        // Angular modules
 
         // Custom modules
 
         // 3rd Party Modules
         'ui.router',
         'ui.bootstrap',
-        'xtForm'
+        'xtForm',
+        'toastr'
     ]);
 })();
-                

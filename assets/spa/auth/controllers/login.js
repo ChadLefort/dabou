@@ -1,39 +1,49 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-      .module('dabou.auth')
-      .controller('LoginController', LoginController);
+  angular
+    .module('dabou.auth')
+    .controller('LoginController', LoginController);
 
-   /**
-     * @ngdoc controller
-     * @name dabou.auth.controller:LoginController
-     * @description
-     *
-     */
-    LoginController.$inject = [];
+  /**
+   * @ngdoc controller
+   * @name dabou.auth.controller:LoginController
+   * @description
+   *
+   */
+  LoginController.$inject = ['authService', '$state', 'toastr'];
 
-    function LoginController() {
-        var vm = this;
+  function LoginController(authService, $state, toastr) {
+    var vm = this;
 
-        // PUBLIC PROPERTIES
-        vm.title = 'Login';
+    // PUBLIC PROPERTIES
+    vm.title = 'Login';
+    vm.user = {};
 
+    // PUBLIC FUNCTIONS
+    vm.login = login;
 
-        // PUBLIC FUNCTIONS
-        vm.doSomething = doSomething;
+    // init
+    activate();
 
+    // PRIVATE FUNCTIONS
 
-        // init
-        activate();
-
-
-        //
-        // PRIVATE FUNCTIONS
-
-        function activate() { }
-
-        function doSomething() { }
+    function activate() {
     }
+
+    function login() {
+      authService.login(vm.user)
+        .then(function (response) {
+          console.log(response);
+          if (response.data.error) {
+            var errors = response.data.error;
+            angular.forEach(errors, function (value, key) {
+              toastr.error(errors[key]);
+            });
+          } else {
+            $state.go('index');
+          }
+        })
+    }
+  }
 })();
-                

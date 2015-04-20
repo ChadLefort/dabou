@@ -24,78 +24,79 @@ var Gravatar = require('machinepack-gravatar');
  * @param {Object}   res
  * @param {Function} next
  */
-exports.register = function(req, res, next) {
-    var email = req.param('email'),
-        username = req.param('username'),
-        password = req.param('password');
+exports.register = function (req, res, next) {
+  var email = req.param('email'),
+    username = req.param('username'),
+    password = req.param('password');
 
-    if (!email) {
-        req.flash('error', 'Error.Passport.Email.Missing');
-        return next(new Error('No email was entered.'));
-    }
+  if (!email) {
+    req.flash('error', 'Error.Passport.Email.Missing');
+  }
 
-    if (!username) {
-        req.flash('error', 'Error.Passport.Username.Missing');
-        return next(new Error('No username was entered.'));
-    }
+  if (!username) {
+    req.flash('error', 'Error.Passport.Username.Missing');
+  }
 
-    if (!password) {
-        req.flash('error', 'Error.Passport.Password.Missing');
-        return next(new Error('No password was entered.'));
-    }
+  if (!password) {
+    req.flash('error', 'Error.Passport.Password.Missing');
+  }
 
-    Gravatar.getImageUrl({
-        emailAddress: req.param('email'),
-        defaultImage: 'http://old-blog.chadlefort.com/assets/img/user-images/default_image.png',
-        rating: 'g',
-        useHttps: true
-    }).exec({
-        error: function(err) {
-            return res.negotiate(err);
-        },
-        success: function(gravatarUrl) {
+  if (!email || !username || !password) {
+    return next(new Error('Missing requied fields.'));
+  }
 
-            User.create({
-                username: username,
-                email: email,
-                gravatar: gravatarUrl
-            }, function(err, user) {
-                if (err) {
-                    if (err.code === 'E_VALIDATION') {
-                        if (err.invalidAttributes.email) {
-                            req.flash('error', 'Error.Passport.Email.Exists');
-                        } else {
-                            req.flash('error', 'Error.Passport.User.Exists');
-                        }
-                    }
+  Gravatar.getImageUrl({
+    emailAddress: req.param('email'),
+    defaultImage: 'http://old-blog.chadlefort.com/assets/img/user-images/default_image.png',
+    rating: 'g',
+    useHttps: true
+  }).exec({
+    error: function (err) {
+      return next(err);
+    },
+    success: function (gravatarUrl) {
 
-                    return next(err);
-                }
+      User.create({
+        username: username,
+        email: email,
+        gravatar: gravatarUrl
+      }, function (err, user) {
+        if (err) {
+          if (err.code === 'E_VALIDATION') {
+            if (err.invalidAttributes.email) {
+              req.flash('error', 'Error.Passport.Email.Exists');
+            } else {
+              req.flash('error', 'Error.Passport.User.Exists');
+            }
+          }
 
-                // Generating accessToken for API authentication
-                var token = crypto.randomBytes(48).toString('base64');
-
-                Passport.create({
-                    protocol: 'local',
-                    password: password,
-                    user: user.id,
-                    accessToken: token
-                }, function(err, passport) {
-                    if (err) {
-                        if (err.code === 'E_VALIDATION') {
-                            req.flash('error', 'Error.Passport.Password.Invalid');
-                        }
-
-                        return user.destroy(function(destroyErr) {
-                            next(destroyErr || err);
-                        });
-                    }
-
-                    next(null, user);
-                });
-            });
+          return next(err);
         }
-    });
+
+        // Generating accessToken for API authentication
+        var token = crypto.randomBytes(48).toString('base64');
+
+        Passport.create({
+          protocol: 'local',
+          password: password,
+          user: user.id,
+          accessToken: token
+        }, function (err, passport) {
+          if (err) {
+            if (err.code === 'E_VALIDATION') {
+              req.flash('error', 'Error.Passport.Password.Invalid');
+            }
+
+            return user.destroy(function (destroyErr) {
+              next(destroyErr || err);
+            });
+          }
+
+          return res.send({success: 'Success.Passport.User.Created', user: user});
+        });
+      });
+    }
+  });
 };
 
 /**
@@ -109,30 +110,30 @@ exports.register = function(req, res, next) {
  * @param {Object}   res
  * @param {Function} next
  */
-exports.connect = function(req, res, next) {
-    var user = req.user,
-        password = req.param('password');
+exports.connect = function (req, res, next) {
+  var user = req.user,
+    password = req.param('password');
 
-    Passport.findOne({
+  Passport.findOne({
+    protocol: 'local',
+    user: user.id
+  }, function (err, passport) {
+    if (err) {
+      return next(err);
+    }
+
+    if (!passport) {
+      Passport.create({
         protocol: 'local',
+        password: password,
         user: user.id
-    }, function(err, passport) {
-        if (err) {
-            return next(err);
-        }
-
-        if (!passport) {
-            Passport.create({
-                protocol: 'local',
-                password: password,
-                user: user.id
-            }, function(err, passport) {
-                next(err, user);
-            });
-        } else {
-            next(null, user);
-        }
-    });
+      }, function (err, passport) {
+        next(err, user);
+      });
+    } else {
+      next(null, user);
+    }
+  });
 };
 
 /**
@@ -147,52 +148,52 @@ exports.connect = function(req, res, next) {
  * @param {string}   password
  * @param {Function} next
  */
-exports.login = function(req, identifier, password, next) {
-    var isEmail = validator.isEmail(identifier),
-        query = {};
+exports.login = function (req, identifier, password, next) {
+  var isEmail = validator.isEmail(identifier),
+    query = {};
 
-    if (isEmail) {
-        query.email = identifier;
-    } else {
-        query.username = identifier;
+  if (isEmail) {
+    query.email = identifier;
+  } else {
+    query.username = identifier;
+  }
+
+  User.findOne(query, function (err, user) {
+    if (err) {
+      return next(err);
     }
 
-    User.findOne(query, function(err, user) {
-        if (err) {
+    if (!user) {
+      if (isEmail) {
+        req.flash('error', 'Error.Passport.Email.NotFound');
+      } else {
+        req.flash('error', 'Error.Passport.Username.NotFound');
+      }
+
+      return next(null, false);
+    }
+
+    Passport.findOne({
+      protocol: 'local',
+      user: user.id
+    }, function (err, passport) {
+      if (passport) {
+        passport.validatePassword(password, function (err, res) {
+          if (err) {
             return next(err);
-        }
+          }
 
-        if (!user) {
-            if (isEmail) {
-                req.flash('error', 'Error.Passport.Email.NotFound');
-            } else {
-                req.flash('error', 'Error.Passport.Username.NotFound');
-            }
-
+          if (!res) {
+            req.flash('error', 'Error.Passport.Password.Wrong');
             return next(null, false);
-        }
-
-        Passport.findOne({
-            protocol: 'local',
-            user: user.id
-        }, function(err, passport) {
-            if (passport) {
-                passport.validatePassword(password, function(err, res) {
-                    if (err) {
-                        return next(err);
-                    }
-
-                    if (!res) {
-                        req.flash('error', 'Error.Passport.Password.Wrong');
-                        return next(null, false);
-                    } else {
-                        return next(null, user);
-                    }
-                });
-            } else {
-                req.flash('error', 'Error.Passport.Password.NotSet');
-                return next(null, false);
-            }
+          } else {
+            return next(null, user);
+          }
         });
+      } else {
+        req.flash('error', 'Error.Passport.Password.NotSet');
+        return next(null, false);
+      }
     });
+  });
 };

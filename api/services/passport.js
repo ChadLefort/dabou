@@ -297,12 +297,12 @@ passport.loadStrategies = function () {
         self.use(new Strategy(options, self.protocols.local.login));
       }
     } else if (key === 'bearer') {
-      
+
       if (strategies.bearer) {
         Strategy = strategies[key].strategy;
         self.use(new Strategy(self.protocols.bearer.authorize));
       }
-      
+
     } else {
       var protocol = strategies[key].protocol
         , callback = strategies[key].callback;

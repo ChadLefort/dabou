@@ -19,20 +19,25 @@
 
         $stateProvider
             .state('index', {
-                url: '/',
-                templateUrl: 'spa/auth/views/index.html',
+                url: '/index',
+                templateUrl: '/spa/auth/views/index.html',
                 controller: 'IndexController',
                 controllerAs: 'vm'
             })
+            .state('errors', {
+              url: '/',
+              controller: 'ErrorController',
+              controllerAs: 'vm'
+            })
             .state('login', {
                 url: '/login',
-                templateUrl: 'spa/auth/views/login.html',
+                templateUrl: '/spa/auth/views/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm'
             })
             .state('register', {
                 url: '/register',
-                templateUrl: 'spa/auth/views/register.html',
+                templateUrl: '/spa/auth/views/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             })

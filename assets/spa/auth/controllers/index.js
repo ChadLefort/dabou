@@ -11,27 +11,30 @@
      * @description
      *
      */
-    IndexController.$inject = ['$modal'];
+    IndexController.$inject = ['authService', '$modal', '$state'];
 
-    function IndexController($modal) {
+    function IndexController(authService, $modal, $state) {
         var vm = this;
 
         // PUBLIC PROPERTIES
         vm.title = 'Welcome to Dabou!';
 
-
         // PUBLIC FUNCTIONS
         vm.register = register;
-
 
         // init
         activate();
 
-
-        //
         // PRIVATE FUNCTIONS
+        function activate() {
+          authenticated();
+        }
 
-        function activate() { 
+        function authenticated(){
+          authService.authenticated()
+            .then(function(data){
+
+            });
         }
 
         function register() {
@@ -43,4 +46,3 @@
         }
     }
 })();
-                

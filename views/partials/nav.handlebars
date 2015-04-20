@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Dabou</a>
+            <a class="navbar-brand" href="/#/">Dabou</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse pull-right">
             {{#if user}}
@@ -15,12 +15,12 @@
                     <li><a href="/user/account">Hello {{#if user.username}} {{user.username}} {{else}} {{user.email}} {{/if}}</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
-            {{else}}         
+            {{else}}
                 <ul class="nav navbar-nav">
-                    <li><a href="#/login">Login</a></li>
-                    <li><a href="#/register">Register</a></li>
+                    <li><a href="/#/login">Login</a></li>
+                    <li><a href="/#/register">Register</a></li>
                 </ul>
-            {{/if}}      
+            {{/if}}
         </div><!--/.nav-collapse -->
     </div>
 </nav>

@@ -11,7 +11,6 @@
  * For more information on configuring the session, check out:
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.session.html
  */
-
 module.exports.session = {
 
   /***************************************************************************
@@ -31,9 +30,9 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // },
+   cookie: {
+     maxAge: 90 * 24 * 60 * 60 * 1000
+   },
 
   /***************************************************************************
   *                                                                          *
