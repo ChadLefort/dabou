@@ -27,11 +27,7 @@
 {{> nav}}
 
 <div ui-view>
-    {{#if errors}}
-      {{#each errors}}
-          <div ng-init="vm.errors('{{this}}')"></div>
-      {{/each}}
-    {{/if}}
+  {{> errors}}
 </div>
 
 <!--SCRIPTS-->
@@ -58,10 +54,5 @@
 <!--TEMPLATES-->
 
 <!--TEMPLATES END-->
-
-{{#if sails.config.livereloadPath}}
-    <script src="{{sails.config.livereloadPath}}"></script>
-{{/if}}
-
 </body>
 </html>

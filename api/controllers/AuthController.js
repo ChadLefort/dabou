@@ -66,14 +66,13 @@ var AuthController = {
       var flashError = req.flash('error');
 
       if (err && !flashError && !provider) {
-        return res.send({error: 'Error.Passport.Generic'});
+        res.send({error: 'Error.Passport.Generic'});
       } else if (flashError && !provider) {
-        return res.send({error: flashError});
-      } else if (err && !flashError && provider) {
-        req.flash('errors', 'Error.Passport.Generic');
-        return res.view('layouts/layout', {errors: flashError});
-      } else if (flashError && provider) {
-        return res.view('layouts/layout', {errors: flashError});
+        res.send({error: flashError});
+      } else if (err && provider && !flashError) {
+        res.view('layouts/layout', {errors: 'Error.Passport.Generic'});
+      } else {
+        res.view('layouts/layout', {errors: flashError});
       }
     }
 
@@ -99,10 +98,11 @@ var AuthController = {
 
   authenticated: function (req, res) {
     if (req.user) {
-      return res.send({status: true, user: req.user});
+      res.send({status: true, user: req.user});
     } else {
-      return res.send({status: false});
+      res.send({status: false});
     }
+
   }
 };
 

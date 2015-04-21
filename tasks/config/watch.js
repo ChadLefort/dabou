@@ -16,24 +16,14 @@ module.exports = function(grunt) {
 
 	grunt.config.set('watch', {
 		api: {
-			options: {
-                livereload: true
-            },
 			// API files to watch:
 			files: ['api/**/*', '!**/node_modules/**']
 		},
 		views: {
-			options: {
-                livereload: true
-            },
             // Views to watch
             files: ['views/**/*']
         },
 		assets: {
-			options: {
-                livereload: true
-            },
-
 			// Assets to watch:
 			files: ['assets/**/*', 'tasks/pipeline.js', '!**/node_modules/**'],
 

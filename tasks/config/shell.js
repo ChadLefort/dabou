@@ -1,3 +1,12 @@
+/**
+ * Runs sails lift.
+ *
+ * ---------------------------------------------------------------
+ *
+ * Starts the express web server.
+ *
+ */
+
 module.exports = function(grunt) {
 
   grunt.config.set('shell', {
