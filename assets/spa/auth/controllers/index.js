@@ -18,6 +18,10 @@
 
     // PUBLIC PROPERTIES
     vm.title = 'Welcome to Dabou!';
+    vm.username = null;
+    vm.email = null;
+    vm.displayName = '';
+    vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS
     vm.register = register;
@@ -33,7 +37,18 @@
     function authenticated() {
       authService.authenticated()
         .then(function (data) {
-          console.log(data);
+          if(data.status) {
+            vm.isLoggedIn = data.status;
+            vm.username = data.user.username;
+            vm.email = data.user.email;
+            vm.gravatar = data.user.gravatar;
+
+            if(data.user.username != ''){
+              vm.displayName = data.user.username;
+            } else {
+              vm.displayName = data.user.email;
+            }
+          }
         });
     }
 

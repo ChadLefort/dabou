@@ -1,45 +1,104 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    /**
-     * @ngdoc module
-     * @name dabou.auth
-     * @module dabou.auth
-     * @description
-     *
-     */
-    angular
-        .module('dabou.auth')
-        .config(routeConfig);
+  /**
+   * @ngdoc module
+   * @name dabou.auth
+   * @module dabou.auth
+   * @description
+   *
+   */
+  angular
+    .module('dabou.auth')
+    .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function routeConfig($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+  function routeConfig($stateProvider, $urlRouterProvider) {
 
-        $stateProvider
-            .state('index', {
-                url: '/index',
-                templateUrl: '/spa/auth/views/index.html',
-                controller: 'IndexController',
-                controllerAs: 'vm'
-            })
-            .state('errors', {
-              url: '/',
-              controller: 'ErrorController',
-              controllerAs: 'vm'
-            })
-            .state('login', {
-                url: '/login',
-                templateUrl: '/spa/auth/views/login.html',
-                controller: 'LoginController',
-                controllerAs: 'vm'
-            })
-            .state('register', {
-                url: '/register',
-                templateUrl: '/spa/auth/views/register.html',
-                controller: 'RegisterController',
-                controllerAs: 'vm'
-            })
-    }
+    $urlRouterProvider.otherwise('/');
+
+    var authenticated = ['$q', 'authService', function ($q, authService) {
+      var deferred = $q.defer();
+      authService.authenticated()
+        .then(function (data) {
+          if (data.status) {
+            deferred.resolve();
+          } else {
+            deferred.reject('Not logged in');
+          }
+        });
+      return deferred.promise;
+    }];
+
+    $stateProvider
+      .state('index', {
+        url: '/index',
+        views: {
+          'nav': {
+            templateUrl: '/spa/auth/views/nav.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/auth/views/index.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('errors', {
+        url: '/',
+        controller: 'ErrorController',
+        controllerAs: 'vm'
+      })
+      .state('login', {
+        url: '/login',
+        views: {
+          'nav': {
+            templateUrl: '/spa/auth/views/nav.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/auth/views/login.html',
+            controller: 'LoginController',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('register', {
+        url: '/register',
+        views: {
+          'nav': {
+            templateUrl: '/spa/auth/views/nav.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/auth/views/register.html',
+            controller: 'RegisterController',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('account', {
+        url: '/account',
+        views: {
+          'nav': {
+            templateUrl: '/spa/auth/views/nav.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/auth/views/account.html',
+            controller: 'IndexController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          authenticated: authenticated
+        }
+      })
+  }
 })();

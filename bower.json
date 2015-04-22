@@ -15,11 +15,11 @@
     "angular-toastr": "~1.2.1",
     "angular-bootstrap": "~0.12.1",
     "xtform": "~1.0.1",
-    "ui-router-extras": "~0.0.13"
+    "angular-animate": "~1.3.15"
   },
-  "name": "my-app",
+  "name": "dabou",
   "version": "0.0.0",
-  "author": "me",
+  "author": "Chad Lefort",
   "private": true,
   "resolutions": {
     "angular": "~1.3.x"
@@ -52,6 +52,9 @@
     },
     "xtorm": {
       "js": "xtForm.js"
+    },
+    "angular-animate": {
+      "js": "angular-animate.min.*"
     }
   }
 }

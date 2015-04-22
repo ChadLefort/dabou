@@ -24,21 +24,23 @@
 
 <body>
 
-{{> nav}}
-
-<div ui-view>
-  {{> errors}}
+<div ui-view="nav"></div>
+<div class="ui-view-container">
+    <div ui-view="page" class="page-view">
+        <div ui-view>
+          {{> errors}}
+        </div>
+    </div>
 </div>
 
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js"></script>
 <script src="/vendor/jquery/js/jquery.min.js"></script>
 <script src="/vendor/angular/js/angular.min.js"></script>
+<script src="/vendor/angular-animate/js/angular-animate.min.js"></script>
 <script src="/vendor/angular-bootstrap/js/ui-bootstrap-tpls.min.js"></script>
 <script src="/vendor/angular-toastr/js/angular-toastr.tpls.min.js"></script>
-<script src="/vendor/angular-ui-router/angular-ui-router.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="/vendor/ui-router-extras/ct-ui-router-extras.js"></script>
 <script src="/vendor/ui-router/js/angular-ui-router.min.js"></script>
 <script src="/vendor/xtform/xtForm.js"></script>
 <script src="/js/custom.js"></script>
@@ -48,6 +50,7 @@
 <script src="/spa/auth/controllers/index.js"></script>
 <script src="/spa/auth/controllers/login.js"></script>
 <script src="/spa/auth/controllers/register.js"></script>
+<script src="/spa/auth/controllers/user.js"></script>
 <script src="/spa/auth/services/auth.service.js"></script>
 <!--SCRIPTS END-->
 

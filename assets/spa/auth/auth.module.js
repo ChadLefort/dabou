@@ -10,6 +10,7 @@
       */
     angular.module('dabou.auth', [
         // Angular modules
+        'ngAnimate',
 
         // Custom modules
 
