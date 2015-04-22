@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('dabou.auth')
+    .module('dabou.main')
     .controller('IndexController', IndexController);
 
   /**
    * @ngdoc controller
-   * @name dabou.auth.controller:IndexController
+   * @name dabou.main.controller:IndexController
    * @description
    *
    */
@@ -21,6 +21,7 @@
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
+    vm.gravatar = '/images/default_avatar.png'
     vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS

@@ -32,21 +32,6 @@
     }];
 
     $stateProvider
-      .state('index', {
-        url: '/index',
-        views: {
-          'nav': {
-            templateUrl: '/spa/auth/views/nav.html',
-            controller: 'IndexController',
-            controllerAs: 'vm'
-          },
-          'page': {
-            templateUrl: '/spa/auth/views/index.html',
-            controller: 'IndexController',
-            controllerAs: 'vm'
-          }
-        }
-      })
       .state('errors', {
         url: '/',
         controller: 'ErrorController',
@@ -56,7 +41,7 @@
         url: '/login',
         views: {
           'nav': {
-            templateUrl: '/spa/auth/views/nav.html',
+            templateUrl: '/spa/main/views/nav.html',
             controller: 'IndexController',
             controllerAs: 'vm'
           },
@@ -71,7 +56,7 @@
         url: '/register',
         views: {
           'nav': {
-            templateUrl: '/spa/auth/views/nav.html',
+            templateUrl: '/spa/main/views/nav.html',
             controller: 'IndexController',
             controllerAs: 'vm'
           },
@@ -86,7 +71,7 @@
         url: '/account',
         views: {
           'nav': {
-            templateUrl: '/spa/auth/views/nav.html',
+            templateUrl: '/spa/main/views/nav.html',
             controller: 'IndexController',
             controllerAs: 'vm'
           },

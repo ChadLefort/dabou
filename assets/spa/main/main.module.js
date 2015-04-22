@@ -3,12 +3,12 @@
 
     /**
       * @ngdoc module
-      * @name dabou.auth
-      * @module dabou.auth
+      * @name dabou.main
+      * @module dabou.main
       * @description
       *
       */
-    angular.module('dabou.auth', [
+    angular.module('dabou.main', [
         // Angular modules
         'ngAnimate',
 
@@ -17,8 +17,6 @@
 
         // 3rd Party Modules
         'ui.router',
-        'ui.bootstrap',
-        'xtForm',
-        'toastr'
+        'ui.bootstrap'
     ]);
 })();

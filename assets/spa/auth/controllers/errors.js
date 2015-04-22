@@ -34,7 +34,6 @@
 
     function errors(errors) {
       if (errors){
-        console.log(errors);
         toastr.error(errors);
         $state.go('register');
       }
