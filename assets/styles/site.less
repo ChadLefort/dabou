@@ -65,6 +65,36 @@ body {
   font-family: 'Anton', sans-serif;
 }
 
+.xt-validation-item {
+  color: darkred;
+}
+
+.xt-validation-inline {
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.xt-validation-inline .xt-validation-item:before {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  content: "\f071 ";
+  margin-right: 5px;
+}
+
+input.ng-dirty.ng-invalid, select.ng-dirty.ng-invalid, textarea.ng-dirty.ng-invalid {
+  border: 1px solid darkred;
+}
+
+input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
+  border: 1px solid darkgreen;
+}
+
 /* ==========================================================================
    2. Toastr
    ========================================================================== */
