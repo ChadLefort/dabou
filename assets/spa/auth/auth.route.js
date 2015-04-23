@@ -10,9 +10,11 @@
    */
   angular
     .module('dabou.auth')
-    .config(routeConfig);
+    .config(routeConfig)
+    .run(redirect);
 
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  redirect.$inject = ['$rootScope', '$state'];
 
   function routeConfig($stateProvider, $urlRouterProvider) {
 
@@ -85,5 +87,11 @@
           authenticated: authenticated
         }
       })
+  }
+
+  function redirect($rootScope, $state) {
+    $rootScope.$on('$stateChangeError', function () {
+      $state.go('login');
+    })
   }
 })();
