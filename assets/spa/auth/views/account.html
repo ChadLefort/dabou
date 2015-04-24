@@ -1,6 +1,6 @@
 <div class="container push-down">
   <div class="text-center">
-    <p><img class="img-circle" src="{{vm.gravatar}}"></p>
+    <p ng-if="vm.gravatar"><img class="img-circle" src="{{vm.gravatar}}"></p>
     <h3>Welcome {{vm.username}}!</h3>
   </div>
   <div class="form-group">
@@ -11,19 +11,19 @@
   </div>
   <div class="form-group">
     <div class="col-md-4 center-block">
-      <a ng-if="vm.twitter" href="/user/unlink/twitter" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
+      <a ng-if="vm.twitter" ng-click="vm.unlink('twitter')" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
       <a ng-if="!vm.twitter" href="/auth/twitter" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
     </div>
   </div>
   <div class="form-group">
     <div class="col-md-4 center-block">
-      <a ng-if="vm.facebook" href="/user/unlink/facebook" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
+      <a ng-if="vm.facebook" ng-click="vm.unlink('facebook')" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
       <a ng-if="!vm.facebook" href="/auth/facebook" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
     </div>
   </div>
   <div class="form-group">
     <div class="col-md-4 center-block">
-      <a ng-if="vm.google" href="/user/unlink/google" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Unlink Google</a>
+      <a ng-if="vm.google" ng-click="vm.unlink('google')" href="/user/unlink/google" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Unlink Google</a>
       <a ng-if="!vm.google" href="/auth/google" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
     </div>
   </div>

@@ -37,11 +37,19 @@
         });
     }
 
+    function unlinkPassport(provider) {
+      return $http.get('/user/unlink/' + provider)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     return {
       addLocalUser: addLocalUser,
       authenticated: authenticated,
       login: login,
-      getPassports: getPassports
+      getPassports: getPassports,
+      unlinkPassport: unlinkPassport
     };
   }
 

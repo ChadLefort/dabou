@@ -5,7 +5,7 @@
     .module('dabou.auth')
     .controller('UserController', UserController);
 
-  UserController.$inject = ['authService'];
+  UserController.$inject = ['authService', 'toastr', '$state'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function UserController(authService) {
+  function UserController(authService, toastr, $state) {
     var vm = this;
 
     // PUBLIC PROPERTIES
@@ -21,7 +21,7 @@
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
-    vm.gravatar = '/images/default_avatar.png'
+    vm.gravatar = '/images/default_avatar.png';
     vm.isLoggedIn = false;
     vm.local = false;
     vm.twitter = false;
@@ -29,7 +29,7 @@
     vm.google = false;
 
     // PUBLIC FUNCTIONS
-    vm.passports = passports();
+    vm.unlink = unlink;
 
     // init
     activate();
@@ -37,6 +37,9 @@
     // PRIVATE FUNCTIONS
     function activate() {
       authenticated();
+      if($state.current.name = 'account') {
+        passports();
+      }
     }
 
     function authenticated() {
@@ -60,6 +63,7 @@
     function passports(){
       authService.getPassports()
         .then(function(data) {
+          console.log(data);
           vm.passport = data.passport;
           angular.forEach(data.passport, function(value, key) {
             if(data.passport[key].provider == 'twitter') {
@@ -74,6 +78,24 @@
               vm.local = true;
             }
           });
+        });
+    }
+
+    function unlink(provider){
+      authService.unlinkPassport(provider)
+        .then(function(data) {
+          if(data.status) {
+            if(provider == 'twitter') {
+              vm.twitter = false;
+            } else if (provider == 'facebook') {
+              vm.facebook = false;
+            } else if (provider == 'google') {
+              vm.google = false;
+            }
+            toastr.success(provider + ' has been unlinked.')
+          } else {
+            toastr.error(data.error)
+          }
         });
     }
   }

@@ -26,10 +26,10 @@ module.exports = {
       user: user.id
     }, function (err, count) {
       if (count == 1) {
-        res.view('user/account', {error: 'You cannnot unlink this account without linking another or deleting your account.'});
+        res.send({error: 'You cannnot unlink this account without linking another or deleting your account.'});
       } else {
         passport.disconnect(req, res);
-        res.redirect('/#/account');
+        res.send({status: true});
       }
     });
   }
