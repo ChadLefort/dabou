@@ -30,10 +30,18 @@
         return $http.post('/auth/local', user);
     }
 
+    function getPassports() {
+      return $http.get('/user/account')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     return {
       addLocalUser: addLocalUser,
       authenticated: authenticated,
-      login: login
+      login: login,
+      getPassports: getPassports
     };
   }
 

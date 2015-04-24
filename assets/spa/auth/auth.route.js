@@ -79,7 +79,7 @@
           },
           'page': {
             templateUrl: '/spa/auth/views/account.html',
-            controller: 'IndexController',
+            controller: 'UserController',
             controllerAs: 'vm'
           }
         },

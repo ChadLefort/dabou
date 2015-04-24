@@ -27,7 +27,8 @@ var Gravatar = require('machinepack-gravatar');
 exports.register = function (req, res, next) {
   var email = req.param('email'),
     username = req.param('username'),
-    password = req.param('password');
+    password = req.param('password'),
+    confirmPassword = req.param('confirmPassword');
 
   if (!email) {
     req.flash('error', 'Error.Passport.Email.Missing');
@@ -41,7 +42,11 @@ exports.register = function (req, res, next) {
     req.flash('error', 'Error.Passport.Password.Missing');
   }
 
-  if (!email || !username || !password) {
+  if (!confirmPassword) {
+    req.flash('error', 'Error.Passport.ConfirmPassword.Missing');
+  }
+
+  if (!email || !username || !password || !confirmPassword) {
     return next(new Error('Missing requied fields.'));
   }
 

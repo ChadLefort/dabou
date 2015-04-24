@@ -49,14 +49,16 @@ var Passport = {
         // When the local strategy is employed, a password will be used as the
         // means of authentication along with either a username or an email.
         //
-        // accessToken is used to authenticate API requests. it is generated when a 
-        // passport (with protocol 'local') is created for a user. 
+        // accessToken is used to authenticate API requests. it is generated when a
+        // passport (with protocol 'local') is created for a user.
         password: {
             type: 'string',
-            minLength: 8
+            minLength: 8,
+            protected: true
         },
         accessToken: {
-            type: 'string'
+            type: 'string',
+            protected: true
         },
 
         // Provider fields: Provider, identifer and tokens
@@ -74,10 +76,12 @@ var Passport = {
             type: 'alphanumericdashed'
         },
         identifier: {
-            type: 'string'
+            type: 'string',
+            protected: true
         },
         tokens: {
-            type: 'json'
+            type: 'json',
+            protected: true
         },
 
         // Associations
