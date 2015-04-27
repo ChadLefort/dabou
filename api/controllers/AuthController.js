@@ -24,11 +24,9 @@ var AuthController = {
    */
   logout: function (req, res) {
     req.logout();
-
     // mark the user as logged out for auth purposes
     req.session.authenticated = false;
-
-    res.redirect('/');
+    res.send(200);
   },
 
   /**
@@ -70,9 +68,9 @@ var AuthController = {
       } else if (flashError && !provider) {
         res.send({error: flashError});
       } else if (err && provider && !flashError) {
-        res.view('layouts/layout', {errors: 'Error.Passport.Generic'});
+        res.view('layouts/layout', {error: 'Error.Passport.Generic', state: req.session.redirect});
       } else {
-        res.view('layouts/layout', {errors: flashError});
+        res.view('layouts/layout', {error: flashError, state: req.session.redirect});
       }
     }
 
@@ -91,7 +89,12 @@ var AuthController = {
 
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        res.redirect('/#/account');
+        if(req.session.redirect == 'account'){
+          var flashSuccess = req.flash('success');
+          res.view('layouts/layout', {success: flashSuccess, state: 'account'});
+        } else {
+          res.redirect('/#/index');
+        }
       });
     });
   },

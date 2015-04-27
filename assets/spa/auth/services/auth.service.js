@@ -30,6 +30,17 @@
         return $http.post('/auth/local', user);
     }
 
+    function logout() {
+      return $http.get('/logout');
+    }
+
+    function csrfToken() {
+      return $http.get('/csrfToken')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     function getPassports() {
       return $http.get('/user/account')
         .then(function (response) {
@@ -47,7 +58,9 @@
     return {
       addLocalUser: addLocalUser,
       authenticated: authenticated,
+      csrfToken: csrfToken,
       login: login,
+      logout: logout,
       getPassports: getPassports,
       unlinkPassport: unlinkPassport
     };

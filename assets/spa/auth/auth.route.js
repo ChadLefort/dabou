@@ -36,7 +36,7 @@
     $stateProvider
       .state('errors', {
         url: '/',
-        controller: 'ErrorController',
+        controller: 'StatusController',
         controllerAs: 'vm'
       })
       .state('login', {

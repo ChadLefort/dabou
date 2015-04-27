@@ -174,7 +174,6 @@ exports.login = function (req, identifier, password, next) {
       } else {
         req.flash('error', 'Error.Passport.Username.NotFound');
       }
-
       return next(null, false);
     }
 

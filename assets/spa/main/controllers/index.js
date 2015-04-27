@@ -25,6 +25,7 @@
     vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS
+    vm.logout = logout;
     vm.register = register;
 
     // init
@@ -44,12 +45,19 @@
             vm.email = data.user.email;
             vm.gravatar = data.user.gravatar;
 
-            if(data.user.username != ''){
+            if(data.user.username){
               vm.displayName = data.user.username;
             } else {
               vm.displayName = data.user.email;
             }
           }
+        });
+    }
+
+    function logout() {
+      authService.logout()
+        .then(function (data) {
+          $state.go('index', {}, {reload: true});
         });
     }
 

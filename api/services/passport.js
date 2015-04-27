@@ -1,7 +1,8 @@
 
 var path     = require('path')
   , url      = require('url')
-  , passport = require('passport');
+  , passport = require('passport')
+  , cases = require('./cases');
 
 /**
  * Passport Service
@@ -145,6 +146,7 @@ passport.connect = function (req, query, profile, next) {
           passport.tokens = query.tokens;
         }
 
+
         // Save any updates to the Passport before moving on
         passport.save(function (err, passport) {
           if (err) {
@@ -167,10 +169,21 @@ passport.connect = function (req, query, profile, next) {
           if (err) {
             return next(err);
           }
-
+          req.flash('success', 'Success.Passport.' + cases.toProperCase(provider) + '.Link');
           next(err, req.user);
         });
       }
+
+      // Scenario: A user is currently logged in and trying to connect a
+      //           already existing passport.
+      // Action:   Throw an error.
+      else if (passport) {
+        if(passport.user != req.user.id) {
+          req.flash('error', 'Error.Passport.Exists');
+          return next(new Error('Passport already exists'));
+        }
+      }
+
       // Scenario: The user is a nutjob or spammed the back-button.
       // Action:   Simply pass along the already established session.
       else {
@@ -194,10 +207,12 @@ passport.endpoint = function (req, res) {
     , provider   = req.param('provider')
     , options    = {};
 
+  req.session.redirect = req.query.state;
+
   // If a provider doesn't exist for this endpoint, send the user back to the
   // login page
   if (!strategies.hasOwnProperty(provider)) {
-    return res.redirect('/login');
+    return res.redirect('/#/login');
   }
 
   // Attach scope if it has been set in the config

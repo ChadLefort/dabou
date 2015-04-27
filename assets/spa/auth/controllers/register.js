@@ -19,6 +19,7 @@
     // PUBLIC PROPERTIES
     vm.title = 'Register';
     vm.user = {};
+    vm.state = $state.current.name;
 
     // PUBLIC FUNCTIONS
     vm.addLocalUser = addLocalUser;
@@ -28,6 +29,10 @@
 
     // PRIVATE FUNCTIONS
     function activate() {
+      authService.csrfToken()
+        .then(function (response){
+          vm.user = {_csrf: response._csrf};
+        });
     }
 
     function addLocalUser() {

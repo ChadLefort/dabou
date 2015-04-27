@@ -19,6 +19,7 @@
     // PUBLIC PROPERTIES
     vm.title = 'Login';
     vm.user = {};
+    vm.state = $state.current.name;
 
     // PUBLIC FUNCTIONS
     vm.login = login;
@@ -29,6 +30,10 @@
     // PRIVATE FUNCTIONS
 
     function activate() {
+      authService.csrfToken()
+        .then(function (response){
+          vm.user = {_csrf: response._csrf};
+        });
     }
 
     function login() {
@@ -41,7 +46,7 @@
               toastr.error(errors[key]);
             });
           } else {
-            $state.go('account');
+            $state.go('index');
           }
         })
     }

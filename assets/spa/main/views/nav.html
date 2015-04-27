@@ -7,16 +7,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="index">Dabou</a>
+      <a class="navbar-brand" href="/#/index">Dabou</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse pull-right">
       <ul class="nav navbar-nav" ng-if="!vm.isLoggedIn">
-        <li><a ui-sref="login">Login</a></li>
-        <li><a ui-sref="register">Register</a></li>
+        <li><a href="/#/login">Login</a></li>
+        <li><a href="/#/register">Register</a></li>
       </ul>
       <ul class="nav navbar-nav" ng-if="vm.isLoggedIn">
-        <li><a ui-sref="account">Hello, {{vm.displayName}}</a></li>
-        <li><a href="logout">Logout</a></li>
+        <li><a href="/#/account">Hello, {{vm.displayName}}</a></li>
+        <li><a ng-click="vm.logout()">Logout</a></li>
       </ul>
     </div>
   </div>

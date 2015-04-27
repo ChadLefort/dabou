@@ -27,6 +27,7 @@
     vm.twitter = false;
     vm.facebook = false;
     vm.google = false;
+    vm.state = $state.current.name;
 
     // PUBLIC FUNCTIONS
     vm.unlink = unlink;
@@ -37,7 +38,7 @@
     // PRIVATE FUNCTIONS
     function activate() {
       authenticated();
-      if($state.current.name = 'account') {
+      if(vm.state = 'account') {
         passports();
       }
     }
@@ -51,7 +52,7 @@
             vm.email = data.user.email;
             vm.gravatar = data.user.gravatar;
 
-            if(data.user.username != ''){
+            if(data.user.username){
               vm.displayName = data.user.username;
             } else {
               vm.displayName = data.user.email;
@@ -63,7 +64,6 @@
     function passports(){
       authService.getPassports()
         .then(function(data) {
-          console.log(data);
           vm.passport = data.passport;
           angular.forEach(data.passport, function(value, key) {
             if(data.passport[key].provider == 'twitter') {
@@ -92,7 +92,7 @@
             } else if (provider == 'google') {
               vm.google = false;
             }
-            toastr.success(provider + ' has been unlinked.')
+            toastr.success(data.success)
           } else {
             toastr.error(data.error)
           }
