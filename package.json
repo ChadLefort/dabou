@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "bcryptjs": "^2.1.0",
+    "chai": "^2.3.0",
     "express-mysql-session": "^0.3.2",
     "grunt": "0.4.2",
     "grunt-bower-task": "^0.4.0",
@@ -37,6 +38,8 @@
     "sails-disk": "~0.10.0",
     "sails-hook-autoreload": "^0.11.5",
     "sails-mysql": "^0.10.11",
+    "supertest": "^0.15.0",
+    "supertest-session": "0.0.7",
     "validator": "^3.37.0"
   },
   "scripts": {
