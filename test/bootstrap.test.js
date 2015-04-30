@@ -11,9 +11,8 @@ before(function (done) {
       connection: 'mysql',
       migrate: 'alter'
     },
-    csrf: {
-      protectionEnabled: false
-    }
+    port: 8080,
+    csrf: false,
   }, function(err) {
     if (err)
       return done(err);

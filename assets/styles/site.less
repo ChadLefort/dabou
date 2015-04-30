@@ -14,7 +14,6 @@
    ========================================================================== */
 
 body {
-  padding-top: 60px;
   background-color: #eeeeee;
 }
 .starter-template {
@@ -61,7 +60,7 @@ body {
 .jumbotron h1, .jumbotron p {
   font-family: 'Anton', sans-serif;
 }
-.navbar-brand {
+.navmenu-brand, .navbar-brand {
   font-family: 'Anton', sans-serif;
 }
 
@@ -85,6 +84,18 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
 [ng-click],
 [data-ng-click] {
   cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-left: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 60px;
+  }
 }
 
 /* ==========================================================================

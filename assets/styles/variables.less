@@ -21,7 +21,6 @@
 @brand-danger:          #d9534f;
 @secondary-color:       #55AA55;
 
-
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
@@ -408,6 +407,31 @@
 @navbar-inverse-toggle-hover-bg:            @navbar-inverse-link-active-bg;
 @navbar-inverse-toggle-icon-bar-bg:         @navbar-inverse-link-color;
 @navbar-inverse-toggle-border-color:        transparent;
+
+// Inverted navmenu
+// Reset inverted navmenu basics
+@navmenu-inverse-color:                      @gray-light;
+@navmenu-inverse-bg:                         @brand-success;
+@navmenu-inverse-border:                     @brand-success;
+
+// Inverted navbar links
+@navmenu-inverse-link-color:                 darken(@brand-success, 15%);
+@navmenu-inverse-link-hover-color:           #fff;
+@navmenu-inverse-link-hover-bg:              transparent;
+@navmenu-inverse-link-active-color:          @navmenu-inverse-link-hover-color;
+@navmenu-inverse-link-active-bg:             darken(@navmenu-inverse-bg, 4%);
+@navmenu-inverse-link-disabled-color:        #444;
+@navmenu-inverse-link-disabled-bg:           transparent;
+
+// Inverted navbar brand label
+@navmenu-inverse-brand-color:                #fff;
+@navmenu-inverse-brand-hover-color:          #fff;
+@navmenu-inverse-brand-hover-bg:             transparent;
+
+// Inverted navbar toggle
+@navmenu-inverse-toggle-hover-bg:            @navmenu-inverse-link-active-bg;
+@navmenu-inverse-toggle-icon-bar-bg:         @navmenu-inverse-link-color;
+@navmenu-inverse-toggle-border-color:        transparent;
 
 
 //== Navs
