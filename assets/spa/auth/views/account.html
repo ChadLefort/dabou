@@ -1,26 +1,106 @@
 <div class="container push-down">
-  <div class="form-group">
-    <div class="col-md-4 center-block">
-      <a ng-if="vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Unlink Local</a>
-      <a ng-if="!vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Link Local</a>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="panel panel-success">
+        <div class="panel-heading">Link Accounts</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="center-block">
+              <a ng-if="vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Unlink Local</a>
+              <a ng-if="!vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Link Local</a>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="center-block">
+              <a ng-if="vm.twitter" ng-click="vm.unlink('twitter')" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
+              <a ng-if="!vm.twitter" href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="center-block">
+              <a ng-if="vm.facebook" ng-click="vm.unlink('facebook')" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
+              <a ng-if="!vm.facebook" href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="center-block">
+              <a ng-if="vm.google" ng-click="vm.unlink('google')" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Unlink Google</a>
+              <a ng-if="!vm.google" href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-success">
+        <div class="panel-heading">Change Password</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <input class="form-control" type="text" id="currentPassword" name="currentPassword" placeholder="Current Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <input class="form-control" type="text" id="newPassword" name="newPassword" placeholder="New Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <input class="form-control" type="text" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <button class="btn btn-success auth-btn" type="submit">Change Password</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="col-md-4 center-block">
-      <a ng-if="vm.twitter" ng-click="vm.unlink('twitter')" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
-      <a ng-if="!vm.twitter" href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-md-4 center-block">
-      <a ng-if="vm.facebook" ng-click="vm.unlink('facebook')" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
-      <a ng-if="!vm.facebook" href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-md-4 center-block">
-      <a ng-if="vm.google" ng-click="vm.unlink('google')" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Unlink Google</a>
-      <a ng-if="!vm.google" href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
+    <div class="col-md-7">
+      <div class="panel panel-success">
+        <div class="panel-heading">Edit Profile</div>
+        <div class="panel-body">
+          <div class="form-horizontal">
+            <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <input class="form-control" type="text" id="name" name="name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <select class="form-control" id="gender" name="gender">
+                    <option selected="" disabled="" value="Gender">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Undisclosed">Undisclosed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <input class="form-control" type="text" id="location" name="location" placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <textarea rows="15" class="form-control" type="text" id="bio" name="bio" placeholder="A breif description about yourself..."
+                  required=""></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <button class="btn btn-success auth-btn" type="submit">Edit Profile</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
