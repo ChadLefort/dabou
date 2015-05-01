@@ -16,9 +16,14 @@
 body {
   background-color: #eeeeee;
 }
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
+}
+
+a {
+  transition: color ease .5s;
 }
 
 .col-centered {
@@ -96,6 +101,48 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
   body {
     padding-top: 60px;
   }
+}
+
+.navmenu .navmenu-nav > li > a:focus, .navmenu .navmenu-nav > li >a:hover {
+  color: @body-bg;
+  text-decoration: none;
+  background-color: @gray-darker;
+  transition: background-color ease .5s;
+}
+
+.nav > li > a {
+  text-align: center;
+}
+
+.navmenu > img {
+  padding: 20px;
+}
+
+.navmenu {
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 15px;
+  margin: 10px 0;
+}
+
+.footer > a {
+  color: @text-color;
+}
+
+.footer > a:focus, .footer > a:hover {
+  color: @body-bg;
+}
+
+.footer-icon {
+  padding: 15px;
 }
 
 /* ==========================================================================
