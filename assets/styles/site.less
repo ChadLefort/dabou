@@ -26,6 +26,10 @@ a {
   transition: color ease .5s;
 }
 
+.btn {
+  transition: none;
+}
+
 .col-centered {
   display:inline-block;
   float:none;
@@ -103,11 +107,15 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
   }
 }
 
+.container {
+  width: 992px;
+}
+
 .navmenu .navmenu-nav > li > a:focus, .navmenu .navmenu-nav > li >a:hover {
   color: @body-bg;
   text-decoration: none;
   background-color: @gray-darker;
-  transition: background-color ease .5s;
+  transition: background-color ease 1.5s;
 }
 
 .nav > li > a {

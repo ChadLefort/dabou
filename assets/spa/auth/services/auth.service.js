@@ -54,6 +54,10 @@
           return response.data;
         });
     }
+    
+    function profile(profile) {
+        return $http.post('/user/profile', profile);
+    }
 
     return {
       addLocalUser: addLocalUser,
@@ -62,7 +66,8 @@
       login: login,
       logout: logout,
       getPassports: getPassports,
-      unlinkPassport: unlinkPassport
+      unlinkPassport: unlinkPassport,
+      profile: profile
     };
   }
 

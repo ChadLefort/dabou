@@ -53,5 +53,6 @@ module.exports.routes = {
     'get /auth/:provider/:action': 'AuthController.callback',
 
     'get /user/account': 'UserController.account',
-    'get /user/unlink/:provider': 'UserController.unlink'
+    'get /user/unlink/:provider': 'UserController.unlink',
+    'post /user/profile': 'UserController.profile'
 };

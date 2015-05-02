@@ -28,9 +28,11 @@
     vm.facebook = false;
     vm.google = false;
     vm.state = $state.current.name;
+    vm.profile = {};
 
     // PUBLIC FUNCTIONS
     vm.unlink = unlink;
+    vm.createProfile = createProfile;
 
     // init
     activate();
@@ -41,6 +43,11 @@
       if(vm.state = 'account') {
         passports();
       }
+      
+      authService.csrfToken()
+        .then(function (response){
+          vm.profile = {_csrf: response._csrf};
+        });
     }
 
     function authenticated() {
@@ -97,6 +104,13 @@
             toastr.error(data.error)
           }
         });
+    }
+    
+    function createProfile() {
+      authService.profile(vm.profile)
+        .then(function(data) {
+          console.log(data);
+        })
     }
   }
 })();

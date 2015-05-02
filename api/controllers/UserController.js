@@ -34,6 +34,28 @@ module.exports = {
         res.send({status: true, success: 'Success.Passport.' + cases.toProperCase(provider) + '.Unlink'});
       }
     });
+  },
+  
+  profile: function (req, res) {
+    var user = req.user,
+        name = req.param('name'),
+        gender = req.param('gender'),
+        location = req.param('location'),
+        bio = req.param('bio');
+        
+        Profile.create({
+          name: name,
+          gender: gender,
+          location: location,
+          bio: bio,
+          user: user.id
+        }, function (err, profile) {
+          if (err) {
+            req.flash('error', 'Error.User.Profile');
+          }
+          
+          res.send({success: 'Success.User.Profile.Created', profile: profile})
+        })
   }
 }
 ;
