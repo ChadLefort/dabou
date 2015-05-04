@@ -43,10 +43,14 @@ module.exports.policies = {
 
   UserController: {
     '*': ['passport', 'sessionAuth']
-  },
-
-  SiteController: {
-    index: ['passport']
+//    'find': ['passport', 'sessionAuth'],
+//    'findOne': ['passport', 'sessionAuth'],
+//    'create': false,
+//    'update': false,
+//    'destroy': false,
+//    'populate': false,
+//    'add': false,
+//    'remove': false
   }
   
 	// RabbitController: {

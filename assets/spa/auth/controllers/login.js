@@ -39,7 +39,6 @@
     function login() {
       authService.login(vm.user)
         .then(function (response) {
-          console.log(response);
           if (response.data.error) {
             var errors = response.data.error;
             angular.forEach(errors, function (value, key) {
@@ -48,7 +47,7 @@
           } else {
             $state.go('index');
           }
-        })
+        });
     }
   }
 })();

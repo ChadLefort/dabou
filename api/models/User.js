@@ -22,11 +22,16 @@ var User = {
             type: 'string'
         },
         admin: {
-            type: 'integer',
-            defaultsTo: 0
+            type: 'boolean',
+            defaultsTo: 0,
+            protected: true
         },
         passports: {
             collection: 'Passport',
+            via: 'user'
+        },
+        profile: {
+            collection: 'Profile',
             via: 'user'
         }
     }

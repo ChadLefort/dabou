@@ -7,6 +7,40 @@
  */
 
 var AuthController = {
+  
+  /**
+   * Checks to see if the current user is authenticated
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  authenticated: function (req, res) {
+    if (!req.user) {
+      res.send(401, {status: false});
+    } else {
+      res.send(200, {status: true, user: req.user});
+    }
+  },
+  
+  /**
+   * Returns all of the passports of the current loggin in user
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  passports: function (req, res) {
+    var user = req.user;
+
+    Passport.find({
+      user: user.id
+    }, function (err, passport) {
+      if (err) {
+        res.send(404, {error: 'Error.Passport.NotFound'});
+      } else {
+        res.send(200, {passport: passport});
+      }
+    });
+  },
 
   /**
    * Log out a user and return them to the homepage
@@ -64,9 +98,9 @@ var AuthController = {
       var flashError = req.flash('error');
 
       if (err && !flashError && !provider) {
-        res.send({error: 'Error.Passport.Generic'});
+        res.send(400, {error: 'Error.Passport.Generic'});
       } else if (flashError && !provider) {
-        res.send({error: flashError});
+        res.send(400, {error: flashError});
       } else if (err && provider && !flashError) {
         res.view('layouts/layout', {error: 'Error.Passport.Generic', state: req.session.redirect});
       } else {
@@ -97,16 +131,8 @@ var AuthController = {
         }
       });
     });
-  },
-
-  authenticated: function (req, res) {
-    if (req.user) {
-      res.send({status: true, user: req.user});
-    } else {
-      res.send({status: false});
-    }
-
   }
+  
 };
 
 module.exports = AuthController;

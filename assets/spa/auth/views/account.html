@@ -5,25 +5,25 @@
         <div class="panel-heading">Link Accounts</div>
         <div class="panel-body">
           <div class="form-group">
-            <div class="center-block">
+            <div class="col-md-10 center-block">
               <a ng-if="vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Unlink Local</a>
               <a ng-if="!vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i> Link Local</a>
             </div>
           </div>
           <div class="form-group">
-            <div class="center-block">
+            <div class="col-md-10 center-block">
               <a ng-if="vm.twitter" ng-click="vm.unlink('twitter')" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
               <a ng-if="!vm.twitter" href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
             </div>
           </div>
           <div class="form-group">
-            <div class="center-block">
+            <div class="col-md-10 center-block">
               <a ng-if="vm.facebook" ng-click="vm.unlink('facebook')" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
               <a ng-if="!vm.facebook" href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
             </div>
           </div>
           <div class="form-group">
-            <div class="center-block">
+            <div class="col-md-10 center-block">
               <a ng-if="vm.google" ng-click="vm.unlink('google')" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Unlink Google</a>
               <a ng-if="!vm.google" href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
             </div>

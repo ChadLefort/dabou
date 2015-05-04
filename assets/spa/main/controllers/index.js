@@ -21,7 +21,7 @@
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
-    vm.gravatar = '/images/default_avatar.png'
+    vm.gravatar = '/images/default_avatar.png';
     vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS

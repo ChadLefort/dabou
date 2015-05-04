@@ -24,7 +24,8 @@ module.exports = {
     },
     user: {
       model: 'User',
-      required: true
+      required: true,
+      unique: true
     }    
   }
 };

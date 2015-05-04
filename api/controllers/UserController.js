@@ -1,61 +1,77 @@
 /**
- * UserController
+ * ProfileController
  *
- * @description :: Server-side logic for managing users
+ * @description :: Server-side logic for managing user's profiles
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var cases = require('../services/cases');
-
-module.exports = {
-  account: function (req, res) {
-    var user = req.user;
-
-    Passport.find({
-      user: user.id
-    }, function (err, passport) {
+ module.exports = {
+   
+  /**
+   * Gets all of the profiles for every user
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  profile: function (req, res) {        
+    Profile.find(function (err, profiles) {
       if (err) {
-        return next(err);
-      }
-      res.send({passport: passport})
-    });
-  },
-
-  unlink: function (req, res) {
-    var user = req.user,
-      provider = req.param('provider');
-
-    Passport.count({
-      user: user.id
-    }, function (err, count) {
-      if (count == 1) {
-        res.send({error: 'Error.Passport.Unlink'});
+        res.send(400, {error: 'Error.User.Profile'});
       } else {
-        passport.disconnect(req, res);
-        res.send({status: true, success: 'Success.Passport.' + cases.toProperCase(provider) + '.Unlink'});
+        res.send({profiles: profiles});
       }
     });
   },
   
-  profile: function (req, res) {
+  /**
+   * Gets a specific profile based on a given username
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  getProfile: function (req, res) {
+    var username = req.param('user');
+        
+    User.findOne({
+      username: username
+    }, function (err, user) {     
+      Profile.findOne({
+        user: user.id
+      }, function (err, profile) {                         
+        if (err) {
+          res.send(400, {error: 'Error.User.Profile'});
+        } else {
+          res.send(200, {profile: profile});
+        }
+      });
+    });
+  },
+  
+  /**
+   * Create a profile for a user if they don't already have one
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  createProfile: function (req, res) {
     var user = req.user,
         name = req.param('name'),
         gender = req.param('gender'),
         location = req.param('location'),
         bio = req.param('bio');
         
-        Profile.create({
-          name: name,
-          gender: gender,
-          location: location,
-          bio: bio,
-          user: user.id
-        }, function (err, profile) {
-          if (err) {
-            req.flash('error', 'Error.User.Profile');
-          }
-          
-          res.send({success: 'Success.User.Profile.Created', profile: profile})
-        })
+    Profile.create({
+      name: name,
+      gender: gender,
+      location: location,
+      bio: bio,
+      user: user.id
+    }, function (err, profile) {
+      if (err) {
+        res.send(409, {error: 'Error.User.Profile'});
+      } else {
+        res.send(200, {success: 'Success.User.Profile.Created', profile: profile});
+      }         
+    });
   }
-}
-;
+  
+};

@@ -362,21 +362,29 @@ passport.loadStrategies = function () {
 passport.disconnect = function (req, res, next) {
   var user     = req.user
     , provider = req.param('provider');
-
-  Passport.findOne({
-      provider : provider,
-      user     : user.id
-    }, function (err, passport) {
-      if (err) {
-        return next(err);
+    
+  Passport.count({
+      user: user.id
+    }, function (err, count) {
+      if (count == 1) {
+        res.send(406, {error: 'Error.Passport.Unlink'});
+      } else {  
+          Passport.findOne({
+            provider : provider,
+            user     : user.id
+          }, function (err, passport) {
+            if (err) {
+              return next(err);
+            }   
+            Passport.destroy(passport.id, function (error) {
+              if (err) {
+                return next(err);
+              }
+            });
+        });
+        res.send(200, {status: true, success: 'Success.Passport.' + cases.toProperCase(provider) + '.Unlink'});
       }
-
-      Passport.destroy(passport.id, function (error) {
-        if (err) {
-          return next(err);
-        }
-      });
-  });
+    });
 };
 
 passport.serializeUser(function (user, next) {

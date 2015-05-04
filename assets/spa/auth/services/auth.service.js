@@ -42,14 +42,14 @@
     }
 
     function getPassports() {
-      return $http.get('/user/account')
+      return $http.get('/auth/passports')
         .then(function (response) {
           return response.data;
         });
     }
 
     function unlinkPassport(provider) {
-      return $http.get('/user/unlink/' + provider)
+      return $http.get('/auth/' + provider + '/disconnect/')
         .then(function (response) {
           return response.data;
         });

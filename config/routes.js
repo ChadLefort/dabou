@@ -46,13 +46,14 @@ module.exports.routes = {
 
     'post /auth/local': 'AuthController.callback',
     'post /auth/local/:action': 'AuthController.callback',
-    'get /logout': 'AuthController.logout',
-    'get /auth': 'AuthController.authenticated',
-    'get /auth/:provider': 'AuthController.provider',
-    'get /auth/:provider/callback': 'AuthController.callback',
-    'get /auth/:provider/:action': 'AuthController.callback',
+    'get  /logout': 'AuthController.logout',
+    'get  /auth': 'AuthController.authenticated',
+    'get  /auth/passports': 'AuthController.passports',
+    'get  /auth/:provider': 'AuthController.provider',
+    'get  /auth/:provider/callback': 'AuthController.callback',
+    'get  /auth/:provider/:action': 'AuthController.callback',
 
-    'get /user/account': 'UserController.account',
-    'get /user/unlink/:provider': 'UserController.unlink',
-    'post /user/profile': 'UserController.profile'
+    'post /user/profile': 'UserController.createProfile',
+    'get  /user/profile': 'UserController.profile',
+    'get  /user/profile/:user': 'UserController.getProfile'
 };
