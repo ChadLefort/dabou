@@ -23,26 +23,22 @@
   },
   
   /**
-   * Gets a specific profile based on a given username
+   * Gets a specific profile based on a user's id
    *
    * @param {Object} req
    * @param {Object} res
    */
   getProfile: function (req, res) {
-    var username = req.param('user');
+    var user = req.param('user');
         
-    User.findOne({
-      username: username
-    }, function (err, user) {     
-      Profile.findOne({
-        user: user.id
-      }, function (err, profile) {                         
-        if (err) {
-          res.send(400, {error: 'Error.User.Profile'});
-        } else {
-          res.send(200, {profile: profile});
-        }
-      });
+    Profile.findOne({
+      user: user
+    }, function (err, profile) {                         
+      if (err) {
+        res.send(400, {error: 'Error.User.Profile'});
+      } else {
+        res.send(200, {profile: profile});
+      }
     });
   },
   

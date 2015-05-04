@@ -29,10 +29,16 @@
     vm.google = false;
     vm.state = $state.current.name;
     vm.profile = {};
+    vm.genders = [
+      {value: 'Male'},
+      {value: 'Female'},
+      {value: 'Undisclosed'}
+    ];
 
     // PUBLIC FUNCTIONS
     vm.unlink = unlink;
     vm.createProfile = createProfile;
+    vm.getProfile = getProfile;
 
     // init
     activate();
@@ -58,12 +64,12 @@
             vm.username = data.user.username;
             vm.email = data.user.email;
             vm.gravatar = data.user.gravatar;
-
             if(data.user.username){
               vm.displayName = data.user.username;
             } else {
               vm.displayName = data.user.email;
             }
+            getProfile(data.user.id);
           }
         });
     }
@@ -110,7 +116,14 @@
       authService.profile(vm.profile)
         .then(function(data) {
           console.log(data);
-        })
+        });
+    }
+    
+    function getProfile(userId) {
+      authService.getProfile(userId)
+        .then(function(data) {
+          vm.profile = data.profile;
+        });
     }
   }
 })();

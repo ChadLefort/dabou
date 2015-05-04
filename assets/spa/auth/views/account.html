@@ -73,11 +73,8 @@
               </div>
               <div class="form-group">
                 <div class="col-md-10 center-block">
-                  <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender">
-                    <option selected="" disabled="" value="Gender">Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Undisclosed">Undisclosed</option>
+                  <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender" ng-options="g.value as g.value for g in vm.genders">
+                    <option selected="selected" disabled="disabled" value="">Gender</option>
                   </select>
                 </div>
               </div>
@@ -98,8 +95,6 @@
                 </div>
               </div>
             </form>
-            
-            {{vm.profile | json}}
           </div>
         </div>
       </div>

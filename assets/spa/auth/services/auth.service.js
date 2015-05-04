@@ -58,6 +58,13 @@
     function profile(profile) {
         return $http.post('/user/profile', profile);
     }
+    
+    function getProfile(userId) {
+        return $http.get('/user/profile/' + userId)
+        .then(function (response) {
+          return response.data;
+        });
+    }
 
     return {
       addLocalUser: addLocalUser,
@@ -67,7 +74,8 @@
       logout: logout,
       getPassports: getPassports,
       unlinkPassport: unlinkPassport,
-      profile: profile
+      profile: profile,
+      getProfile: getProfile
     };
   }
 

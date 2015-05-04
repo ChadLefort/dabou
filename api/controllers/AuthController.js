@@ -16,7 +16,7 @@ var AuthController = {
    */
   authenticated: function (req, res) {
     if (!req.user) {
-      res.send(401, {status: false});
+      res.send({status: false});
     } else {
       res.send(200, {status: true, user: req.user});
     }
@@ -98,9 +98,9 @@ var AuthController = {
       var flashError = req.flash('error');
 
       if (err && !flashError && !provider) {
-        res.send(400, {error: 'Error.Passport.Generic'});
+        res.send({error: 'Error.Passport.Generic'});
       } else if (flashError && !provider) {
-        res.send(400, {error: flashError});
+        res.send({error: flashError});
       } else if (err && provider && !flashError) {
         res.view('layouts/layout', {error: 'Error.Passport.Generic', state: req.session.redirect});
       } else {
