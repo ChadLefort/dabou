@@ -42,15 +42,16 @@ module.exports.policies = {
   },
 
   UserController: {
-    '*': ['passport', 'sessionAuth']
-//    'find': ['passport', 'sessionAuth'],
-//    'findOne': ['passport', 'sessionAuth'],
-//    'create': false,
-//    'update': false,
-//    'destroy': false,
-//    'populate': false,
-//    'add': false,
-//    'remove': false
+    '*': ['passport', 'sessionAuth'],
+    'create': false,
+    'update': false,
+    'destroy': false
+  },
+  
+  ProfileController : {
+    '*': ['passport', 'sessionAuth'],
+    'update': ['passport', 'sessionAuth', 'userAuth'],
+    'destroy': false
   }
   
 	// RabbitController: {

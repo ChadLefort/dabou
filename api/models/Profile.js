@@ -23,8 +23,7 @@ module.exports = {
       type: 'string'
     },
     user: {
-      model: 'User',
-      required: true,
+      model: 'user',
       unique: true
     }    
   }

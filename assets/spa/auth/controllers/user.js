@@ -38,6 +38,7 @@
     // PUBLIC FUNCTIONS
     vm.unlink = unlink;
     vm.createProfile = createProfile;
+    vm.editProfile = editProfile;
     vm.getProfile = getProfile;
 
     // init
@@ -52,7 +53,7 @@
       
       authService.csrfToken()
         .then(function (response){
-          vm.profile = {_csrf: response._csrf};
+          vm.profile._csrf = response._csrf;
         });
     }
 
@@ -105,24 +106,37 @@
             } else if (provider == 'google') {
               vm.google = false;
             }
-            toastr.success(data.success)
+            toastr.success(data.success);
           } else {
-            toastr.error(data.error)
+            toastr.error(data.error);
           }
         });
     }
     
     function createProfile() {
       authService.profile(vm.profile)
-        .then(function(data) {
-          console.log(data);
+        .then(function(response) {
+          toastr.success(response.data.success);
+          vm.profile = response.data.profile;
+          vm.noProfile = false;
         });
+    }
+    
+    function editProfile() {
+
     }
     
     function getProfile(userId) {
       authService.getProfile(userId)
-        .then(function(data) {
-          vm.profile = data.profile;
+        .then(function(data) {    
+          if (Object.keys(data).length == 0) {
+            vm.noProfile = true;
+          } else {
+            vm.profile.name = data.profile.name;
+            vm.profile.gender = data.profile.gender;
+            vm.profile.location = data.profile.location;
+            vm.profile.bio = data.profile.bio;
+          }
         });
     }
   }

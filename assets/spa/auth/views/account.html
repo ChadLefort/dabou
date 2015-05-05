@@ -62,7 +62,8 @@
     </div>
     <div class="col-md-7">
       <div class="panel panel-success">
-        <div class="panel-heading">Edit Profile</div>
+        <div ng-if="vm.noProfile" class="panel-heading">Create Profile</div>
+        <div ng-if="!vm.noProfile" class="panel-heading">Edit Profile</div>
         <div class="panel-body">
           <div class="form-horizontal">
             <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
@@ -91,7 +92,8 @@
               </div>
               <div class="form-group">
                 <div class="col-md-10 center-block">
-                  <button class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Edit Profile</button>
+                  <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Create Profile</button>
+                  <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()" type="submit">Edit Profile</button>
                 </div>
               </div>
             </form>
