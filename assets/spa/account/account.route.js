@@ -3,33 +3,39 @@
 
   /**
    * @ngdoc module
-   * @name dabou.main
-   * @module dabou.main
+   * @name dabou.account
+   * @module dabou.account
    * @description
    *
    */
   angular
-    .module('dabou.main')
-    .config(routeConfig);
+    .module('dabou.account')
+    .config(routeConfig)
+    .run(redirect);
 
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  redirect.$inject = ['$rootScope', '$state'];
 
   function routeConfig($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
-    
+
     var user = ['$q', 'authService', function ($q, authService) {
       var deferred = $q.defer();
       authService.authenticated()
         .then(function (data) {
+          if (data.status) {
             deferred.resolve(data);
+          } else {
+            deferred.reject('You must login.');
+          }
         });
       return deferred.promise;
     }];
 
     $stateProvider
-      .state('index', {
-        url: '/index',
+      .state('account', {
+        url: '/account',
         views: {
           'nav': {
             templateUrl: '/spa/main/views/nav.html',
@@ -37,12 +43,20 @@
             controllerAs: 'vm'
           },
           'page': {
-            templateUrl: '/spa/main/views/index.html'
+            templateUrl: '/spa/account/views/account.html',
+            controller: 'AccountController',
+            controllerAs: 'vm'
           }
         },
         resolve: {
           userData: user
         }
       });
+  }
+
+  function redirect($rootScope, $state) {
+    $rootScope.$on('$stateChangeError', function () {
+      $state.go('login');
+    });
   }
 })();

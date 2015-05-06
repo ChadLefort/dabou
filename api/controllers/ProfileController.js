@@ -5,27 +5,7 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
  module.exports = {
-   
-  /**
-   * Gets a specific profile based on a user's id
-   *
-   * @param {Object} req
-   * @param {Object} res
-   */
-  findOne: function (req, res) {
-    var user = req.param('id');
-        
-    Profile.findOne({
-      user: user
-    }, function (err, profile) {                         
-      if (err) {
-        res.send(400, {error: 'Error.User.Profile'});
-      } else {
-        res.send(200, {profile: profile});
-      }
-    });
-  },
-  
+
   /**
    * Create a profile for a user if they don't already have one
    *

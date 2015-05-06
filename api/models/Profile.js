@@ -5,27 +5,28 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var Profile = {
   // Enforce model schema in the case of schemaless databases
   schema: true,
-    
-  attributes: {
-    name: {
-      type: 'string'
-    },
-    gender: {
-      type: 'string'
-    },
-    location: {
-      type: 'string'
-    },
-    bio: {
-      type: 'string'
-    },
-    user: {
-      model: 'user',
-      unique: true
-    }    
-  }
+
+    attributes: {
+        name: {
+            type: 'string'
+        },
+        gender: {
+            type: 'string'
+        },
+        location: {
+            type: 'string'
+        },
+        bio: {
+            type: 'string'
+        },
+        user: {
+            model: 'User',
+            unique: true
+        }
+    }
 };
 
+module.exports = Profile;

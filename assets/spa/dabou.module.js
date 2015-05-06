@@ -13,7 +13,8 @@
 
     // Custom modules
     'dabou.main',
-    'dabou.auth'
+    'dabou.auth',
+    'dabou.account'
 
     // 3rd Party Modules
   ]);

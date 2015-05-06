@@ -10,25 +10,19 @@
    */
   angular
     .module('dabou.auth')
-    .config(routeConfig)
-    .run(redirect);
+    .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-  redirect.$inject = ['$rootScope', '$state'];
 
   function routeConfig($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
 
-    var authenticated = ['$q', 'authService', function ($q, authService) {
+    var user = ['$q', 'authService', function ($q, authService) {
       var deferred = $q.defer();
       authService.authenticated()
         .then(function (data) {
-          if (data.status) {
-            deferred.resolve();
-          } else {
-            deferred.reject('Not logged in');
-          }
+            deferred.resolve(data);
         });
       return deferred.promise;
     }];
@@ -43,8 +37,9 @@
         url: '/login',
         views: {
           'nav': {
+            resolve: {userData: user},
             templateUrl: '/spa/main/views/nav.html',
-            controller: 'IndexController',
+            controller: 'NavController',
             controllerAs: 'vm'
           },
           'page': {
@@ -58,8 +53,9 @@
         url: '/register',
         views: {
           'nav': {
+            resolve: {userData: user},
             templateUrl: '/spa/main/views/nav.html',
-            controller: 'IndexController',
+            controller: 'NavController',
             controllerAs: 'vm'
           },
           'page': {
@@ -68,30 +64,6 @@
             controllerAs: 'vm'
           }
         }
-      })
-      .state('account', {
-        url: '/account',
-        views: {
-          'nav': {
-            templateUrl: '/spa/main/views/nav.html',
-            controller: 'IndexController',
-            controllerAs: 'vm'
-          },
-          'page': {
-            templateUrl: '/spa/auth/views/account.html',
-            controller: 'UserController',
-            controllerAs: 'vm'
-          }
-        },
-        resolve: {
-          authenticated: authenticated
-        }
-      })
-  }
-
-  function redirect($rootScope, $state) {
-    $rootScope.$on('$stateChangeError', function () {
-      $state.go('login');
-    })
+      });
   }
 })();

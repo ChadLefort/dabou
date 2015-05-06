@@ -51,9 +51,5 @@ module.exports.routes = {
     'get  /auth/passports': 'AuthController.passports',
     'get  /auth/:provider': 'AuthController.provider',
     'get  /auth/:provider/callback': 'AuthController.callback',
-    'get  /auth/:provider/:action': 'AuthController.callback',
-
-    'post /user/profile': 'ProfileController.create',
-    'get  /user/profile': 'ProfileController.find',
-    'get  /user/profile/:id': 'ProfileController.findOne'
+    'get  /auth/:provider/:action': 'AuthController.callback'
 };

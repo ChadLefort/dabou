@@ -31,7 +31,7 @@ var User = {
             via: 'user'
         },
         profile: {
-            model: 'profile'
+            model: 'Profile'
         }
     }
 };
