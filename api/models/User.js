@@ -18,6 +18,9 @@ var User = {
             type: 'email',
             unique: true
         },
+        displayName: {
+            type: 'string'
+        },
         gravatar: {
             type: 'string'
         },

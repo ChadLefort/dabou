@@ -40,8 +40,9 @@
         vm.username = userData.user.username;
         vm.email = userData.user.email;
         vm.gravatar = userData.user.gravatar;
-
-        if(userData.user.username){
+        if(userData.user.displayName) {
+          vm.displayName = userData.user.displayName;
+        } else if(userData.user.username) {
           vm.displayName = userData.user.username;
         } else {
           vm.displayName = userData.user.email;
