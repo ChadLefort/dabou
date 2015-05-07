@@ -90,6 +90,10 @@ passport.connect = function (req, query, profile, next) {
   if (profile.hasOwnProperty('username')) {
     user.username = profile.username;
   }
+  
+  if (profile.hasOwnProperty('battletag')) {
+    user.username = profile.battletag.split('#')[0];
+  }
 
   // If neither an email or a username was available in the profile, we don't
   // have a way of identifying the user in the future. Throw an error and let
