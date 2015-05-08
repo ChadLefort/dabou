@@ -18,6 +18,7 @@
 
     // PUBLIC PROPERTIES
     vm.local = false;
+    vm.bnet = false;
     vm.twitter = false;
     vm.facebook = false;
     vm.google = false;
@@ -67,7 +68,9 @@
         .then(function(data) {
           vm.passport = data;
           angular.forEach(data, function(value, key) {
-            if(data[key].provider == 'twitter') {
+            if (data[key].provider == 'bnet') {
+              vm.bnet = true;
+            }else if (data[key].provider == 'twitter') {
               vm.twitter = true;
             } else if (data[key].provider == 'facebook') {
               vm.facebook = true;
@@ -100,7 +103,9 @@
       accountService.unlinkPassport(provider)
         .then(function(data) {
           if(data.status) {
-            if(provider == 'twitter') {
+            if (provider == 'bnet') {
+              vm.bnet = false;
+            } else if (provider == 'twitter') {
               vm.twitter = false;
             } else if (provider == 'facebook') {
               vm.facebook = false;

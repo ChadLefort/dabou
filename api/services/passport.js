@@ -92,7 +92,7 @@ passport.connect = function (req, query, profile, next) {
   }
   
   if (profile.hasOwnProperty('battletag')) {
-    user.username = profile.battletag.split('#')[0];
+    user.username = profile.battletag;
   }
   
   if (profile.hasOwnProperty('displayName')) {
@@ -375,7 +375,7 @@ passport.disconnect = function (req, res, next) {
       user: user.id
     }, function (err, count) {
       if (count == 1) {
-        res.send(406, {error: 'Error.Passport.Unlink'});
+        res.send({error: 'Error.Passport.Unlink'});
       } else {  
           Passport.findOne({
             provider : provider,

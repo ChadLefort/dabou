@@ -35,9 +35,11 @@ var AuthController = {
       user: user.id
     }, function (err, passport) {
       if (err) {
+        res.send(500);
+      } else if (!passport) {
         res.send(404, {error: 'Error.Passport.NotFound'});
       } else {
-        res.send(200, {passport: passport});
+        res.send(200, {passport: passport.tokens});
       }
     });
   },

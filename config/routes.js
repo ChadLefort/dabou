@@ -51,5 +51,7 @@ module.exports.routes = {
     'get  /auth/passports': 'AuthController.passports',
     'get  /auth/:provider': 'AuthController.provider',
     'get  /auth/:provider/callback': 'AuthController.callback',
-    'get  /auth/:provider/:action': 'AuthController.callback'
+    'get  /auth/:provider/:action': 'AuthController.callback',
+    
+    //'get /api/character/token': 'CharacterController.token'
 };

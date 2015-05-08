@@ -51,6 +51,24 @@
         resolve: {
           userData: user
         }
+      })
+      .state('character', {
+        url: '/character',
+        views: {
+          'nav': {
+            templateUrl: '/spa/main/views/nav.html',
+            controller: 'NavController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/account/views/character.html',
+            controller: 'CharacterController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          userData: user
+        }
       });
   }
 

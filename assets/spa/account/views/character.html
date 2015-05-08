@@ -1,0 +1,38 @@
+<div class="container push-down">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">Characters</div>
+        <div class="panel-body">
+          <div class="form-group" ng-if="vm.noBnet">
+            <div class="col-md-5 center-block">
+              <a href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Link Battle.net</a>
+            </div>
+          </div>
+          <table class="table table-hover" ng-if="!vm.noBnet">
+            <thead>
+              <th></th>
+              <th>Name</th>
+              <th>Level</th>
+              <th>Class</th>
+              <th>Spec</th>
+              <th>Guild</th>
+              <th>Realm</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="character in vm.characters | orderBy: '-level'">
+                <td><img src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle"></td>
+                <td>{{character.name}}</td>
+                <td>{{character.level}}</td>
+                <td>{{character.class}}</td>
+                <td>{{character.spec.name}}</td>
+                <td>{{character.guild}}</td>
+                <td>{{character.realm}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
