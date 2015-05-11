@@ -15,19 +15,23 @@
               <th>Name</th>
               <th>Level</th>
               <th>Class</th>
-              <th>Spec</th>
               <th>Guild</th>
               <th>Realm</th>
+              <th></th>
             </thead>
-            <tbody>
-              <tr ng-repeat="character in vm.characters | orderBy: '-level'">
+            <tbody>                  
+              <tr ng-repeat="character in vm.characters | orderBy:'perferred':true">
                 <td><img src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle"></td>
                 <td>{{character.name}}</td>
                 <td>{{character.level}}</td>
                 <td>{{character.class}}</td>
-                <td>{{character.spec.name}}</td>
                 <td>{{character.guild}}</td>
                 <td>{{character.realm}}</td>
+                <td>
+                  <i ng-if="!character.perferred && vm.noCharacter" class="fa fa-thumb-tack" ng-click="vm.createCharacter(character.name, character.realm)"></i>
+                  <i ng-if="!character.perferred && !vm.noCharacter" class="fa fa-thumb-tack" ng-click="vm.updateCharacter(character.name, character.realm)"></i>
+                  <i ng-if="character.perferred" class="fa fa-check"></i>
+                </td>
               </tr>
             </tbody>
           </table>

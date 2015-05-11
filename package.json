@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "battlenet-api": "^0.8.4",
     "bcryptjs": "^2.1.0",
     "chai": "^2.3.0",
     "express-mysql-session": "^0.3.2",

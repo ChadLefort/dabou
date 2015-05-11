@@ -70,7 +70,7 @@
           angular.forEach(data, function(value, key) {
             if (data[key].provider == 'bnet') {
               vm.bnet = true;
-            }else if (data[key].provider == 'twitter') {
+            } else if (data[key].provider == 'twitter') {
               vm.twitter = true;
             } else if (data[key].provider == 'facebook') {
               vm.facebook = true;

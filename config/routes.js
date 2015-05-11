@@ -54,4 +54,5 @@ module.exports.routes = {
     'get  /auth/:provider/:action': 'AuthController.callback',
     
     //'get /api/character/token': 'CharacterController.token'
+    'put /api/character': 'CharacterController.update'
 };

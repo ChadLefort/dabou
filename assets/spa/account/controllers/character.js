@@ -17,32 +17,92 @@
     var vm = this;
 
     // PUBLIC PROPERTIES
+    vm.characters = [];
     vm.noBnet = true;
+    vm.noCharacter = true;
     vm.state = $state.current.name;
     
     // PUBLIC FUNCTIONS
+    vm.createCharacter = createCharacter;
+    vm.updateCharacter = updateCharacter;
 
     // init
     activate();
 
     // PRIVATE FUNCTIONS
-    function activate() {      
-      getCharacters();
+    function activate() {
+      getAccount();
+    }
+
+    function createCharacter(name, realm) {
+      authService.csrfToken()
+        .then(function (response) {
+        var character = {
+          name: name,
+          realm: realm,
+          region: 'us',
+          _csrf: response._csrf
+        };
+
+        characterService.createCharacter(character)
+          .then(function (response) {
+          toastr.success(response.data.success);
+        });
+      });
+    }
+
+    function getAccount() {
+      characterService.getAccount()
+        .then(function (data) {
+        if (Object.keys(data).length == 0) {
+          vm.noBnet = true;
+        } else {
+          var characters = data.characters;
+          angular.forEach(characters, function (value, key) {
+            vm.characters.push(data.characters[key]);
+            data.characters[key].perferred = false;
+          });
+          getCharacter(userData.user.id, characters);
+          vm.noBnet = false;
+                console.log(vm.characters);
+        }
+      });
+    }
+
+    function getCharacter(userId, characters) {
+      characterService.getCharacter(userData.user.id)
+        .then(function (character) {
+        if (Object.keys(character).length == 0) {
+          vm.noCharacter = true;
+        } else {
+          vm.noCharacter = false;
+          angular.forEach(characters, function (value, key) {
+            if (characters[key].name == character.name && characters[key].realm == character.realm ) {
+              vm.characters.splice(key, 1);
+              vm.characters.unshift(characters[key]);
+              characters[key].perferred = true;
+            }
+          }); 
+        }
+      });
     }
     
-    function getCharacters() {
-      characterService.getToken()
-        .then(function (data){
-          if (Object.keys(data).length == 0) {
-            vm.noBnet = true;
-          } else {
-            characterService.getCharacters(data.token)
-              .then(function (data) {
-                  vm.characters = data.characters;
-                  vm.noBnet = false;
-              });
-          }
+    function updateCharacter(name, realm) {
+      authService.csrfToken()
+        .then(function (response) {
+        var character = {
+          name: name,
+          realm: realm,
+          region: 'us',
+          _csrf: response._csrf
+        };
+
+        characterService.updateCharacter(character)
+          .then(function (response) {
+            toastr.success(response.data.success);
+            console.log(response);
         });
+      });
     }
   }
 })();

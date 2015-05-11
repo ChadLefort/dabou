@@ -15,23 +15,33 @@
    */
   function characterService($http, urlRoot) {
 
-    function getCharacters(token) {
-      return $http.get('https://us.api.battle.net/wow/user/characters?access_token=' + token)
+    function createCharacter(character) {
+        return $http.post(urlRoot + '/character/', character);
+    }
+
+    function getAccount(token) {
+      return $http.get(urlRoot + '/character/account/')
         .then(function (response) {
           return response.data;
         });
-    }  
+    } 
     
-    function getToken() {
-      return $http.get(urlRoot + '/character/token/')
+    function getCharacter(userId) {
+        return $http.get(urlRoot + '/user/' + userId + '/character/')
         .then(function (response) {
           return response.data;
         });
     }
-       
+    
+    function updateCharacter(character) {
+        return $http.put(urlRoot + '/character/', character);
+    }
+         
     return {
-      getCharacters: getCharacters,
-      getToken: getToken
+      getAccount: getAccount,
+      createCharacter: createCharacter,
+      getCharacter: getCharacter,
+      updateCharacter: updateCharacter
     };
   }
 

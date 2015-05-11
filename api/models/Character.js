@@ -5,10 +5,25 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var Character = {
+  // Enforce model schema in the case of schemaless databases
+  schema: true,
 
-  attributes: {
-
-  }
+    attributes: {
+        name: {
+            type: 'string'
+        },
+        realm: {
+            type: 'string'
+        },
+        region: {
+            type: 'string'
+        },
+        user: {
+            model: 'User',
+            unique: true
+        }
+    }
 };
 
+module.exports = Character;

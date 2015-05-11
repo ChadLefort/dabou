@@ -35,6 +35,9 @@ var User = {
         },
         profile: {
             model: 'Profile'
+        },
+        character: {
+            model: 'Character'
         }
     }
 };
