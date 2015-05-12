@@ -7,7 +7,7 @@
           
           <div class="col-md-4 fx-fade-normal fx-speed-2000" ng-repeat="character in vm.characters">
             <div class="thumbnail">
-              <img src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle pull-left">
+              <img ng-src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle pull-left">
               <div class="caption">
                 <div class="row">
                   <div class="pull-left">

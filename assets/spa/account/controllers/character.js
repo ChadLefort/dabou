@@ -33,19 +33,24 @@
       getAccount();
     }
 
-    function createCharacter(name, realm) {
+    function createCharacter(viewCharacter) {
+      var key = vm.characters.indexOf(viewCharacter);
+      
       authService.csrfToken()
         .then(function (response) {
         var character = {
-          name: name,
-          realm: realm,
+          name: viewCharacter.name,
+          realm: viewCharacter.realm,
           region: 'us',
           _csrf: response._csrf
         };
 
         characterService.createCharacter(character)
           .then(function (response) {
-          toastr.success(response.data.success);
+            toastr.success(response.data.success);
+            vm.characters.splice(key, 1);
+            vm.characters.unshift(viewCharacter);
+            vm.characters[0].perferred = true;
         });
       });
     }
