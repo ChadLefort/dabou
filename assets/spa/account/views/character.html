@@ -4,37 +4,39 @@
       <div class="panel panel-success">
         <div class="panel-heading">Characters</div>
         <div class="panel-body">
+          
+          <div class="col-md-4 fx-fade-normal fx-speed-2000" ng-repeat="character in vm.characters">
+            <div class="thumbnail">
+              <img src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle pull-left">
+              <div class="caption">
+                <div class="row">
+                  <div class="pull-left">
+                    <h3>{{character.name}}</h3>
+                    <p><i>{{character.guild}}</i></p>
+                    <p>{{character.level}}</p>
+                  </div>
+                  <p class="pull-right preferred-character">
+                    <i ng-if="!character.perferred && vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.createCharacter(character)"></i>
+                    <i ng-if="!character.perferred && !vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.updateCharacter(character)"></i>
+                    <i ng-if="character.perferred" class="fa fa-2x fa-check"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div class="form-group" ng-if="vm.noBnet">
             <div class="col-md-5 center-block">
               <a href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Link Battle.net</a>
             </div>
           </div>
-          <table class="table table-hover" ng-if="!vm.noBnet">
-            <thead>
-              <th></th>
-              <th>Name</th>
-              <th>Level</th>
-              <th>Class</th>
-              <th>Guild</th>
-              <th>Realm</th>
-              <th></th>
-            </thead>
-            <tbody>                  
-              <tr ng-repeat="character in vm.characters | orderBy:'perferred':true">
-                <td><img src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle"></td>
-                <td>{{character.name}}</td>
-                <td>{{character.level}}</td>
-                <td>{{character.class}}</td>
-                <td>{{character.guild}}</td>
-                <td>{{character.realm}}</td>
-                <td>
-                  <i ng-if="!character.perferred && vm.noCharacter" class="fa fa-thumb-tack" ng-click="vm.createCharacter(character.name, character.realm)"></i>
-                  <i ng-if="!character.perferred && !vm.noCharacter" class="fa fa-thumb-tack" ng-click="vm.updateCharacter(character.name, character.realm)"></i>
-                  <i ng-if="character.perferred" class="fa fa-check"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          
+          <div class="row" ng-if="vm.loading">
+              <div class="col-md-12 text-center">
+                  <h3>Loading</h3><i class="fa fa-spinner fa-spin fa-4x"></i>
+              </div>
+          </div>
+          
         </div>
       </div>
     </div>

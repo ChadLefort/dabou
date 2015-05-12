@@ -6,6 +6,7 @@
     1.  General
     2.  Toastr
     3.  Animations
+    4.  Bootstrap
 
 */
 
@@ -226,4 +227,33 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
   -webkit-transform:translate(100px, 0, 0);
   -moz-transform:translate(100px, 0, 0);
   transform:translate(100px, 0, 0);
+}
+
+.thumbnail {
+    opacity: 1;
+}
+.thumbnail.ng-enter {
+    -webkit-transition: 1s;
+    transition: 1s;
+    opacity: 0;
+}
+.thumbnail.ng-enter-active {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   4. Bootstrap
+   ========================================================================== */
+
+.thumbnail > img, .thumbnail a > img {
+  margin: 10px;
+}
+
+.caption > .row > .pull-left > h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.preferred-character {
+  margin-right: 10px;
 }

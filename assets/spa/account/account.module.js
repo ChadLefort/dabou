@@ -19,6 +19,7 @@
         'ui.router',
         'ui.bootstrap',
         'xtForm',
-        'toastr'
+        'toastr',
+        'ngFx'
     ]);
 })();
