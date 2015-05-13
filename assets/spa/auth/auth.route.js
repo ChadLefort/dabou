@@ -18,11 +18,14 @@
 
     $urlRouterProvider.otherwise('/');
 
-    var user = ['$q', 'authService', function ($q, authService) {
+    var globalData = ['$q', 'authService', function ($q, authService) {
       var deferred = $q.defer();
       authService.authenticated()
-        .then(function (data) {
-            deferred.resolve(data);
+        .then(function (userData) {
+          authService.csrfToken()
+            .then(function (tokenData){
+              deferred.resolve({userData, tokenData});
+            });
         });
       return deferred.promise;
     }];
@@ -37,7 +40,6 @@
         url: '/login',
         views: {
           'nav': {
-            resolve: {userData: user},
             templateUrl: '/spa/main/views/nav.html',
             controller: 'NavController',
             controllerAs: 'vm'
@@ -47,13 +49,15 @@
             controller: 'LoginController',
             controllerAs: 'vm'
           }
+        },
+        resolve: {
+          globalData: globalData
         }
       })
       .state('register', {
         url: '/register',
         views: {
           'nav': {
-            resolve: {userData: user},
             templateUrl: '/spa/main/views/nav.html',
             controller: 'NavController',
             controllerAs: 'vm'
@@ -63,6 +67,9 @@
             controller: 'RegisterController',
             controllerAs: 'vm'
           }
+        },
+        resolve: {
+          globalData: globalData
         }
       });
   }

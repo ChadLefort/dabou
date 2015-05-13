@@ -16,25 +16,35 @@
   function characterService($http, urlRoot) {
 
     function createCharacter(character) {
-        return $http.post(urlRoot + '/character/', character);
+      return $http.post(urlRoot + '/character/', character)
+        .then(function (response) {
+          return response.data;
+        });
     }
 
     function getAccount(token) {
       return $http.get(urlRoot + '/character/account/')
         .then(function (response) {
           return response.data;
+        }, function(error) {
+            return error;
         });
     } 
     
     function getCharacter(userId) {
-        return $http.get(urlRoot + '/user/' + userId + '/character/')
+      return $http.get(urlRoot + '/user/' + userId + '/character/')
         .then(function (response) {
           return response.data;
+        }, function(error) {
+            return error;
         });
     }
     
     function updateCharacter(character) {
-        return $http.put(urlRoot + '/character/', character);
+      return $http.put(urlRoot + '/character/', character)
+        .then(function (response) {
+            return response.data;
+        });
     }
          
     return {

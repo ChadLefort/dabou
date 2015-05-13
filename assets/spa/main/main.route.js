@@ -18,11 +18,11 @@
 
     $urlRouterProvider.otherwise('/');
     
-    var user = ['$q', 'authService', function ($q, authService) {
+    var globalData = ['$q', 'authService', function ($q, authService) {
       var deferred = $q.defer();
       authService.authenticated()
-        .then(function (data) {
-            deferred.resolve(data);
+        .then(function (userData) {
+            deferred.resolve({userData});
         });
       return deferred.promise;
     }];
@@ -41,7 +41,7 @@
           }
         },
         resolve: {
-          userData: user
+          globalData: globalData
         }
       });
   }

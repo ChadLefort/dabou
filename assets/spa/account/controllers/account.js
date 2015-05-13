@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('AccountController', AccountController);
 
-  AccountController.$inject = ['accountService', 'authService', 'toastr', '$state', 'userData'];
+  AccountController.$inject = ['accountService', 'authService', 'toastr', '$state', 'globalData'];
 
   /**
    * @ngdoc controller
@@ -13,8 +13,11 @@
    * @description
    *
    */
-  function AccountController(accountService, authService, toastr, $state, userData) {
-    var vm = this;
+  function AccountController(accountService, authService, toastr, $state, globalData) {
+    var vm = this,
+        user = globalData.userData.user,
+        _csrf = globalData.tokenData._csrf;
+        
 
     // PUBLIC PROPERTIES
     vm.local = false;
@@ -40,28 +43,22 @@
     activate();
 
     // PRIVATE FUNCTIONS
-    function activate() {
-      getProfile(userData.user.id);
-      getPassports(userData.user.id);
-
-      authService.csrfToken()
-        .then(function (response){
-          vm.profile._csrf = response._csrf;
-        });
+    function activate() {   
+      getProfile(user.id);
+      getPassports(user.id);
     }
     
     function createProfile() {
       accountService.createProfile(vm.profile)
-        .then(function(response) {
-          toastr.success(response.data.success);
-          vm.profile = response.data.profile;
+        .then(function(data) {
+          toastr.success(data.success);
+          vm.profile = data.profile;
+          vm.profile._csrf = _csrf;
           vm.noProfile = false;
         });
     }
     
-    function editProfile() {
-
-    }
+    function editProfile() {}
 
     function getPassports(userId){
       accountService.getPassports(userId)
@@ -87,14 +84,12 @@
     
     function getProfile(userId) {
       accountService.getProfile(userId)
-        .then(function(data) {   
-          if (Object.keys(data).length == 0) {
+        .then(function(data) {  
+          if (data.status == 404) {
             vm.noProfile = true;
           } else {
-            vm.profile.name = data.name;
-            vm.profile.gender = data.gender;
-            vm.profile.location = data.location;
-            vm.profile.bio = data.bio;
+            vm.profile = data;
+            vm.profile._csrf = _csrf;
           }
         });
     }

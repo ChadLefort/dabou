@@ -20,12 +20,15 @@
 
     $urlRouterProvider.otherwise('/');
 
-    var user = ['$q', 'authService', function ($q, authService) {
+    var globalData = ['$q', 'authService', function ($q, authService) {
       var deferred = $q.defer();
       authService.authenticated()
-        .then(function (data) {
-          if (data.status) {
-            deferred.resolve(data);
+        .then(function (userData) {
+          if (userData.status) {
+            authService.csrfToken()
+              .then(function (tokenData){
+                deferred.resolve({userData, tokenData});
+              });
           } else {
             deferred.reject('You must login.');
           }
@@ -49,7 +52,7 @@
           }
         },
         resolve: {
-          userData: user
+          globalData: globalData
         }
       })
       .state('character', {
@@ -67,7 +70,7 @@
           }
         },
         resolve: {
-          userData: user
+          globalData: globalData
         }
       });
   }

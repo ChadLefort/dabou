@@ -11,17 +11,19 @@
    * @description
    *
    */
-  NavController.$inject = ['authService', '$modal', '$state', 'userData'];
+  NavController.$inject = ['authService', '$modal', '$state', 'globalData'];
 
-  function NavController(authService, $modal, $state, userData) {
-    var vm = this;
+  function NavController(authService, $modal, $state, globalData) {
+    var vm = this,
+        user = globalData.userData.user,
+        status = globalData.userData.status;
 
     // PUBLIC PROPERTIES
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
     vm.gravatar = '/images/default_avatar.png';
-    vm.isLoggedIn = false;
+    vm.isLoggedIn = false;  
 
     // PUBLIC FUNCTIONS
     vm.logout = logout;
@@ -34,18 +36,18 @@
       authenticated();
     }
 
-    function authenticated() {
-      if(userData.status) {
-        vm.isLoggedIn = userData.status;
-        vm.username = userData.user.username;
-        vm.email = userData.user.email;
-        vm.gravatar = userData.user.gravatar;
-        if(userData.user.displayName) {
-          vm.displayName = userData.user.displayName;
-        } else if(userData.user.username) {
-          vm.displayName = userData.user.username;
+    function authenticated() { 
+      if(status) {
+        vm.isLoggedIn = status;
+        vm.username = user.username;
+        vm.email = user.email;
+        vm.gravatar = user.gravatar;
+        if(user.displayName) {
+          vm.displayName = user.displayName;
+        } else if(user.username) {
+          vm.displayName = user.username;
         } else {
-          vm.displayName = userData.user.email;
+          vm.displayName = user.email;
         }
       }
     }

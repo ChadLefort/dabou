@@ -11,10 +11,11 @@
    * @description
    *
    */
-  RegisterController.$inject = ['authService', '$state', 'toastr'];
+  RegisterController.$inject = ['authService', '$state', 'toastr', 'globalData'];
 
-  function RegisterController(authService, $state, toastr) {
-    var vm = this;
+  function RegisterController(authService, $state, toastr, globalData) {
+    var vm = this,
+        _csrf = globalData.tokenData._csrf;
 
     // PUBLIC PROPERTIES
     vm.title = 'Register';
@@ -29,23 +30,20 @@
 
     // PRIVATE FUNCTIONS
     function activate() {
-      authService.csrfToken()
-        .then(function (response){
-          vm.user = {_csrf: response._csrf};
-        });
+      vm.user = {_csrf: _csrf};
     }
 
     function addLocalUser() {
       authService.addLocalUser(vm.user)
-        .then(function (response) {
-          if (response.data.error) {
-            var errors = response.data.error;
+        .then(function (data) {
+          if (data.error) {
+            var errors = data.error;
             angular.forEach(errors, function (value, key) {
               toastr.error(errors[key]);
             });
           } else {
             $state.go('login');
-            toastr.success(response.data.success);
+            toastr.success(data.success);
           }
         })
     }
