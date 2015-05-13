@@ -11,7 +11,11 @@ var Tabard = {
 
     attributes: {
         item: {
-            type: 'integer'
+            type: 'integer',
+            unique: true
+        },
+        name: {
+            type: 'string'
         }
     }
 };
