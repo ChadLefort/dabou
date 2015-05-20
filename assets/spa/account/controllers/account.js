@@ -26,7 +26,7 @@
     vm.facebook = false;
     vm.google = false;
     vm.state = $state.current.name;
-    vm.profile = {};
+    vm.profile = {_csrf: _csrf};
     vm.genders = [
       {value: 'Male'},
       {value: 'Female'},
@@ -53,7 +53,6 @@
         .then(function(data) {
           toastr.success(data.success);
           vm.profile = data.profile;
-          vm.profile._csrf = _csrf;
           vm.noProfile = false;
         });
     }
