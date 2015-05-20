@@ -40,10 +40,7 @@
 ################################################
 
 config/local.js
-config/passport.js
-config/connections.js
-config/env/*
-
+.env
 
 
 

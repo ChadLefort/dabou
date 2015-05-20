@@ -4,38 +4,50 @@
  * @description :: Server-side logic for managing tabards
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var PromiseThrottle = require('promise-throttle');
+var promiseThrottle = new PromiseThrottle({
+    requestsPerSecond: 10,
+    promiseImplementation: sails.Promise
+});
 
 module.exports = {
-	create: function (req, res) {
-		var item = req.param('item');
-		
-		sails.bnet.wow.item.item({
-	      origin: 'us', 
-	      id: item
-	    }, function (err, item) {
-	        if (item.inventoryType == 19) {
-				Tabard.create({
-					item: item.id,
-					name: item.name
-				}, function (err, item) {
-					if (err) {
-		        		res.send(400);
-					} else {
-						res.send(200);
+	generate: function (req, res) {
+
+		sails.fs.readFileAsync('console/tabardsIds.json', 'utf8').then(function (data) {
+			var items = JSON.parse(data);
+			return items;
+		}).map(function (item, index) {
+			promiseThrottle.add(function () {
+				return create(item.id);
+			});
+		}).then(function () {
+			res.send(200, 'All tabards have been imported!');
+		}).catch(function (error) {
+			res.send(400, { error: error });
+		});
+
+		function create (id) {
+			return new sails.Promise(function (resolve, reject) {
+				sails.getItem({
+					origin: 'us',
+					id: id
+				}).then(function (item) {
+					if (item.inventoryType == 19) {
+						Tabard.create({
+							item: item.id,
+							name: item.name
+						}).then(function (item) {
+							resolve(item.id)
+						}).catch(function (error) {
+							console.log(error);
+						});
 					}
+				}).catch(function (error) {
+					console.log(error);
 				});
-			}
-	    });
-	  }, 
-	  
-	  find: function(req, res) {
-		  Tabard.find(function(err, items) {
-			  var itemsId = [];
-			  for (var i = 1; i < items.length; i++) {
-				  itemsId.push({id: items[i].item, name: items[i].name});
-			  }
-			  res.send(200, {items: itemsId});
-		  });
-	  }
+			});
+		}
+
+	}
 };
 

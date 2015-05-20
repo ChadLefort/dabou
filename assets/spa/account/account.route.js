@@ -27,7 +27,7 @@
           if (userData.status) {
             authService.csrfToken()
               .then(function (tokenData){
-                deferred.resolve({userData, tokenData});
+                deferred.resolve({userData: userData, tokenData: tokenData});
               });
           } else {
             deferred.reject('You must login.');

@@ -17,6 +17,11 @@
  * The same command-line arguments are supported, e.g.:
  * `node app.js --silent --port=80 --prod`
  */
+ 
+// Setup local environment variables 
+if (!process.env.NODE_ENV) {
+  require('dotenv').load();
+}
 
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.

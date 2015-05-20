@@ -24,7 +24,7 @@
         .then(function (userData) {
           authService.csrfToken()
             .then(function (tokenData){
-              deferred.resolve({userData, tokenData});
+              deferred.resolve({userData: userData, tokenData: tokenData});
             });
         });
       return deferred.promise;
