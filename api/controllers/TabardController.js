@@ -4,12 +4,6 @@
  * @description :: Server-side logic for managing tabards
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var PromiseThrottle = require('promise-throttle');
-var promiseThrottle = new PromiseThrottle({
-    requestsPerSecond: 10,
-    promiseImplementation: sails.Promise
-});
-
 module.exports = {
 	generate: function (req, res) {
 
@@ -17,7 +11,7 @@ module.exports = {
 			var items = JSON.parse(data);
 			return items;
 		}).map(function (item, index) {
-			promiseThrottle.add(function () {
+			sails.promiseThrottle.add(function () {
 				return create(item.id);
 			});
 		}).then(function () {

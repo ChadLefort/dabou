@@ -37,7 +37,7 @@ module.exports.policies = {
 
   '*': ['passport', 'sessionAuth'],
  
- 'auth': {
+  AuthController: {
     '*': ['passport']
   },
 
@@ -50,12 +50,16 @@ module.exports.policies = {
     'add': false
   },
   
-  ProfileController : {
+  ProfileController: {
     '*': ['passport', 'sessionAuth'],
     'update': ['passport', 'sessionAuth', 'userAuth'],
     'destroy': false,
     'remove': false,
     'add': false
+  },
+  
+  TabardController: {
+    'generate': ['passport', 'sessionAuth', 'adminAuth']
   }
   
 	// RabbitController: {
