@@ -43,6 +43,21 @@ module.exports.routes = {
      * for configuration options and examples.                                  *
      *                                                                          *
      ***************************************************************************/
+     
+    /**
+    * Admin Routes
+    * 
+    * @description :: These routes are all associated with a admin access level
+    * end points
+    */
+    'get /admin/generateTabards': 'AdminController.generateTabards',
+     
+    /**
+    * Authenication Routes
+    * 
+    * @description :: These routes are all associated with passport or to see 
+    * if a user is authenicated
+    */
 
     'post /auth/local': 'AuthController.callback',
     'post /auth/local/:action': 'AuthController.callback',
@@ -53,7 +68,11 @@ module.exports.routes = {
     'get  /auth/:provider/callback': 'AuthController.callback',
     'get  /auth/:provider/:action': 'AuthController.callback',
     
-    //'get /api/character/token': 'CharacterController.token'
-    'put /api/character': 'CharacterController.update',
-    'get /admin/generate': 'TabardController.generate'
+    /**
+    * Character Routes
+    * 
+    * @description :: These routes are all associated with a user's character
+    */
+    
+    'put /api/character': 'CharacterController.update'
 };

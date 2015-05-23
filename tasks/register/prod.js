@@ -4,6 +4,7 @@ module.exports = function (grunt) {
 		'concat',
 		'uglify',
 		'cssmin',
+		'autoprefixer',
 		'sails-linker:prodJs',
 		'sails-linker:prodStyles'
 	]);
