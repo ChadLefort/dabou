@@ -1,12 +1,9 @@
 /**
  * Authentication Controller
  *
- * This is merely meant as an example of how your Authentication controller
- * should look. It currently includes the minimum amount of functionality for
- * the basics of Passport.js to work.
+ * @description :: Server-side logic for authentication
  */
-
-var AuthController = {
+module.exports = {
   
   /**
    * Checks to see if the current user is authenticated
@@ -117,5 +114,3 @@ var AuthController = {
   }
   
 };
-
-module.exports = AuthController;
