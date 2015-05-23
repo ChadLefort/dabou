@@ -2,99 +2,96 @@
  * CharacterController
  *
  * @description :: Server-side logic for managing characters
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 module.exports = {
 	
   /**
-   * Returns the all of the wow character's associated with a user's battle.net account
+   * Returns the all of the wow character's associated with a user's 
+   * battle.net account
    *
    * @param {Object} req
    * @param {Object} res
    */
   account: function (req, res) {
     var user = req.user;
-
+    
     Passport.findOne({
       user: user.id,
       provider: 'bnet'
-    }, function (err, passport) {
-      if (err) {
-        res.send(500);
-      } else if (!passport) {
+    }).then(function (passport) {
+      if (!passport) {
         res.send(404, {error: 'Error.Bnet.Passport.NotFound'});
       } else {
         var token = passport.tokens.accessToken;
         
-        sails.bnet.account.wow({
+        sails.wowAccount({
           origin: 'us', 
           access_token: token
-        }, function (err, account) {
-          if (err) {
-            res.send(500);
-            console.log(err);
-          } else {
-            res.send(200, account);
-          }
+        }).then(function (account) {
+          res.send(200, account);
+        }).catch(function (error) {
+          res.send(500);
+          console.log(error);
         }); 
       }
+    }).catch(function (error) {
+      res.send(500);
+      console.log(error);
     });
   },
   
+  /**
+   * Creates a preferred character if none has been already created
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
   create: function (req, res) {
     var user = req.user,
         name = req.param('name'),
         realm = req.param('realm'),
         region = req.param('region');
-    
+        
     Character.create({
       name: name,
       realm: realm,
       region: region,
       user: user.id
-    }, function (err, character) {
-      if (err) {
-        res.send(409, {error: 'Error.User.Character'});
-      } else {
-        User.update(user.id, {
+    }).then(function (character) {
+      User.update(user.id, {
           character: character.id
-        }, function (err, user) {
-          if (err) {
-            res.send(400, {error: 'Error.User.Character'})
-          } else {
-            res.send(200, {success: 'Success.User.Character.Created', character: character});
-          }
+        }).then(function (user) {
+          res.send(200, {success: 'Success.User.Character.Created', character: character});
+        }).catch(function (error) {
+          res.send(400, {error: 'Error.User.Character'});
         });
-      }         
+    }).catch(function (error) {
+        res.send(409, {error: 'Error.User.Character'});
     });
   },
   
-  item: function (req, res) {
-    sails.bnet.wow.item.item({
-      origin: 'us', 
-      id: 18810
-    }, function (err, item) {
-        res.send(200, {item: item});
-    });
-  },
-  
+  /**
+   * Updates a user's preferred character
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
   update: function (req, res) {
     var user = req.user,
         name = req.param('name'),
         realm = req.param('realm'),
         region = req.param('region');
-    
+        
     Character.update(user.id, {
       name: name,
       realm: realm,
       region: region
-    }, function (err, character) {
-      if (err) {
-        res.send(409, {error: 'Error.User.Character.Update'});
-      } else {
-        res.send(200, {success: 'Success.User.Character.Update', character: character});
-      }         
+    }).then(function (character) {
+      res.send(200, {success: 'Success.User.Character.Update', character: character});
+    }).catch(function (error) {
+      res.send(409, {error: 'Error.User.Character.Update'});
     });
-  },
+  }
+  
 };
 

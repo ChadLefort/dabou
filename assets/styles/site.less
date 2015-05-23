@@ -160,22 +160,16 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
    ========================================================================== */
 
 #toast-container > div {
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    border-radius: 0px;
+    box-shadow: none;
 }
 
 #toast-container >:hover {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .toast-top-center {
-  top: 20px;
+    top: 20px;
 }
 
 /* ==========================================================================
@@ -191,41 +185,27 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
   position: absolute;
   left: 0;
   right: 0;
-  -webkit-transition:all .5s ease-in-out;
-  -moz-transition:all .5s ease-in-out;
-  -o-transition:all .5s ease-in-out;
   transition:all .5s ease-in-out;
 }
 
 .page-view.ng-enter {
   opacity: 0;
-  -webkit-transform:translate(20px, 0, 0);
-  -moz-transform:translate(20px, 0, 0);
-  transform:translate(20px, 0, 0);
-  -webkit-transition: all 500ms;
   transition: all 500ms;
 }
 
 .page-view.ng-enter-active {
   opacity: 1;
-  -webkit-transform:translate(40px, 0, 0);
-  -moz-transform:translate(40px, 0, 0);
   transform:translate(40px, 0, 0);
-  -webkit-transition: all 500ms;
   transition: all 500ms;
 }
 
 .page-view.ng-leave {
   opacity: 1;
-  -webkit-transform:translate3d(0, 0, 0);
-  -moz-transform:translate3d(0, 0, 0);
   transform:translate3d(0, 0, 0);
 }
 
 .page-view.ng-leave-active {
   opacity: 0;
-  -webkit-transform:translate(100px, 0, 0);
-  -moz-transform:translate(100px, 0, 0);
   transform:translate(100px, 0, 0);
 }
 
@@ -233,7 +213,6 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
     opacity: 1;
 }
 .thumbnail.ng-enter {
-    -webkit-transition: 1s;
     transition: 1s;
     opacity: 0;
 }

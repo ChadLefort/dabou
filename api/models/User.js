@@ -26,7 +26,7 @@ var User = {
         },
         admin: {
             type: 'boolean',
-            defaultsTo: 0,
+            defaultsTo: false,
             protected: true
         },
         passports: {
@@ -39,6 +39,26 @@ var User = {
         character: {
             model: 'Character'
         }
+    },
+    
+    /**
+     * Callback to be run before creating a User that makes
+     * the first user an admin.
+     *
+     * @param {Object}   user The soon-to-be-created User
+     * @param {Function} next
+     */
+    beforeCreate: function(user, next) {
+        sails.models['user'].count().then(function (count) {
+            if (count == 0) {
+                user.admin = true;
+                next(null, user);
+            } else {
+                next(null, user);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 };
 

@@ -2,9 +2,17 @@
  * TabardController
  *
  * @description :: Server-side logic for managing tabards
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 module.exports = {
+	
+	/**
+	* Scrapes WoWDB tabard pages and grabs the rest of the tabard
+	* information from the battle.net api and insert that data
+	* into our database to create an tabard item cache
+	*
+	* @param {Object} req
+	* @param {Object} res
+	*/
 	generate: function (req, res) {
 
 		sails.fs.readFileAsync('console/tabardsIds.json', 'utf8').then(function (data) {
@@ -31,7 +39,7 @@ module.exports = {
 							item: item.id,
 							name: item.name
 						}).then(function (item) {
-							resolve(item.id)
+							resolve(item.id);
 						}).catch(function (error) {
 							console.log(error);
 						});
@@ -43,5 +51,6 @@ module.exports = {
 		}
 
 	}
+	
 };
 

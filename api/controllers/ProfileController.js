@@ -2,7 +2,6 @@
  * ProfileController
  *
  * @description :: Server-side logic for managing user's profiles
- * @help        :: See http://links.sailsjs.org/docs/controllers
  */
  module.exports = {
 
@@ -25,20 +24,42 @@
       location: location,
       bio: bio,
       user: user.id
-    }, function (err, profile) {
-      if (err) {
-        res.send(409, {error: 'Error.User.Profile'});
-      } else {
-        User.update(user.id, {
+    }).then(function (profile) {
+      User.update(user.id, {
           profile: profile.id
-        }, function (err, user) {
-          if (err) {
-            res.send(400, {error: 'Error.User.Profile'})
-          } else {
-            res.send(200, {success: 'Success.User.Profile.Created', profile: profile});
-          }
+        }).then(function (user) {
+           res.send(200, {success: 'Success.User.Profile.Created', profile: profile});
+        }).catch(function (error) {
+          res.send(400, {error: 'Error.User.Profile'});
         });
-      }         
+    }).catch(function (error) {
+      res.send(409, {error: 'Error.User.Profile'});
+    });
+  },
+  
+  
+  /**
+   * Updates a user's profile
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  update: function (req, res) {
+    var user = req.user,
+        name = req.param('name'),
+        gender = req.param('gender'),
+        location = req.param('location'),
+        bio = req.param('bio');
+        
+    Profile.update(user.id, {
+      name: name,
+      gender: gender,
+      location: location,
+      bio: bio
+    }).then(function (profile) {
+      res.send(200, {success: 'Success.User.Profile.Updated', profile: profile});
+    }).catch(function (error) {
+      res.send(500, {error: 'Error.User.Profile.Updated'});
     });
   }
   
