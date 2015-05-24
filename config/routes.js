@@ -58,7 +58,6 @@ module.exports.routes = {
     * @description :: These routes are all associated with passport or to see 
     * if a user is authenicated
     */
-
     'post /auth/local': 'AuthController.callback',
     'post /auth/local/:action': 'AuthController.callback',
     'get  /logout': 'AuthController.logout',
@@ -67,12 +66,4 @@ module.exports.routes = {
     'get  /auth/:provider': 'AuthController.provider',
     'get  /auth/:provider/callback': 'AuthController.callback',
     'get  /auth/:provider/:action': 'AuthController.callback',
-    
-    /**
-    * Character Routes
-    * 
-    * @description :: These routes are all associated with a user's character
-    */
-    
-    'put /api/character': 'CharacterController.update'
 };

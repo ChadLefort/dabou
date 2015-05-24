@@ -46,18 +46,19 @@
    */
   update: function (req, res) {
     var user = req.user,
+        id = req.param('id'),
         name = req.param('name'),
         gender = req.param('gender'),
         location = req.param('location'),
         bio = req.param('bio');
         
-    Profile.update(user.id, {
+    Profile.update(id, {
       name: name,
       gender: gender,
       location: location,
       bio: bio
     }).then(function (profile) {
-      res.send(200, {success: 'Success.User.Profile.Updated', profile: profile});
+      res.send(200, {success: 'Success.User.Profile.Updated', profile: profile[0]});
     }).catch(function (error) {
       res.send(500, {error: 'Error.User.Profile.Updated'});
     });

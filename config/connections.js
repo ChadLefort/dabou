@@ -23,40 +23,20 @@ module.exports.connections = {
 
   /***************************************************************************
   *                                                                          *
-  * Local disk storage for DEVELOPMENT ONLY                                  *
-  *                                                                          *
-  * Installed by default.                                                    *
-  *                                                                          *
-  ***************************************************************************/
-//  localDiskDb: {
-//    adapter: 'sails-disk'
-//  },
-
-  /***************************************************************************
-  *                                                                          *
-  * MySQL is the world's most popular relational database.                   *
-  * http://en.wikipedia.org/wiki/MySQL                                       *
-  *                                                                          *
-  * Run: npm install sails-mysql                                             *
-  *                                                                          *
-  ***************************************************************************/
-  mysql: {
-    adapter: 'sails-mysql',
-    host: process.env.DEV_DB_HOST,
-    user: process.env.DEV_DB_USER,
-    password: process.env.DEV_DB_PASSWORD,
-    database: process.env.DEV_DB_DATABASE
-  },
-
-  /***************************************************************************
-  *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
   * http://en.wikipedia.org/wiki/MongoDB                                     *
   *                                                                          *
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
-  mongo: {
+  mongoDevelopment: {
+    adapter: 'sails-mongo',
+    host: process.env.DEV_DB_HOST,
+    port: process.env.DEV_DB_PORT,
+    database: process.env.DEV_DB_DATABASE
+  }, 
+  
+  mongoProduction: {
     adapter: 'sails-mongo',
     host: process.env.PROD_DB_HOST,
     port: process.env.PROD_DB_PORT,
@@ -64,5 +44,5 @@ module.exports.connections = {
     password: process.env.PROD_DB_PASSWORD,
     database: process.env.PROD_DB_DATABASE
   }
-
+  
 };

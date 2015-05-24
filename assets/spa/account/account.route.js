@@ -72,6 +72,24 @@
         resolve: {
           globalData: globalData
         }
+      })
+      .state('profile', {
+        url: '/profile',
+        views: {
+          'nav': {
+            templateUrl: '/spa/main/views/nav.html',
+            controller: 'NavController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/account/views/profile.html',
+            controller: 'ProfileController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          globalData: globalData
+        }
       });
   }
 

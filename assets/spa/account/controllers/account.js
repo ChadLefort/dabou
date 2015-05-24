@@ -17,7 +17,6 @@
     var vm = this,
         user = globalData.userData.user,
         _csrf = globalData.tokenData._csrf;
-        
 
     // PUBLIC PROPERTIES
     vm.local = false;
@@ -57,7 +56,14 @@
         });
     }
     
-    function editProfile() {}
+    function editProfile() {
+      accountService.updateProfile(user.profile, vm.profile)
+        .then(function(data) {
+          toastr.success(data.success);
+          vm.profile = data.profile;
+          vm.noProfile = false;
+        });
+    }
 
     function getPassports(userId){
       accountService.getPassports(userId)

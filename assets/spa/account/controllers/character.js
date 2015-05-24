@@ -99,7 +99,7 @@
             _csrf: _csrf
           };
 
-      characterService.updateCharacter(character)
+      characterService.updateCharacter(user.character, character)
         .then(function (data) {
           toastr.success(data.success);
           vm.characters.splice(key, 1);

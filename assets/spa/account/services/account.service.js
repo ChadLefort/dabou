@@ -45,11 +45,19 @@
         });
     }
     
+    function updateProfile(id, profile) {
+      return $http.put(urlRoot + '/profile/' + id, profile)
+        .then(function(response) {
+          return response.data;
+        });
+    }
+    
     return {
       getPassports: getPassports,
       getProfile: getProfile,
       createProfile: createProfile,
-      unlinkPassport: unlinkPassport
+      unlinkPassport: unlinkPassport,
+      updateProfile: updateProfile
     };
   }
 

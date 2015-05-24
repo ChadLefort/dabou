@@ -37,8 +37,20 @@ module.exports.policies = {
 
   '*': ['passport', 'sessionAuth'],
  
+  AdminController: {
+    'generate': ['passport', 'sessionAuth', 'adminAuth']
+  },
+  
   AuthController: {
     '*': ['passport']
+  },
+  
+  CharacterController: {
+    '*': ['passport', 'sessionAuth'],
+    'update': ['passport', 'sessionAuth', 'userOwnership'],
+    'destroy': false,
+    'remove': false,
+    'add': false
   },
 
   UserController: {
@@ -52,14 +64,14 @@ module.exports.policies = {
   
   ProfileController: {
     '*': ['passport', 'sessionAuth'],
-    'update': ['passport', 'sessionAuth', 'userAuth'],
+    'update': ['passport', 'sessionAuth', 'userOwnership'],
     'destroy': false,
     'remove': false,
     'add': false
   },
   
   TabardController: {
-    'generate': ['passport', 'sessionAuth', 'adminAuth']
+    '*': true
   }
   
 	// RabbitController: {

@@ -40,8 +40,8 @@
         });
     }
     
-    function updateCharacter(character) {
-      return $http.put(urlRoot + '/character/', character)
+    function updateCharacter(id, character) {
+      return $http.put(urlRoot + '/character/' + id, character)
         .then(function (response) {
             return response.data;
         });

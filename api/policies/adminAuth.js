@@ -1,10 +1,19 @@
+/**
+ * adminAuth
+ *
+ * @module      :: Policy
+ * @description :: Checks to see the the user is an admin for certain rotues
+ *                 that require admin only level access
+ * @docs        :: http://sailsjs.org/#!documentation/policies
+ *
+ */
+
 module.exports = function(req, res, next) {
 
-  // User is allowed, proceed to the next policy, 
-  // or if this is the last policy, the controller
   if (req.user.admin == true) {
     return next();
+  } else {
+    return res.forbidden(); 
   }
-  console.log(req.user);
-  return res.forbidden();
+  
 };
