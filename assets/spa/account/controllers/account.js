@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('AccountController', AccountController);
 
-  AccountController.$inject = ['accountService', 'authService', 'toastr', '$state', 'globalData'];
+  AccountController.$inject = ['accountService', 'authService', 'toastr', '$state', 'globalData', '$modal'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function AccountController(accountService, authService, toastr, $state, globalData) {
+  function AccountController(accountService, authService, toastr, $state, globalData, $modal) {
     var vm = this,
         user = globalData.userData.user,
         _csrf = globalData.tokenData._csrf;
@@ -34,6 +34,7 @@
 
     // PUBLIC FUNCTIONS
     vm.createProfile = createProfile;
+    vm.deleteProfile = deleteProfile;
     vm.editProfile = editProfile;
     vm.getProfile = getProfile;
     vm.unlinkPassport = unlinkPassport;
@@ -54,6 +55,12 @@
           vm.profile = data.profile;
           vm.noProfile = false;
         });
+    }
+    
+    function deleteProfile() {
+      $modal.open({
+        templateUrl: 'spa/account/views/delete.profile.html'
+      });
     }
     
     function editProfile() {

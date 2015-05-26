@@ -6,7 +6,7 @@
         <div class="panel-body">
           
           <div class="col-md-4 fx-fade-normal fx-speed-2000" ng-repeat="character in vm.characters">
-            <div class="thumbnail">
+            <div class="thumbnail" style="border-color: {{character.color}}">
               <img ng-src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle pull-left">
               <div class="caption">
                 <div class="row">
@@ -16,9 +16,9 @@
                     <p>{{character.level}}</p>
                   </div>
                   <p class="pull-right preferred-character">
-                    <i ng-if="!character.perferred && vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.createCharacter(character)"></i>
-                    <i ng-if="!character.perferred && !vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.updateCharacter(character)"></i>
-                    <i ng-if="character.perferred" class="fa fa-2x fa-check"></i>
+                    <i ng-if="!character.preferred && vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.createCharacter(character)"></i>
+                    <i ng-if="!character.preferred && !vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.updateCharacter(character)"></i>
+                    <i ng-if="character.preferred" class="fa fa-2x fa-check"></i>
                   </p>
                 </div>
               </div>

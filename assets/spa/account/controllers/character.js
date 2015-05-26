@@ -49,7 +49,7 @@
           toastr.success(data.success);
           vm.characters.splice(key, 1);
           vm.characters.unshift(viewCharacter);
-          vm.characters[0].perferred = true;
+          vm.characters[0].preferred = true;
       });
     }
 
@@ -64,7 +64,7 @@
           getCharacter(user.id, characters);
           angular.forEach(characters, function (value, key) {
             vm.characters.push(data.characters[key]);
-            data.characters[key].perferred = false;
+            data.characters[key].preferred = false;
           });
           vm.noBnet = false;
           vm.loading = false;
@@ -83,7 +83,7 @@
             if (characters[key].name == data.name && characters[key].realm == data.realm ) {
               vm.characters.splice(key, 1);
               vm.characters.unshift(characters[key]);
-              characters[key].perferred = true;
+              characters[key].preferred = true;
             }
           }); 
         }
@@ -104,8 +104,8 @@
           toastr.success(data.success);
           vm.characters.splice(key, 1);
           vm.characters.unshift(viewCharacter);
-          vm.characters[0].perferred = true;
-          vm.characters[1].perferred = false;
+          vm.characters[0].preferred = true;
+          vm.characters[1].preferred = false;
       });
     }
   }

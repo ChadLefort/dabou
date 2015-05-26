@@ -68,42 +68,65 @@
     </div>
     <div class="col-md-7">
       <div class="panel panel-success">
-        <div ng-if="vm.noProfile" class="panel-heading">Create Profile</div>
-        <div ng-if="!vm.noProfile" class="panel-heading">Edit Profile</div>
+        <div class="panel-heading">Profile</div>
         <div class="panel-body">
-          <div class="form-horizontal">
-            <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name" placeholder="Name">
-                </div>
+          <tabset justified="true">
+            <tab heading="Preview Profile">
+              <div class="push-down">
+                <h1>{{vm.profile.name}}</h1>
+                <small><cite title="{{vm.profile.location}}">{{vm.profile.location}} <i class="fa fa-lg fa-home">
+                </i></cite></small>
+                <p>
+                  <i class="fa fa-lg fa-envelope"></i> chadlefort@gmail.com
+                    <br />
+                    <i class="fa fa-lg fa-globe"></i><a href="http://chadlefort.com" target="_blank"> chadlefort.com</a>
+                    <br />
+                    <i class="fa fa-lg fa-gift"></i> September 28, 1989
+                </p>
+                <p>{{vm.profile.bio}}</p>
               </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender" ng-options="g.value as g.value for g in vm.genders">
-                    <option selected="selected" disabled="disabled" value="">Gender</option>
-                  </select>
-                </div>
+            </tab>
+            <tab heading="Edit Profile">
+              <div class="form-horizontal push-down">
+                <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
+                  <div class="form-group">
+                    <div class="col-md-10 center-block">
+                      <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-10 center-block">
+                      <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender" ng-options="g.value as g.value for g in vm.genders">
+                        <option selected="selected" disabled="disabled" value="">Gender</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-10 center-block">
+                      <input class="form-control" type="text" id="location" name="location" ng-model="vm.profile.location" placeholder="Location">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-10 center-block">
+                      <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio" placeholder="A breif description about yourself..."
+                      required=""></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-10 center-block">
+                      <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Create Profile</button>
+                      <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()" type="submit">Edit Profile</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="location" name="location" ng-model="vm.profile.location" placeholder="Location">
-                </div>
+            </tab>
+            <tab heading="Delete Profile">
+              <div class="col-md-10 center-block push-down">
+                  <button class="btn btn-success auth-btn" ng-click="vm.deleteProfile()" type="submit">Delete Profile</button>
               </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio" placeholder="A breif description about yourself..."
-                  required=""></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Create Profile</button>
-                  <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()" type="submit">Edit Profile</button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </tab>
+          </tabset>  
         </div>
       </div>
     </div>

@@ -18,11 +18,9 @@ module.exports = function(grunt) {
       ]
     },
     options: {
+      open: false,
       watchTask: true,
-      proxy: 'https://localhost:1337',
-      socket: {
-        path: '/socket.io'
-      }
+      proxy: 'https://localhost:1337'
     }
   });
 

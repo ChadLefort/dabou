@@ -23,6 +23,7 @@ module.exports.bootstrap = function (cb) {
   sails.bnet = require('battlenet-api')(sails.config.bnet.key);
   sails.getItem = sails.Promise.promisify(sails.bnet.wow.item.item);
   sails.wowAccount = sails.Promise.promisify(sails.bnet.account.wow);
+  sails.wowClasses = sails.Promise.promisify(sails.bnet.wow.data.characterClasses);
   sails.services.passport.loadStrategies();
   cb();
 };
