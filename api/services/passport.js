@@ -2,8 +2,7 @@
 var path     = require('path')
   , url      = require('url')
   , passport = require('passport')
-  , cases = require('./cases');
-
+  , _        = require('lodash');
 /**
  * Passport Service
  *
@@ -177,7 +176,7 @@ passport.connect = function (req, query, profile, next) {
           if (err) {
             return next(err);
           }
-          req.flash('success', 'Success.Passport.' + cases.toProperCase(provider) + '.Link');
+          req.flash('success', 'Success.Passport.' + _.capitalize(provider) + '.Link');
           next(err, req.user);
         });
       }
@@ -390,7 +389,7 @@ passport.disconnect = function (req, res, next) {
               }
             });
         });
-        res.send(200, {status: true, success: 'Success.Passport.' + cases.toProperCase(provider) + '.Unlink'});
+        res.send(200, {status: true, success: 'Success.Passport.' + _.capitalize(provider) + '.Unlink'});
       }
     });
 };
