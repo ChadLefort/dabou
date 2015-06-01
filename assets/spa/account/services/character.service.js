@@ -22,7 +22,7 @@
         });
     }
 
-    function getAccount(token) {
+    function getAccount() {
       return $http.get(urlRoot + '/character/account/')
         .then(function (response) {
           return response.data;

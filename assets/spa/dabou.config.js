@@ -10,6 +10,7 @@
       */
     angular
 	    .module('dabou')
-	    .constant('urlRoot', location.protocol + '//' + location.hostname + ':' + location.port + '/api');
+	    .constant('urlRoot', location.protocol + '//' + location.hostname + ':' + location.port + '/api')
+        .constant('_', _);
 })();
                 

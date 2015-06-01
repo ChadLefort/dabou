@@ -19,6 +19,15 @@ var Character = {
         region: {
             type: 'string'
         },
+        race: {
+            type: 'integer'
+        },
+        gender: {
+            type: 'integer'
+        },
+        thumbnail: {
+            type: 'string'
+        },
         user: {
             model: 'User',
             unique: true

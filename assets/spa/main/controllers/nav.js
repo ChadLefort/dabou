@@ -11,9 +11,9 @@
    * @description
    *
    */
-  NavController.$inject = ['authService', '$modal', '$state', 'globalData'];
+  NavController.$inject = ['authService', 'characterService', '$modal', '$state', 'globalData', '_'];
 
-  function NavController(authService, $modal, $state, globalData) {
+  function NavController(authService, characterService, $modal, $state, globalData, _) {
     var vm = this,
         user = globalData.userData.user,
         status = globalData.userData.status;
@@ -22,7 +22,6 @@
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
-    vm.gravatar = '/images/default_avatar.png';
     vm.isLoggedIn = false;  
 
     // PUBLIC FUNCTIONS
@@ -42,14 +41,23 @@
         vm.username = user.username;
         vm.email = user.email;
         vm.gravatar = user.gravatar;
-        if(user.displayName) {
+        if (!_.isNull(_.get(user, 'character'))) {
+          getCharacter();
+        } else if (user.displayName) {
           vm.displayName = user.displayName;
-        } else if(user.username) {
+        } else if (user.username) {
           vm.displayName = user.username;
         } else {
           vm.displayName = user.email;
         }
       }
+    }
+    
+    function getCharacter() {
+      characterService.getCharacter(user.id).then(function (character) {
+          vm.displayName = character.name;
+          vm.gravatar = 'https://us.battle.net/static-render/us/'+ character.thumbnail + '?alt=/wow/static/images/2d/avatar/' + character.race + '-' + character.gender + '.jpg';
+        });
     }
 
     function logout() {

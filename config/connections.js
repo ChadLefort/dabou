@@ -29,36 +29,21 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
-  mysql: {
+  mysqlDevelopment: {
     adapter: 'sails-mysql',
     host: process.env.DEV_DB_HOST,
+    port: process.env.DEV_DB_PORT,
     user: process.env.DEV_DB_USER,
     password: process.env.DEV_DB_PASSWORD,
     database: process.env.DEV_DB_DATABASE
   },
   
-  /***************************************************************************
-  *                                                                          *
-  * MongoDB is the leading NoSQL database.                                   *
-  * http://en.wikipedia.org/wiki/MongoDB                                     *
-  *                                                                          *
-  * Run: npm install sails-mongo                                             *
-  *                                                                          *
-  ***************************************************************************/
-  mongoDevelopment: {
-    adapter: 'sails-mongo',
-    host: process.env.DEV_DB_HOST,
-    port: process.env.DEV_DB_PORT,
-    database: process.env.DEV_DB_DATABASE
-  }, 
-  
-  mongoProduction: {
-    adapter: 'sails-mongo',
+  mysqlProduction: {
+    adapter: 'sails-mysql',
     host: process.env.PROD_DB_HOST,
     port: process.env.PROD_DB_PORT,
     user: process.env.PROD_DB_USER,
     password: process.env.PROD_DB_PASSWORD,
     database: process.env.PROD_DB_DATABASE
   }
-  
 };

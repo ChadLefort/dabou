@@ -102,12 +102,18 @@ module.exports = {
     var user = req.user,
       name = req.param('name'),
       realm = req.param('realm'),
-      region = req.param('region');
+      region = req.param('region'),
+      race = req.param('race'),
+      gender = req.param('gender'),
+      thumbnail = req.param('thumbnail');
 
     Character.create({
       name: name,
       realm: realm,
       region: region,
+      race: race,
+      gender: gender,
+      thumbnail: thumbnail,
       user: user.id
     }).then(function (character) {
       User.update(user.id, {
@@ -132,12 +138,18 @@ module.exports = {
     var user = req.user,
       name = req.param('name'),
       realm = req.param('realm'),
-      region = req.param('region');
+      region = req.param('region'),
+      race = req.param('race'),
+      gender = req.param('gender'),
+      thumbnail = req.param('thumbnail')
 
     Character.update(user.id, {
       name: name,
       realm: realm,
-      region: region
+      region: region,
+      race: race,
+      gender: gender,
+      thumbnail: thumbnail
     }).then(function (character) {
       res.send(200, { success: 'Success.User.Character.Update', character: character });
     }).catch(function (error) {

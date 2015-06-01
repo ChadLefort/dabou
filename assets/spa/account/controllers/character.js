@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('CharacterController', CharacterController);
 
-  CharacterController.$inject = ['characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout'];
+  CharacterController.$inject = ['characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout', '_'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function CharacterController(characterService, authService, toastr, $state, globalData, $timeout) {
+  function CharacterController(characterService, authService, toastr, $state, globalData, $timeout, _) {
     var vm = this,
         user = globalData.userData.user,
         _csrf = globalData.tokenData._csrf;
@@ -41,6 +41,9 @@
             name: viewCharacter.name,
             realm: viewCharacter.realm,
             region: 'us',
+            race: viewCharacter.race,
+            gender: viewCharacter.gender,
+            thumbnail: viewCharacter.thumbnail,
             _csrf: _csrf
           };
 
@@ -50,6 +53,7 @@
           vm.characters.splice(key, 1);
           vm.characters.unshift(viewCharacter);
           vm.characters[0].preferred = true;
+          vm.noCharacter = false;
       });
     }
 
@@ -62,7 +66,7 @@
         } else {
           var characters = data.characters;
           getCharacter(user.id, characters);
-          angular.forEach(characters, function (value, key) {
+          _.each(characters, function (value, key) {
             vm.characters.push(data.characters[key]);
             data.characters[key].preferred = false;
           });
@@ -79,7 +83,7 @@
           vm.noCharacter = true;
         } else {
           vm.noCharacter = false;
-          angular.forEach(characters, function (value, key) {
+          _.each(characters, function (value, key) {
             if (characters[key].name == data.name && characters[key].realm == data.realm ) {
               vm.characters.splice(key, 1);
               vm.characters.unshift(characters[key]);
@@ -96,16 +100,21 @@
             name: viewCharacter.name,
             realm: viewCharacter.realm,
             region: 'us',
+            race: viewCharacter.race,
+            gender: viewCharacter.gender,
+            thumbnail: viewCharacter.thumbnail,
             _csrf: _csrf
           };
 
-      characterService.updateCharacter(user.character, character)
-        .then(function (data) {
-          toastr.success(data.success);
-          vm.characters.splice(key, 1);
-          vm.characters.unshift(viewCharacter);
-          vm.characters[0].preferred = true;
-          vm.characters[1].preferred = false;
+      authService.authenticated().then(function (data) {
+        characterService.updateCharacter(data.user.character, character)
+          .then(function (data) {
+            toastr.success(data.success);
+            vm.characters.splice(key, 1);
+            vm.characters.unshift(viewCharacter);
+            vm.characters[0].preferred = true;
+            vm.characters[1].preferred = false;
+        });
       });
     }
   }
