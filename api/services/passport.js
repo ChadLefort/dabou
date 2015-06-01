@@ -2,7 +2,8 @@
 var path     = require('path')
   , url      = require('url')
   , passport = require('passport')
-  , _        = require('lodash');
+  , _        = require('lodash'),
+  Gravatar   = require('machinepack-gravatar');
 /**
  * Passport Service
  *
@@ -84,6 +85,20 @@ passport.connect = function (req, query, profile, next) {
   // add it to the user.
   if (profile.hasOwnProperty('emails')) {
     user.email = profile.emails[0].value;
+    
+    Gravatar.getImageUrl({
+      emailAddress: profile.emails[0].value,
+      defaultImage: 'http://chadlefort.com/content/images/default_avatar.png',
+      rating: 'g',
+      useHttps: true
+    }).exec({
+      error: function (err) {
+        return next(err);
+      },
+      success: function (gravatarUrl) {
+        user.gravatar = gravatarUrl;
+      }
+    });  
   }
   // If the profile object contains a username, add it to the user.
   if (profile.hasOwnProperty('username')) {
