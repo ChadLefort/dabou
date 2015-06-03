@@ -61,27 +61,27 @@ module.exports = {
           };
 
           if (character.class == 'Death Knight') {
-            obj.color = '#C41F3B';
+            obj.color = '#941C30';
           } else if (character.class == 'Druid') {
-            obj.color = '#FF7D0A';
+            obj.color = '#BB5C08';
           } else if (character.class == 'Hunter') {
-            obj.color = '#ABD473';
+            obj.color = '#79994C';
           } else if (character.class == 'Mage') {
-            obj.color = '#69CCF0';
+            obj.color = '#349DC3';
           } else if (character.class == 'Monk') {
-            obj.color = '#00FF96';
+            obj.color = '#06BE72';
           } else if (character.class == 'Paladin') {
-            obj.color = '#F58CBA';
+            obj.color = '#B56E8D';
           } else if (character.class == 'Priest') {
-            obj.color = '#FFFFFF';
+            obj.color = '#D2D2D2';
           } else if (character.class == 'Rogue') {
-            obj.color = '#FFF569';
+            obj.color = '#CFC219';
           } else if (character.class == 'Shaman') {
-            obj.color = '#0070DE';
+            obj.color = '#0454A3';
           } else if (character.class == 'Warlock') {
-            obj.color = '#9482C9';
+            obj.color = '#6B5E93';
           } else if (character.class == 'Warrior') {
-            obj.color = '#C79C6E';
+            obj.color = '#836647';
           }
 
           characters.push(obj);
