@@ -72,21 +72,11 @@
         <div class="panel-body">
           <tabset justified="true">
             <tab heading="Preview Profile">
-              <div class="push-down">
-                <h1>{{vm.profile.name}}</h1>
-                <small><cite title="{{vm.profile.location}}">{{vm.profile.location}} <i class="fa fa-lg fa-home">
-                </i></cite></small>
-                <p>
-                  <i class="fa fa-lg fa-envelope"></i> chadlefort@gmail.com
-                    <br />
-                    <i class="fa fa-lg fa-globe"></i><a href="http://chadlefort.com" target="_blank"> chadlefort.com</a>
-                    <br />
-                    <i class="fa fa-lg fa-gift"></i> September 28, 1989
-                </p>
-                <p>{{vm.profile.bio}}</p>
+              <div class="text-center push-down">
+               <p ng-if="vm.noProfile">You currently don't have a profile. Please click <a ng-click="vm.selectCreateTab()">here</a> to create one.</p></p></p>
               </div>
             </tab>
-            <tab heading="Edit Profile">
+            <tab heading="Create Profile" active="vm.createTab">
               <div class="form-horizontal push-down">
                 <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
                   <div class="form-group">
@@ -121,7 +111,7 @@
                 </form>
               </div>
             </tab>
-            <tab heading="Delete Profile">
+            <tab ng-if="!vm.noProfile"  heading="Delete Profile">
               <div class="col-md-10 center-block push-down">
                   <button class="btn btn-success auth-btn" ng-click="vm.deleteProfile()" type="submit">Delete Profile</button>
               </div>

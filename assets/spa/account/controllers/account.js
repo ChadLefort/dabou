@@ -31,12 +31,15 @@
       {value: 'Female'},
       {value: 'Undisclosed'}
     ];
+    vm.createTab = false;
+    vm.profileTitle = 'Create Profile';
 
     // PUBLIC FUNCTIONS
     vm.createProfile = createProfile;
     vm.deleteProfile = deleteProfile;
     vm.editProfile = editProfile;
     vm.getProfile = getProfile;
+    vm.selectCreateTab = selectCreateTab;
     vm.unlinkPassport = unlinkPassport;
 
     // init
@@ -54,6 +57,7 @@
           toastr.success(data.success);
           vm.profile = data.profile;
           vm.noProfile = false;
+          vm.profileTitle = 'Edit Profile';
         });
     }
     
@@ -68,7 +72,6 @@
         .then(function(data) {
           toastr.success(data.success);
           vm.profile = data.profile;
-          vm.noProfile = false;
         });
     }
 
@@ -102,8 +105,14 @@
           } else {
             vm.profile = data;
             vm.profile._csrf = _csrf;
+            vm.noProfile = false;
+            vm.profileTitle = 'Edit Profile';
           }
         });
+    }
+    
+    function selectCreateTab () {
+      vm.createTab = true;
     }
 
     function unlinkPassport(provider){

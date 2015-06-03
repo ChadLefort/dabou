@@ -45,7 +45,6 @@
     "sails": "~0.11.0",
     "sails-disk": "~0.10.0",
     "sails-hook-autoreload": "^0.11.5",
-    "sails-mongo": "^0.11.1",
     "sails-mysql": "^0.10.11",
     "socket.io-redis": "^0.1.4",
     "supertest": "^0.15.0",

@@ -36,8 +36,7 @@
     }
 
     function createCharacter(viewCharacter) {
-      var key = vm.characters.indexOf(viewCharacter),
-          character = {
+      var character = {
             name: viewCharacter.name,
             realm: viewCharacter.realm,
             region: 'us',
@@ -50,10 +49,7 @@
       characterService.createCharacter(character)
         .then(function (data) {
           toastr.success(data.success);
-          vm.characters.splice(key, 1);
-          vm.characters.unshift(viewCharacter);
-          vm.characters[0].preferred = true;
-          vm.noCharacter = false;
+          $state.reload();
       });
     }
 
@@ -67,63 +63,46 @@
           toastr.error('Battle.net isn\'t responding');
         } else {
           var account = data.characters;
-          
-          characterService.getCharacter(user.id)
-            .then(function(data) {
-               if (data.status == 404) {
-                vm.noCharacter = true;
-              } else {
-                vm.noCharacter = false;
-              }
-               
-              var characters = _.map(account, function (character) { 
-                if (character.name == data.name && character.realm == data.realm) {
-                  return _.extend({}, character, {preferred: true});
-                } else {
-                  return _.extend({}, character, {preferred: false});
-                }
-              });
-              
-              _.each(characters, function (value, key) {
-                  var preferredKey = _.indexOf(characters, (_.find(characters, {preferred: true})));
-                            
-                  if (key == preferredKey) {
-                    vm.characters.splice(key, 1);
-                    vm.characters.unshift(characters[key]);
-                  } else {
-                    vm.characters.push(characters[key]);
-                  }
-              }); 
-              
-              vm.noBnet = false;
-              vm.loading = false;
-            });
+          getCharacter(account);
         }
       });
     }
 
-    function getCharacter(userId, characters) {
+    function getCharacter(account) {
       characterService.getCharacter(user.id)
         .then(function(data) {
-        if (data.status == 404) {
-          vm.noCharacter = true;
-        } else {
-          vm.noCharacter = false;
+           if (data.status == 404) {
+            vm.noCharacter = true;
+          } else {
+            vm.noCharacter = false;
+          }
+           
+          var characters = _.map(account, function (character) { 
+            if (character.name == data.name && character.realm == data.realm) {
+              return _.extend({}, character, {preferred: true});
+            } else {
+              return _.extend({}, character, {preferred: false});
+            }
+          });
           
           _.each(characters, function (value, key) {
-            if (characters[key].name == data.name && characters[key].realm == data.realm ) {
-              vm.characters.splice(key, 1);
-              vm.characters.unshift(characters[key]);
-              characters[key].preferred = true;
-            }
+              var preferredKey = _.indexOf(characters, (_.find(characters, {preferred: true})));
+                        
+              if (key == preferredKey) {
+                vm.characters.splice(key, 1);
+                vm.characters.unshift(characters[key]);
+              } else {
+                vm.characters.push(characters[key]);
+              }
           }); 
-        }
-      });
+          
+          vm.noBnet = false;
+          vm.loading = false;
+        });
     }
     
     function updateCharacter(viewCharacter) {
-      var key = vm.characters.indexOf(viewCharacter),
-          character = {
+      var character = {
             name: viewCharacter.name,
             realm: viewCharacter.realm,
             region: 'us',
@@ -132,16 +111,11 @@
             thumbnail: viewCharacter.thumbnail,
             _csrf: _csrf
           };
-
-      authService.authenticated().then(function (data) {
-        characterService.updateCharacter(data.user.character, character)
-          .then(function (data) {
-            toastr.success(data.success);
-            vm.characters.splice(key, 1);
-            vm.characters.unshift(viewCharacter);
-            vm.characters[0].preferred = true;
-            vm.characters[1].preferred = false;
-        });
+          
+      characterService.updateCharacter(user.character, character)
+        .then(function (data) {
+          toastr.success(data.success);
+          $state.reload();
       });
     }
   }

@@ -6,24 +6,29 @@
         <div class="panel-body">
           
           <div class="col-md-4 fx-fade-normal fx-speed-2000" ng-repeat="character in vm.characters">
-            <div class="thumbnail" style="border-color: {{character.color}}">
-              <img ng-src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle pull-left">
-              <div class="caption">
-                <div class="row">
-                  <div class="pull-left">
-                    <h3>{{character.name}}</h3>
-                    <p><i>{{character.guild}}</i></p>
-                    <p>{{character.level}}</p>
-                  </div>
-                  <p class="pull-right preferred-character">
+            <div class="panel panel-default">
+              <div class="panel-heading" style="background-color: {{character.color}}">
+                {{character.name}}
+                
+                  <p class="pull-right">
                     <i ng-if="!character.preferred && vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.createCharacter(character)"></i>
                     <i ng-if="!character.preferred && !vm.noCharacter" class="fa fa-2x fa-thumb-tack" ng-click="vm.updateCharacter(character)"></i>
                     <i ng-if="character.preferred" class="fa fa-2x fa-check"></i>
                   </p>
-                </div>
+              </div>
+                  <div class="panel-body preferred-character">
+                    <div class="text-center">
+                      <img ng-src="https://us.battle.net/static-render/us/{{character.thumbnail}}?alt=/wow/static/images/2d/avatar/{{character.race}}-{{character.gender}}.jpg" class="img-circle">
+                      <p ng-if="character.guild"><i><{{character.guild}}></i></p>
+                      <p ng-if="!character.guild">No Guild</p>
+                      <p>Level {{character.level}}</p>
+                      <p>{{character.class}}</p>
+                      <p>{{character.realm}}</p>
+                    </div>                    
+                  </div>
               </div>
             </div>
-          </div>
+    
           
           <div class="form-group" ng-if="vm.noBnet">
             <div class="col-md-5 center-block">
