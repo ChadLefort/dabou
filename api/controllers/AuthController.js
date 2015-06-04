@@ -4,7 +4,7 @@
  * @description :: Server-side logic for authentication
  */
 module.exports = {
-  
+
   /**
    * Checks to see if the current user is authenticated
    *
@@ -18,7 +18,7 @@ module.exports = {
       res.send(200, {status: true, user: req.user});
     }
   },
-  
+
   /**
    * Returns all of the passports of the current loggin in user
    *
@@ -27,7 +27,7 @@ module.exports = {
    */
   passports: function (req, res) {
     var user = req.user;
-    
+
     Passport.find({user: user.id}).then(function (passport) {
       if (!passport) {
         res.send(404, {error: 'Error.Passport.NotFound'});
@@ -103,7 +103,7 @@ module.exports = {
 
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        if(req.session.redirect == 'account'){
+        if (req.session.redirect == 'account') {
           var flashSuccess = req.flash('success');
           res.view('layouts/layout', {success: flashSuccess, state: 'account'});
         } else {
@@ -112,5 +112,5 @@ module.exports = {
       });
     });
   }
-  
+
 };

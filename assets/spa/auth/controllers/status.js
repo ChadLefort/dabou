@@ -32,13 +32,13 @@
     }
 
     function error(msg) {
-      if (msg){
+      if (msg) {
         toastr.error(msg);
       }
     }
 
     function success(msg) {
-      if (msg){
+      if (msg) {
         toastr.success(msg);
       }
     }

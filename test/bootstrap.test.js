@@ -13,7 +13,7 @@ before(function (done) {
     },
     port: 8080,
     csrf: false,
-  }, function(err) {
+  }, function (err) {
     if (err)
       return done(err);
 

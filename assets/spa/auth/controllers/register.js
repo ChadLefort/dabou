@@ -15,7 +15,7 @@
 
   function RegisterController(authService, $state, toastr, globalData) {
     var vm = this,
-        _csrf = globalData.tokenData._csrf;
+      _csrf = globalData.tokenData._csrf;
 
     // PUBLIC PROPERTIES
     vm.title = 'Register';

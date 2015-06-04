@@ -25,10 +25,10 @@
     function addLocalUser(user) {
       return $http.post('/auth/local/register', user)
         .then(function (response) {
-            return response.data;
-          });
+          return response.data;
+        });
     }
-    
+
     function csrfToken() {
       return $http.get('/csrfToken')
         .then(function (response) {
@@ -46,7 +46,7 @@
     function logout() {
       return $http.get('/logout');
     }
-    
+
     return {
       addLocalUser: addLocalUser,
       authenticated: authenticated,

@@ -9,59 +9,59 @@
 // A task runner configuration for grunt. It launches my sails.js app.
 
 {
-	"version": "0.1.0",
-	"command": "grunt",
-	"isShellCommand": true,
-	"tasks": [
-		{
-			"taskName": "sails",
-			"isBuildCommand": true,
-			"showOutput": "silent"
-		},
-		{
-			"taskName": "build",
-			"isBuildCommand": true,			
-			"showOutput": "silent"
-		},
-		{
-			"taskName": "buildProd",
-			"isBuildCommand": true,			
-			"showOutput": "silent"
-		},
-		{
-			"taskName": "default",
-			"isBuildCommand": true,			
-			"showOutput": "silent"
-		}
-	]
+  "version": "0.1.0",
+  "command": "grunt",
+  "isShellCommand": true,
+  "tasks": [
+    {
+      "taskName": "sails",
+      "isBuildCommand": true,
+      "showOutput": "silent"
+    },
+    {
+      "taskName": "build",
+      "isBuildCommand": true,
+      "showOutput": "silent"
+    },
+    {
+      "taskName": "buildProd",
+      "isBuildCommand": true,
+      "showOutput": "silent"
+    },
+    {
+      "taskName": "default",
+      "isBuildCommand": true,
+      "showOutput": "silent"
+    }
+  ]
 }
 
-// A task runner that calls the Typescipt compiler (tsc) and 
+// A task runner that calls the Typescipt compiler (tsc) and
 // Compiles a HelloWorld.ts program
 //{
 //	"version": "0.1.0",
-//	
+//
 //	// The command is tsc.
 //	"command": "tsc",
 //
-//	// Show the output window only if unrecognized errors occur. 
+//	// Show the output window only if unrecognized errors occur.
 //	"showOutput": "silent",
-//	
+//
 //	// Under windows use tsc.exe. This ensures we don't need a shell.
 //	"windows": {
 //		"command": "tsc.exe"
 //	},
-//	
+//
 //	// args is the HelloWorld program to compile.
 //	"args": ["HelloWorld.ts"],
-//	
+//
 //	// use the standard tsc problem matcher to find compile problems
 //	// in the output.
 //	"problemMatcher": "$tsc"
 //}
 
 // A task runner configuration for gulp. Gulp provides a less task
-// which compiles less to css. 
+// which compiles less to css.
 /*
 {
 	"version": "0.1.0",
@@ -83,7 +83,7 @@
 
 // Uncomment the following section to use gulp in a watching mode that compiles a
 // less file. The gulp task prints "[hh:mm:ss] Starting 'clean-styles'" to the console
-// when existing css files get deleted and "[hh:mm:ss] Finished 'styles'" when the 
+// when existing css files get deleted and "[hh:mm:ss] Finished 'styles'" when the
 // overall less compilation has finished. When the clean pattern is detect internal less
 // problems are cleaned. When the finshed pattern is detected in the output less
 // problems are published.
@@ -143,7 +143,7 @@
 
 // Uncomment the section below to use msbuild and generate problems
 // for csc, cpp, tsc and vb. The configuration assumes that msbuild
-// is available on the path and a solution file exists in the 
+// is available on the path and a solution file exists in the
 // workspace folder root.
 /*
 {

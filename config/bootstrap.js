@@ -11,13 +11,13 @@
 
 module.exports.bootstrap = function (cb) {
   var PromiseThrottle = require('promise-throttle');
-  
+
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   sails.Promise = require('bluebird');
   sails.promiseThrottle = new PromiseThrottle({
-      requestsPerSecond: 10,
-      promiseImplementation: sails.Promise
+    requestsPerSecond: 10,
+    promiseImplementation: sails.Promise
   });
   sails.fs = sails.Promise.promisifyAll(require('fs'));
   sails.bnet = require('battlenet-api')(sails.config.bnet.key);

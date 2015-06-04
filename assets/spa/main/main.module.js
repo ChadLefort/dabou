@@ -1,22 +1,22 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    /**
-      * @ngdoc module
-      * @name dabou.main
-      * @module dabou.main
-      * @description
-      *
-      */
-    angular.module('dabou.main', [
-        // Angular modules
-        'ngAnimate',
+  /**
+   * @ngdoc module
+   * @name dabou.main
+   * @module dabou.main
+   * @description
+   *
+   */
+  angular.module('dabou.main', [
+    // Angular modules
+    'ngAnimate',
 
-        // Custom modules
-        'dabou',
+    // Custom modules
+    'dabou',
 
-        // 3rd Party Modules
-        'ui.router',
-        'ui.bootstrap'
-    ]);
+    // 3rd Party Modules
+    'ui.router',
+    'ui.bootstrap'
+  ]);
 })();

@@ -15,14 +15,14 @@
 
   function NavController(authService, characterService, $modal, $state, globalData, _) {
     var vm = this,
-        user = globalData.userData.user,
-        status = globalData.userData.status;
+      user = globalData.userData.user,
+      status = globalData.userData.status;
 
     // PUBLIC PROPERTIES
     vm.username = null;
     vm.email = null;
     vm.displayName = '';
-    vm.isLoggedIn = false;  
+    vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS
     vm.logout = logout;
@@ -35,8 +35,8 @@
       authenticated();
     }
 
-    function authenticated() { 
-      if(status) {
+    function authenticated() {
+      if (status) {
         vm.isLoggedIn = status;
         vm.username = user.username;
         vm.email = user.email;
@@ -52,12 +52,12 @@
         }
       }
     }
-    
+
     function getCharacter() {
       characterService.getCharacter(user.id).then(function (character) {
-          vm.displayName = character.name;
-          vm.gravatar = 'https://us.battle.net/static-render/us/'+ character.thumbnail + '?alt=/wow/static/images/2d/avatar/' + character.race + '-' + character.gender + '.jpg';
-        });
+        vm.displayName = character.name;
+        vm.gravatar = 'https://us.battle.net/static-render/us/' + character.thumbnail + '?alt=/wow/static/images/2d/avatar/' + character.race + '-' + character.gender + '.jpg';
+      });
     }
 
     function logout() {

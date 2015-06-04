@@ -23,7 +23,7 @@
       authService.authenticated()
         .then(function (userData) {
           authService.csrfToken()
-            .then(function (tokenData){
+            .then(function (tokenData) {
               deferred.resolve({userData: userData, tokenData: tokenData});
             });
         });

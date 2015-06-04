@@ -9,7 +9,7 @@
 
   /**
    * @ngdoc service
-     * @name dabou.tabards.service:tabardsService
+   * @name dabou.tabards.service:tabardsService
    * @description
    *
    */
@@ -19,11 +19,11 @@
       return $http.get(urlRoot + '/tabard?limit=200')
         .then(function (response) {
           return response.data;
-        }, function(error) {
-            return error;
+        }, function (error) {
+          return error;
         });
-    } 
-	 
+    }
+
     return {
       getTabards: getTabards,
     };

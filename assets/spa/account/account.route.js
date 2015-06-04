@@ -26,7 +26,7 @@
         .then(function (userData) {
           if (userData.status) {
             authService.csrfToken()
-              .then(function (tokenData){
+              .then(function (tokenData) {
                 deferred.resolve({userData: userData, tokenData: tokenData});
               });
           } else {

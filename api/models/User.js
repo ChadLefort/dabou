@@ -6,61 +6,61 @@
  */
 
 var User = {
-    // Enforce model schema in the case of schemaless databases
-    schema: true,
+  // Enforce model schema in the case of schemaless databases
+  schema: true,
 
-    attributes: {
-        username: {
-            type: 'string',
-            unique: true
-        },
-        email: {
-            type: 'email',
-            unique: true
-        },
-        displayName: {
-            type: 'string'
-        },
-        gravatar: {
-            type: 'string',
-            defaultsTo: 'https://localhost:1337/images/default_avatar.png'
-        },
-        admin: {
-            type: 'boolean',
-            defaultsTo: false,
-            protected: true
-        },
-        passports: {
-            collection: 'Passport',
-            via: 'user'
-        },
-        profile: {
-            model: 'Profile'
-        },
-        character: {
-            model: 'Character'
-        }
+  attributes: {
+    username: {
+      type: 'string',
+      unique: true
     },
-    
-    /**
-     * Callback to be run before creating a User that makes
-     * the first user an admin.
-     *
-     * @param {Object}   user The soon-to-be-created User
-     * @param {Function} next
-     */
-    beforeCreate: function(user, next) {
-        sails.models['user'].count().then(function (count) {
-            if (count == 0) {
-                user.admin = true;
-                next(null, user);
-            } else {
-                next(null, user);
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
+    email: {
+      type: 'email',
+      unique: true
+    },
+    displayName: {
+      type: 'string'
+    },
+    gravatar: {
+      type: 'string',
+      defaultsTo: 'https://localhost:1337/images/default_avatar.png'
+    },
+    admin: {
+      type: 'boolean',
+      defaultsTo: false,
+      protected: true
+    },
+    passports: {
+      collection: 'Passport',
+      via: 'user'
+    },
+    profile: {
+      model: 'Profile'
+    },
+    character: {
+      model: 'Character'
     }
+  },
+
+  /**
+   * Callback to be run before creating a User that makes
+   * the first user an admin.
+   *
+   * @param {Object}   user The soon-to-be-created User
+   * @param {Function} next
+   */
+  beforeCreate: function (user, next) {
+    sails.models['user'].count().then(function (count) {
+      if (count == 0) {
+        user.admin = true;
+        next(null, user);
+      } else {
+        next(null, user);
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 };
 
 module.exports = User;

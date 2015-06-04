@@ -50,7 +50,7 @@ module.exports.passport = {
       scope: ['email', 'profile']
     }
   },
-  
+
   bnet: {
     name: 'Battle.nat',
     protocol: 'oauth2',

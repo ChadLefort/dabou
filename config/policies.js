@@ -20,31 +20,31 @@
 module.exports.policies = {
 
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions (`true` allows public     *
-  * access)                                                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions (`true` allows public     *
+   * access)                                                                  *
+   *                                                                          *
+   ***************************************************************************/
 
   // '*': true,
 
   /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Here's an example of mapping some policies to run before a controller    *
+   * and its actions                                                          *
+   *                                                                          *
+   ***************************************************************************/
 
   '*': ['passport', 'sessionAuth'],
- 
+
   AdminController: {
     'generate': ['passport', 'sessionAuth', 'adminAuth']
   },
-  
+
   AuthController: {
     '*': ['passport']
   },
-  
+
   CharacterController: {
     '*': ['passport', 'sessionAuth'],
     'update': ['passport', 'sessionAuth', 'userOwnership'],
@@ -61,7 +61,7 @@ module.exports.policies = {
     'remove': false,
     'add': false
   },
-  
+
   ProfileController: {
     '*': ['passport', 'sessionAuth'],
     'update': ['passport', 'sessionAuth', 'userOwnership'],
@@ -69,23 +69,23 @@ module.exports.policies = {
     'remove': false,
     'add': false
   },
-  
+
   TabardController: {
     '*': true
   }
-  
-	// RabbitController: {
 
-		// Apply the `false` policy as the default for all of RabbitController's actions
-		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
-		// '*': false,
+  // RabbitController: {
 
-		// For the action `nurture`, apply the 'isRabbitMother' policy
-		// (this overrides `false` above)
-		// nurture	: 'isRabbitMother',
+  // Apply the `false` policy as the default for all of RabbitController's actions
+  // (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
+  // '*': false,
 
-		// Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
-		// before letting any users feed our rabbits
-		// feed : ['isNiceToAnimals', 'hasRabbitFood']
-	// }
+  // For the action `nurture`, apply the 'isRabbitMother' policy
+  // (this overrides `false` above)
+  // nurture	: 'isRabbitMother',
+
+  // Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
+  // before letting any users feed our rabbits
+  // feed : ['isNiceToAnimals', 'hasRabbitFood']
+  // }
 };

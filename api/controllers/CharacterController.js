@@ -7,9 +7,9 @@
 //var _ = require('lodash');
 
 module.exports = {
-	
+
   /**
-   * Returns the all of the wow character's associated with a user's 
+   * Returns the all of the wow character's associated with a user's
    * battle.net account
    *
    * @param {Object} req
@@ -25,7 +25,7 @@ module.exports = {
       provider: 'bnet'
     }).then(function (passport) {
       if (!passport) {
-        res.send(404, { error: 'Error.Bnet.Passport.NotFound' });
+        res.send(404, {error: 'Error.Bnet.Passport.NotFound'});
       } else {
         var token = passport.tokens.accessToken;
         sails.wowAccount({
@@ -44,10 +44,10 @@ module.exports = {
     });
 
 
-    function map (data) {
-      sails.wowClasses({ origin: 'us' }).then(function (classes) {
+    function map(data) {
+      sails.wowClasses({origin: 'us'}).then(function (classes) {
         sails.Promise.map(data.characters, function (character) {
-          return _.merge(character, { class: _.findWhere(classes.classes, { id: character.class }).name });
+          return _.merge(character, {class: _.findWhere(classes.classes, {id: character.class}).name});
         }).each(function (character) {
           var obj = {
             name: character.name,
@@ -86,12 +86,12 @@ module.exports = {
 
           characters.push(obj);
         }).then(function () {
-          res.send(200, { characters: characters });
+          res.send(200, {characters: characters});
         });
       });
     }
   },
-  
+
   /**
    * Creates a preferred character if none has been already created
    *
@@ -119,15 +119,15 @@ module.exports = {
       User.update(user.id, {
         character: character.id
       }).then(function (user) {
-        res.send(200, { success: 'Success.User.Character.Created', character: character });
+        res.send(200, {success: 'Success.User.Character.Created', character: character});
       }).catch(function (error) {
-        res.send(400, { error: 'Error.User.Character' });
+        res.send(400, {error: 'Error.User.Character'});
       });
     }).catch(function (error) {
-      res.send(409, { error: 'Error.User.Character' });
+      res.send(409, {error: 'Error.User.Character'});
     });
   },
-  
+
   /**
    * Updates a user's preferred character
    *
@@ -151,9 +151,9 @@ module.exports = {
       gender: gender,
       thumbnail: thumbnail
     }).then(function (character) {
-      res.send(200, { success: 'Success.User.Character.Update', character: character });
+      res.send(200, {success: 'Success.User.Character.Update', character: character});
     }).catch(function (error) {
-      res.send(409, { error: 'Error.User.Character.Update' });
+      res.send(409, {error: 'Error.User.Character.Update'});
     });
   }
 

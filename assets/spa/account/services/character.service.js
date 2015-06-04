@@ -9,7 +9,7 @@
 
   /**
    * @ngdoc service
-     * @name dabou.account.service:characterService
+   * @name dabou.account.service:characterService
    * @description
    *
    */
@@ -26,27 +26,27 @@
       return $http.get(urlRoot + '/character/account/')
         .then(function (response) {
           return response.data;
-        }, function(error) {
-            return error;
+        }, function (error) {
+          return error;
         });
-    } 
-    
+    }
+
     function getCharacter(userId) {
       return $http.get(urlRoot + '/user/' + userId + '/character/')
         .then(function (response) {
           return response.data;
-        }, function(error) {
-            return error;
+        }, function (error) {
+          return error;
         });
     }
-    
+
     function updateCharacter(id, character) {
       return $http.put(urlRoot + '/character/' + id, character)
         .then(function (response) {
-            return response.data;
+          return response.data;
         });
     }
-         
+
     return {
       getAccount: getAccount,
       createCharacter: createCharacter,

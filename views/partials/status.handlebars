@@ -1,8 +1,8 @@
 {{#if error}}
     <div ng-init="vm.redirect('{{state}}')"></div>
-  {{#each error}}
-      <div ng-init="vm.error('{{this}}')"></div>
-  {{/each}}
+    {{#each error}}
+        <div ng-init="vm.error('{{this}}')"></div>
+    {{/each}}
 {{/if}}
 
 {{#if success}}

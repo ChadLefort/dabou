@@ -15,24 +15,24 @@
    */
   function ProfileController(accountService, globalData) {
     var vm = this,
-        user = globalData.userData.user;
+      user = globalData.userData.user;
 
     // PUBLIC PROPERTIES
     vm.profile = {};
-	
+
     // PUBLIC FUNCTIONS
 
     // init
     activate();
 
     // PRIVATE FUNCTIONS
-    function activate() {   
+    function activate() {
       getProfile(user.id);
     }
-    
+
     function getProfile(userId) {
       accountService.getProfile(userId)
-        .then(function(data) {  
+        .then(function (data) {
           if (data.status == 404) {
             vm.noProfile = true;
           } else {
@@ -40,6 +40,6 @@
           }
         });
     }
-  
+
   }
 })();

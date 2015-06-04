@@ -1,7 +1,7 @@
 /*!
  * See LICENSE in this repository for license information
  */
-(function(){
+(function () {
   'use strict';
   'use strict';
 
@@ -522,7 +522,7 @@
     };
   }]);
 })();
-angular.module('xtForm').run(['$templateCache', function($templateCache) {
+angular.module('xtForm').run(['$templateCache', function ($templateCache) {
   $templateCache.put('xtForm/summary/validationSummary.html',
     '<div class="panel panel-danger" data-ng-show="showErrors">\n' +
     '    <div class="panel-heading">\n' +
@@ -543,7 +543,7 @@ angular.module('xtForm').run(['$templateCache', function($templateCache) {
     '</div>');
 }]);
 
-angular.module('xtForm').run(['$templateCache', function($templateCache) {
+angular.module('xtForm').run(['$templateCache', function ($templateCache) {
   $templateCache.put('xtForm/inline/validationInline.html',
     '<div data-ng-show="showErrors">\n' +
     '    <span class="xt-validation-item" data-ng-repeat="error in errors" data-key="error.key">{{error.message}}</span>\n' +

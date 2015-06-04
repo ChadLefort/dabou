@@ -15,8 +15,8 @@
    */
   function AccountController(accountService, authService, toastr, $state, globalData, $modal) {
     var vm = this,
-        user = globalData.userData.user,
-        _csrf = globalData.tokenData._csrf;
+      user = globalData.userData.user,
+      _csrf = globalData.tokenData._csrf;
 
     // PUBLIC PROPERTIES
     vm.local = false;
@@ -39,6 +39,7 @@
     vm.deleteProfile = deleteProfile;
     vm.editProfile = editProfile;
     vm.getProfile = getProfile;
+    vm.openDatepicker = openDatepicker;
     vm.selectCreateTab = selectCreateTab;
     vm.unlinkPassport = unlinkPassport;
 
@@ -46,40 +47,40 @@
     activate();
 
     // PRIVATE FUNCTIONS
-    function activate() {   
+    function activate() {
       getProfile(user.id);
       getPassports(user.id);
     }
-    
+
     function createProfile() {
       accountService.createProfile(vm.profile)
-        .then(function(data) {
+        .then(function (data) {
           toastr.success(data.success);
           vm.profile = data.profile;
           vm.noProfile = false;
           vm.profileTitle = 'Edit Profile';
         });
     }
-    
+
     function deleteProfile() {
       $modal.open({
         templateUrl: 'spa/account/views/delete.profile.html'
       });
     }
-    
+
     function editProfile() {
       accountService.updateProfile(user.profile, vm.profile)
-        .then(function(data) {
+        .then(function (data) {
           toastr.success(data.success);
           vm.profile = data.profile;
         });
     }
 
-    function getPassports(userId){
+    function getPassports(userId) {
       accountService.getPassports(userId)
-        .then(function(data) {
+        .then(function (data) {
           vm.passport = data;
-          angular.forEach(data, function(value, key) {
+          angular.forEach(data, function (value, key) {
             if (data[key].provider == 'bnet') {
               vm.bnet = true;
             } else if (data[key].provider == 'twitter') {
@@ -90,16 +91,16 @@
               vm.google = true;
             }
 
-            if(data[key].protocol == 'local') {
+            if (data[key].protocol == 'local') {
               vm.local = true;
             }
           });
         });
     }
-    
+
     function getProfile(userId) {
       accountService.getProfile(userId)
-        .then(function(data) {  
+        .then(function (data) {
           if (data.status == 404) {
             vm.noProfile = true;
           } else {
@@ -110,15 +111,22 @@
           }
         });
     }
-    
-    function selectCreateTab () {
+
+    function openDatepicker($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      vm.opened = true;
+    }
+
+    function selectCreateTab() {
       vm.createTab = true;
     }
 
-    function unlinkPassport(provider){
+    function unlinkPassport(provider) {
       accountService.unlinkPassport(provider)
-        .then(function(data) {
-          if(data.status) {
+        .then(function (data) {
+          if (data.status) {
             if (provider == 'bnet') {
               vm.bnet = false;
             } else if (provider == 'twitter') {
@@ -134,6 +142,6 @@
           }
         });
     }
-  
+
   }
 })();

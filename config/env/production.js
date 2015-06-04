@@ -17,26 +17,26 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-   models: {
-     connection: 'mysqlProduction'
-   },
+  models: {
+    connection: 'mysqlProduction'
+  },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-   port: 443,
+  port: 443,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
    ***************************************************************************/
 
-   log: {
-     level: 'warn'
-   },
-   
-   bnet: {
-     key: process.env.BNET_KET
-   }
-   
+  log: {
+    level: 'warn'
+  },
+
+  bnet: {
+    key: process.env.BNET_KET
+  }
+
 };

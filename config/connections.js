@@ -22,13 +22,13 @@
 module.exports.connections = {
 
   /***************************************************************************
-  *                                                                          *
-  * MySQL is the world's most popular relational database.                   *
-  * http://en.wikipedia.org/wiki/MySQL                                       *
-  *                                                                          *
-  * Run: npm install sails-mysql                                             *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * MySQL is the world's most popular relational database.                   *
+   * http://en.wikipedia.org/wiki/MySQL                                       *
+   *                                                                          *
+   * Run: npm install sails-mysql                                             *
+   *                                                                          *
+   ***************************************************************************/
   mysqlDevelopment: {
     adapter: 'sails-mysql',
     host: process.env.DEV_DB_HOST,
@@ -37,7 +37,7 @@ module.exports.connections = {
     password: process.env.DEV_DB_PASSWORD,
     database: process.env.DEV_DB_DATABASE
   },
-  
+
   mysqlProduction: {
     adapter: 'sails-mysql',
     host: process.env.PROD_DB_HOST,

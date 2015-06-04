@@ -22,7 +22,7 @@
       var deferred = $q.defer();
       authService.authenticated()
         .then(function (userData) {
-            deferred.resolve({userData: userData});
+          deferred.resolve({userData: userData});
         });
       return deferred.promise;
     }];

@@ -18,23 +18,23 @@
 
     // PUBLIC PROPERTIES
     vm.tabards = {};
-	
+
     // PUBLIC FUNCTIONS
 
     // init
     activate();
 
     // PRIVATE FUNCTIONS
-    function activate() {   
+    function activate() {
       getTabards();
     }
-    
+
     function getTabards() {
       tabardsService.getTabards()
-        .then(function(data) {  
-            vm.tabards = data;
+        .then(function (data) {
+          vm.tabards = data;
         });
     }
-  
+
   }
 })();
