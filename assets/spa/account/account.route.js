@@ -20,7 +20,7 @@
 
     $urlRouterProvider.otherwise('/');
 
-    var globalData = ['$q', 'authService', function ($q, authService) {
+    var globalData = ['$q', 'authService', function ($q, authService, $state) {
       var deferred = $q.defer();
       authService.authenticated()
         .then(function (userData) {
@@ -85,6 +85,22 @@
             templateUrl: '/spa/account/views/profile.html',
             controller: 'ProfileController',
             controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          globalData: globalData
+        }
+      })
+      .state('username', {
+        url: '/username',
+        views: {
+          'nav': {
+            templateUrl: '/spa/main/views/nav.html',
+            controller: 'NavController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/account/views/username.html'
           }
         },
         resolve: {

@@ -7,11 +7,16 @@
     <li><a href="#">Dressing Room</a></li>
     <li><a href="#">Tabard Creator</a></li>
   </ul>
-  <img ng-if="vm.isLoggedIn" class="img-circle col-md-5 center-block" ng-src="{{vm.gravatar}}">
-  <ul class="nav navmenu-nav" ng-if="vm.isLoggedIn">
+  <img ng-if="vm.isLoggedIn && vm.setUsername" class="img-circle col-md-5 center-block" ng-src="{{vm.gravatar}}">
+  <ul class="nav navmenu-nav" ng-if="vm.isLoggedIn && vm.setUsername">
     <li><a href="/#/account">Welcome {{vm.displayName}}</a></li>
     <li><a href="/#/tabards">Tabards</a></li>
     <li><a href="/#/character">Characters</a></li>
+    <li><a href="#">Dressing Room</a></li>
+    <li><a href="#">Tabard Creator</a></li>
+    <li><a ng-click="vm.logout()">Logout</a></li>
+  </ul>
+  <ul class="nav navmenu-nav" ng-if="vm.isLoggedIn && !vm.setUsername">
     <li><a href="#">Dressing Room</a></li>
     <li><a href="#">Tabard Creator</a></li>
     <li><a ng-click="vm.logout()">Logout</a></li>

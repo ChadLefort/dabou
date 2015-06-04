@@ -64,7 +64,8 @@ exports.register = function (req, res, next) {
       User.create({
         username: username,
         email: email,
-        gravatar: gravatarUrl
+        gravatar: gravatarUrl,
+        setUsername: true
       }, function (err, user) {
         if (err) {
           if (err.code === 'E_VALIDATION') {

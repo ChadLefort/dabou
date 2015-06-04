@@ -36,8 +36,9 @@
     }
 
     function authenticated() {
-      if (status) {
+      if (status && user.setUsername) {
         vm.isLoggedIn = status;
+        vm.setUsername = user.setUsername;
         vm.username = user.username;
         vm.email = user.email;
         vm.gravatar = user.gravatar;
@@ -50,6 +51,10 @@
         } else {
           vm.displayName = user.email;
         }
+      } else if (status && !user.setUsername) {
+        vm.isLoggedIn = status;
+        vm.setUsername = user.setUsername;
+        $state.go('username');
       }
     }
 

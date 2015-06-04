@@ -30,6 +30,10 @@ var User = {
       defaultsTo: false,
       protected: true
     },
+    setUsername: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     passports: {
       collection: 'Passport',
       via: 'user'
