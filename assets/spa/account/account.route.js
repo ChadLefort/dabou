@@ -100,7 +100,9 @@
             controllerAs: 'vm'
           },
           'page': {
-            templateUrl: '/spa/account/views/username.html'
+            templateUrl: '/spa/account/views/username.html',
+            controller: 'AccountController',
+            controllerAs: 'vm'
           }
         },
         resolve: {

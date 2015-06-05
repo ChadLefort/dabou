@@ -52,12 +52,22 @@
         });
     }
 
+    function updateUsername(userId, username) {
+      return $http.put(urlRoot + '/user/' + userId, username)
+        .then(function (response) {
+          return response.data;
+        }, function (error) {
+          return error;
+        });
+    }
+
     return {
       getPassports: getPassports,
       getProfile: getProfile,
       createProfile: createProfile,
       unlinkPassport: unlinkPassport,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      updateUsername: updateUsername
     };
   }
 

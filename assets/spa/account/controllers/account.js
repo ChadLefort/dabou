@@ -33,6 +33,7 @@
     ];
     vm.createTab = false;
     vm.profileTitle = 'Create Profile';
+    vm.user = {_csrf: _csrf};
 
     // PUBLIC FUNCTIONS
     vm.createProfile = createProfile;
@@ -42,6 +43,7 @@
     vm.openDatepicker = openDatepicker;
     vm.selectCreateTab = selectCreateTab;
     vm.unlinkPassport = unlinkPassport;
+    vm.updateUsername = updateUsername;
 
     // init
     activate();
@@ -143,5 +145,16 @@
         });
     }
 
+    function updateUsername() {
+      accountService.updateUsername(user.id, vm.user)
+        .then(function (data) {
+          if (data.status == 409) {
+            toastr.error(data.data.error);
+          } else {
+            toastr.success(data.success);
+            $state.go('index');
+          }
+        });
+    }
   }
 })();

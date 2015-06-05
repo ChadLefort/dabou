@@ -15,7 +15,10 @@ module.exports = function (req, res, next) {
     id = req.param('id');
 
   sails.models[model].findOne({id: id}).then(function (data) {
+
     if (user.id == data.user) {
+      return next();
+    } else if (model == 'user' && user.id == data.id) {
       return next();
     } else {
       return res.forbidden();

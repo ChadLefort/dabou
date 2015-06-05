@@ -56,7 +56,7 @@ module.exports.policies = {
   UserController: {
     '*': ['passport', 'sessionAuth'],
     'create': false,
-    'update': false,
+    'update': ['passport', 'sessionAuth', 'userOwnership'],
     'destroy': false,
     'remove': false,
     'add': false
