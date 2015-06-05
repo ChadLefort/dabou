@@ -13,22 +13,27 @@ module.exports = {
    */
   update: function (req, res) {
     var user = req.user,
-      username = req.param('username');
+      username = req.param('username'),
+      regex = /^[a-zA-Z0-9.\-_]{3,16}$/;
 
-    User.update(user.id, {
-      username: username,
-      setUsername: true
-    }).then(function () {
-      res.send(200, {success: 'Success.Username.Update'});
-    }).catch(function (error) {
-      if (error.code === 'E_VALIDATION') {
-        if (error.invalidAttributes.username) {
-          res.send(409, {error: 'Error.Username.Exists'});
+    if (!regex.test(username)) {
+      res.send(400, {error: 'Error.Username.Validation'});
+    } else {
+      User.update(user.id, {
+        username: username,
+        setUsername: true
+      }).then(function () {
+        res.send(200, {success: 'Success.Username.Update'});
+      }).catch(function (error) {
+        if (error.code === 'E_VALIDATION') {
+          if (error.invalidAttributes.username) {
+            res.send(409, {error: 'Error.Username.Exists'});
+          }
+        } else {
+          res.send(400, {error: 'Error.Username.Update'});
         }
-      } else {
-        res.send(400, {error: 'Error.Username.Update'});
-      }
-    });
+      });
+    }
   }
 
 };

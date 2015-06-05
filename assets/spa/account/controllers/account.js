@@ -148,7 +148,7 @@
     function updateUsername() {
       accountService.updateUsername(user.id, vm.user)
         .then(function (data) {
-          if (data.status == 409) {
+          if (data.status == 409 || data.status == 400) {
             toastr.error(data.data.error);
           } else {
             toastr.success(data.success);
