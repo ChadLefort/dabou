@@ -3,9 +3,7 @@
  *
  * @description :: Server-side logic for managing characters
  */
-
-//var _ = require('lodash');
-
+ 
 module.exports = {
 
   /**
@@ -15,7 +13,6 @@ module.exports = {
    * @param {Object} req
    * @param {Object} res
    */
-  //@TODO: Clean this up!
   account: function (req, res) {
     var user = req.user;
     var characters = [];
@@ -25,7 +22,7 @@ module.exports = {
       provider: 'bnet'
     }).then(function (passport) {
       if (!passport) {
-        res.send(404, {error: 'Error.Bnet.Passport.NotFound'});
+        res.send(404, {msg: 'Error.Bnet.Passport.NotFound'});
       } else {
         var token = passport.tokens.accessToken;
         sails.wowAccount({
@@ -34,13 +31,11 @@ module.exports = {
         }).then(function (data) {
           map(data);
         }).catch(function (error) {
-          res.send(500);
-          console.log(error);
+          res.send(500, {msg: 'Error.Bnet.Account'});
         });
       }
     }).catch(function (error) {
-      res.send(500);
-      console.log(error);
+      res.send(500, {msg: 'Error.Bnet.Passport'});
     });
 
 
@@ -119,12 +114,12 @@ module.exports = {
       User.update(user.id, {
         character: character.id
       }).then(function (user) {
-        res.send(200, {success: 'Success.User.Character.Created', character: character});
+        res.send(200, {msg: 'Success.User.Character.Created', character: character});
       }).catch(function (error) {
-        res.send(400, {error: 'Error.User.Character'});
+        res.send(500, {msg: 'Error.User.Character'});
       });
     }).catch(function (error) {
-      res.send(409, {error: 'Error.User.Character'});
+      res.send(500, {msg: 'Error.User.Character'});
     });
   },
 
@@ -151,9 +146,9 @@ module.exports = {
       gender: gender,
       thumbnail: thumbnail
     }).then(function (character) {
-      res.send(200, {success: 'Success.User.Character.Update', character: character});
+      res.send(200, {msg: 'Success.User.Character.Update', character: character});
     }).catch(function (error) {
-      res.send(409, {error: 'Error.User.Character.Update'});
+      res.send(500, {msg: 'Error.User.Character.Update'});
     });
   }
 

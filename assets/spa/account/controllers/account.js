@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('AccountController', AccountController);
 
-  AccountController.$inject = ['accountService', 'authService', 'toastr', '$state', 'globalData', '$modal'];
+  AccountController.$inject = ['_', 'accountService', 'authService', 'toastr', '$state', 'globalData', '$modal'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function AccountController(accountService, authService, toastr, $state, globalData, $modal) {
+  function AccountController(_, accountService, authService, toastr, $state, globalData, $modal) {
     var vm = this,
       user = globalData.userData.user,
       _csrf = globalData.tokenData._csrf;
@@ -49,18 +49,34 @@
     activate();
 
     // PRIVATE FUNCTIONS
+    
+    /*
+     * @private
+     * @function
+     */
     function activate() {
-      getProfile(user.id);
-      getPassports(user.id);
+      if (!$state.includes('username')) {
+        getProfile(user.id);
+        getPassports(user.id);
+      }
     }
 
+    /*
+     * @public
+     * @function
+     * 
+     * @description :: Create a profile for a user if they don't already have one
+     */
     function createProfile() {
       accountService.createProfile(vm.profile)
         .then(function (data) {
-          toastr.success(data.success);
+          toastr.success(data.msg);
           vm.profile = data.profile;
+          vm.profile._csrf = _csrf;
           vm.noProfile = false;
           vm.profileTitle = 'Edit Profile';
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
 
@@ -71,18 +87,30 @@
     }
 
     function editProfile() {
-      accountService.updateProfile(user.profile, vm.profile)
+      authService.authenticated()
         .then(function (data) {
-          toastr.success(data.success);
-          vm.profile = data.profile;
+          accountService.updateProfile(data.user.profile, vm.profile)
+            .then(function (data) {
+              toastr.success(data.msg);
+              vm.profile = data.profile;
+              vm.profile._csrf = _csrf;
+            }).catch(function (error) {
+              toastr.error(error.data.msg);
+            });
         });
     }
 
+    /*
+     * @private
+     * @function
+     * @param {Interger} userId - The id of the user
+     * @description :: Create a profile for a user if they don't already have one
+     */
     function getPassports(userId) {
       accountService.getPassports(userId)
         .then(function (data) {
           vm.passport = data;
-          angular.forEach(data, function (value, key) {
+          _.each(data, function (value, key) {
             if (data[key].provider == 'bnet') {
               vm.bnet = true;
             } else if (data[key].provider == 'twitter') {
@@ -103,21 +131,18 @@
     function getProfile(userId) {
       accountService.getProfile(userId)
         .then(function (data) {
-          if (data.status == 404) {
-            vm.noProfile = true;
-          } else {
-            vm.profile = data;
-            vm.profile._csrf = _csrf;
-            vm.noProfile = false;
-            vm.profileTitle = 'Edit Profile';
-          }
+          vm.profile = data;
+          vm.profile._csrf = _csrf;
+          vm.noProfile = false;
+          vm.profileTitle = 'Edit Profile';
+        }).catch(function (error) {
+          vm.noProfile = true;
         });
     }
 
     function openDatepicker($event) {
       $event.preventDefault();
       $event.stopPropagation();
-
       vm.opened = true;
     }
 
@@ -128,7 +153,6 @@
     function unlinkPassport(provider) {
       accountService.unlinkPassport(provider)
         .then(function (data) {
-          if (data.status) {
             if (provider == 'bnet') {
               vm.bnet = false;
             } else if (provider == 'twitter') {
@@ -138,22 +162,19 @@
             } else if (provider == 'google') {
               vm.google = false;
             }
-            toastr.success(data.success);
-          } else {
-            toastr.error(data.error);
-          }
+            toastr.success(data.msg);
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
 
     function updateUsername() {
       accountService.updateUsername(user.id, vm.user)
         .then(function (data) {
-          if (data.status == 409 || data.status == 400) {
-            toastr.error(data.data.error);
-          } else {
-            toastr.success(data.success);
-            $state.go('index');
-          }
+          toastr.success(data.msg);
+          $state.go('index');
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
   }

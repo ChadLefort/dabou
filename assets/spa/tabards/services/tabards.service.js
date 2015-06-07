@@ -19,8 +19,6 @@
       return $http.get(urlRoot + '/tabard?limit=200')
         .then(function (response) {
           return response.data;
-        }, function (error) {
-          return error;
         });
     }
 

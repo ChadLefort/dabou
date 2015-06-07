@@ -25,7 +25,7 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Load sails.io before everything else
-  //'js/dependencies/sails.io.js',
+  'js/dependencies/sails.io.js',
 
   //From grunt-bower-task
   'vendor/jquery/js/jquery.min.js',

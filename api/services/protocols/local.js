@@ -98,7 +98,7 @@ exports.register = function (req, res, next) {
             });
           }
 
-          return res.send({success: 'Success.Passport.User.Created', user: user});
+          return res.send({msg: 'Success.Passport.User.Created', user: user});
         });
       });
     }

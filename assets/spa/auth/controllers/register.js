@@ -11,9 +11,9 @@
    * @description
    *
    */
-  RegisterController.$inject = ['authService', '$state', 'toastr', 'globalData'];
+  RegisterController.$inject = ['_', 'authService', '$state', 'toastr', 'globalData'];
 
-  function RegisterController(authService, $state, toastr, globalData) {
+  function RegisterController(_, authService, $state, toastr, globalData) {
     var vm = this,
       _csrf = globalData.tokenData._csrf;
 
@@ -38,12 +38,12 @@
         .then(function (data) {
           if (data.error) {
             var errors = data.error;
-            angular.forEach(errors, function (value, key) {
+            _.each(errors, function (value, key) {
               toastr.error(errors[key]);
             });
           } else {
             $state.go('login');
-            toastr.success(data.success);
+            toastr.success(data.msg);
           }
         })
     }

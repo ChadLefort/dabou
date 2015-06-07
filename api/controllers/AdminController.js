@@ -25,7 +25,7 @@ module.exports = {
     }).then(function () {
       res.send(200, 'All tabards have been imported!');
     }).catch(function (error) {
-      res.send(400, {error: error});
+      res.send(400, {msg: error});
     });
 
     function create(id) {

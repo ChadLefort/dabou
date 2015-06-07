@@ -37,8 +37,8 @@
 
     function authenticated() {
       if (status && user.setUsername) {
-        vm.isLoggedIn = status;
-        vm.setUsername = user.setUsername;
+        vm.isLoggedIn = true;
+        vm.setUsername = true;
         vm.username = user.username;
         vm.email = user.email;
         vm.gravatar = user.gravatar;
@@ -52,17 +52,21 @@
           vm.displayName = user.email;
         }
       } else if (status && !user.setUsername) {
-        vm.isLoggedIn = status;
-        vm.setUsername = user.setUsername;
+        vm.isLoggedIn = true;
+        vm.setUsername = false;
         $state.go('username');
       }
     }
 
     function getCharacter() {
-      characterService.getCharacter(user.id).then(function (character) {
-        vm.displayName = character.name;
-        vm.gravatar = 'https://us.battle.net/static-render/us/' + character.thumbnail + '?alt=/wow/static/images/2d/avatar/' + character.race + '-' + character.gender + '.jpg';
-      });
+      characterService.getCharacter(user.id)
+        .then(function (data) {
+          vm.displayName = data.name;
+          vm.gravatar = 'https://us.battle.net/static-render/us/' 
+          + data.thumbnail 
+          + '?alt=/wow/static/images/2d/avatar/' + data.race + '-' 
+          + data.gender + '.jpg';
+        });
     }
 
     function logout() {

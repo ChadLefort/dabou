@@ -11,9 +11,9 @@
    * @description
    *
    */
-  LoginController.$inject = ['authService', '$state', 'toastr', 'globalData'];
+  LoginController.$inject = ['_', 'authService', '$state', 'toastr', 'globalData'];
 
-  function LoginController(authService, $state, toastr, globalData) {
+  function LoginController(_, authService, $state, toastr, globalData) {
     var vm = this,
       _csrf = globalData.tokenData._csrf;
 
@@ -39,7 +39,7 @@
         .then(function (data) {
           if (data.error) {
             var errors = data.error;
-            angular.forEach(errors, function (value, key) {
+            _.each(errors, function (value, key) {
               toastr.error(errors[key]);
             });
           } else {

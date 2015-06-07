@@ -26,8 +26,6 @@
       return $http.get(urlRoot + '/user/' + userId + '/profile/')
         .then(function (response) {
           return response.data;
-        }, function (error) {
-          return error;
         });
     }
 
@@ -56,8 +54,6 @@
       return $http.put(urlRoot + '/user/' + userId, username)
         .then(function (response) {
           return response.data;
-        }, function (error) {
-          return error;
         });
     }
 

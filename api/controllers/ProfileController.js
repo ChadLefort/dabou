@@ -28,12 +28,12 @@ module.exports = {
       User.update(user.id, {
         profile: profile.id
       }).then(function (user) {
-        res.send(200, {success: 'Success.User.Profile.Created', profile: profile});
+        res.send(200, {msg: 'Success.User.Profile.Created', profile: profile});
       }).catch(function (error) {
-        res.send(400, {error: 'Error.User.Profile'});
+        res.send(500, {msg: 'Error.User.Profile'});
       });
     }).catch(function (error) {
-      res.send(409, {error: 'Error.User.Profile'});
+      res.send(500, {msg: 'Error.User.Profile'});
     });
   },
 
@@ -58,9 +58,9 @@ module.exports = {
       location: location,
       bio: bio
     }).then(function (profile) {
-      res.send(200, {success: 'Success.User.Profile.Updated', profile: profile[0]});
+      res.send(200, {msg: 'Success.User.Profile.Updated', profile: profile[0]});
     }).catch(function (error) {
-      res.send(500, {error: 'Error.User.Profile.Updated'});
+      res.send(500, {msg: 'Error.User.Profile.Updated'});
     });
   }
 

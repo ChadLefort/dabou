@@ -13,31 +13,17 @@ module.exports = {
    */
   authenticated: function (req, res) {
     if (!req.user) {
-      res.send({status: false});
+      res.send(200, {status: false});
     } else {
       res.send(200, {status: true, user: req.user});
     }
   },
 
-  /**
-   * Returns all of the passports of the current loggin in user
-   *
-   * @param {Object} req
-   * @param {Object} res
-   */
-  passports: function (req, res) {
-    var user = req.user;
-
-    Passport.find({user: user.id}).then(function (passport) {
-      if (!passport) {
-        res.send(404, {error: 'Error.Passport.NotFound'});
-      } else {
-        res.send(200, {passport: passport.tokens});
-      }
-    }).catch(function (error) {
-      res.send(500);
-      console.log(error);
-    });
+  subscribe: function(req, res) {
+    User.findOne({id: req.user.id})
+      .then(function (user) {
+        
+      }) 
   },
 
   /**

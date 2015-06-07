@@ -26,8 +26,6 @@
       return $http.get(urlRoot + '/character/account/')
         .then(function (response) {
           return response.data;
-        }, function (error) {
-          return error;
         });
     }
 
@@ -35,8 +33,8 @@
       return $http.get(urlRoot + '/user/' + userId + '/character/')
         .then(function (response) {
           return response.data;
-        }, function (error) {
-          return error;
+        }).catch(function (response) {
+          return response;
         });
     }
 

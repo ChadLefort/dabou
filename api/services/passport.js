@@ -388,7 +388,7 @@ passport.disconnect = function (req, res, next) {
     user: user.id
   }, function (err, count) {
     if (count == 1) {
-      res.send({error: 'Error.Passport.Unlink'});
+      res.send(406, {msg: 'Error.Passport.Unlink'});
     } else {
       Passport.findOne({
         provider: provider,
@@ -403,7 +403,7 @@ passport.disconnect = function (req, res, next) {
           }
         });
       });
-      res.send(200, {status: true, success: 'Success.Passport.' + _.capitalize(provider) + '.Unlink'});
+      res.send(200, {msg: 'Success.Passport.' + _.capitalize(provider) + '.Unlink'});
     }
   });
 };

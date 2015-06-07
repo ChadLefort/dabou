@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('CharacterController', CharacterController);
 
-  CharacterController.$inject = ['characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout', '_'];
+  CharacterController.$inject = ['_', 'characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function CharacterController(characterService, authService, toastr, $state, globalData, $timeout, _) {
+  function CharacterController(_, characterService, authService, toastr, $state, globalData, $timeout) {
     var vm = this,
       user = globalData.userData.user,
       _csrf = globalData.tokenData._csrf;
@@ -48,22 +48,24 @@
 
       characterService.createCharacter(character)
         .then(function (data) {
-          toastr.success(data.success);
+          toastr.success(data.msg);
           $state.reload();
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
 
     function getAccount() {
       characterService.getAccount()
         .then(function (data) {
-          if (data.status == 404) {
+          var account = data.characters;
+          getCharacter(account);
+        }).catch(function (error) {
+          if (error.status == 404) {
             vm.noBnet = true;
             vm.loading = false;
-          } else if (data.status == 500) {
-            toastr.error('Battle.net isn\'t responding');
           } else {
-            var account = data.characters;
-            getCharacter(account);
+            toastr.error(error.data.msg);
           }
         });
     }
@@ -77,28 +79,31 @@
             vm.noCharacter = false;
           }
 
-          var characters = _.map(account, function (character) {
-            if (character.name == data.name && character.realm == data.realm) {
-              return _.extend({}, character, {preferred: true});
-            } else {
-              return _.extend({}, character, {preferred: false});
-            }
-          });
-
-          _.each(characters, function (value, key) {
-            var preferredKey = _.indexOf(characters, (_.find(characters, {preferred: true})));
-
-            if (key == preferredKey) {
-              vm.characters.splice(key, 1);
-              vm.characters.unshift(characters[key]);
-            } else {
-              vm.characters.push(characters[key]);
-            }
-          });
-
           vm.noBnet = false;
           vm.loading = false;
+          mapCharacters(account, data);
         });
+    }
+
+    function mapCharacters(account, data) {
+      var characters = _.map(account, function (character) {
+        if (character.name == data.name && character.realm == data.realm) {
+          return _.extend({}, character, {preferred: true});
+        } else {
+          return _.extend({}, character, {preferred: false});
+        }
+      });
+
+      _.each(characters, function (value, key) {
+        var preferredKey = _.indexOf(characters, (_.find(characters, {preferred: true})));
+
+        if (key == preferredKey) {
+          vm.characters.splice(key, 1);
+          vm.characters.unshift(characters[key]);
+        } else {
+          vm.characters.push(characters[key]);
+        }
+      });
     }
 
     function updateCharacter(viewCharacter) {
@@ -114,8 +119,10 @@
 
       characterService.updateCharacter(user.character, character)
         .then(function (data) {
-          toastr.success(data.success);
+          toastr.success(data.msg);
           $state.reload();
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
   }
