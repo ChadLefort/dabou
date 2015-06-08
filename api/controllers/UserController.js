@@ -22,7 +22,8 @@ module.exports = {
       User.update(user.id, {
         username: username,
         setUsername: true
-      }).then(function () {
+      }).then(function (user) {
+        User.publishUpdate(user[0].id, {user: user[0]});
         res.send(200, {msg: 'Success.Username.Update'});
       }).catch(function (error) {
         if (error.code === 'E_VALIDATION') {

@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('AccountController', AccountController);
 
-  AccountController.$inject = ['_', 'accountService', 'authService', 'toastr', '$state', 'globalData', '$modal'];
+  AccountController.$inject = ['_', 'accountService', 'authService', 'toastr', '$state', 'globalData', '$modal', '$sails'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function AccountController(_, accountService, authService, toastr, $state, globalData, $modal) {
+  function AccountController(_, accountService, authService, toastr, $state, globalData, $modal, $sails) {
     var vm = this,
       user = globalData.userData.user,
       _csrf = globalData.tokenData._csrf;
@@ -59,6 +59,7 @@
         getProfile(user.id);
         getPassports(user.id);
       }
+      socket();
     }
 
     /*
@@ -87,16 +88,13 @@
     }
 
     function editProfile() {
-      authService.authenticated()
+      accountService.updateProfile(user.profile, vm.profile)
         .then(function (data) {
-          accountService.updateProfile(data.user.profile, vm.profile)
-            .then(function (data) {
-              toastr.success(data.msg);
-              vm.profile = data.profile;
-              vm.profile._csrf = _csrf;
-            }).catch(function (error) {
-              toastr.error(error.data.msg);
-            });
+          toastr.success(data.msg);
+          vm.profile = data.profile;
+          vm.profile._csrf = _csrf;
+        }).catch(function (error) {
+          toastr.error(error.data.msg);
         });
     }
 
@@ -148,6 +146,13 @@
 
     function selectCreateTab() {
       vm.createTab = true;
+    }
+    
+    function socket() {
+      $sails.get('/subscribe');
+      $sails.on('user', function(response) {
+        user = response.data.user;
+      });
     }
 
     function unlinkPassport(provider) {

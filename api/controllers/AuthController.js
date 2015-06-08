@@ -19,11 +19,23 @@ module.exports = {
     }
   },
 
+  /**
+   * Subscribes to socket.io user model updates
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
   subscribe: function(req, res) {
-    User.findOne({id: req.user.id})
+    var user = req.user;
+    
+    if (!user) {
+      res.send(400);
+    } else {
+    User.findOne({id: user.id})
       .then(function (user) {
-        
-      }) 
+        User.subscribe(req.socket, user, ['update']);
+      }); 
+    }
   },
 
   /**

@@ -20,6 +20,7 @@
     'ui.bootstrap',
     'xtForm',
     'toastr',
-    'ngFx'
+    'ngFx',
+    'ngSails'
   ]);
 })();

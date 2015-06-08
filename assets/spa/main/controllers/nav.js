@@ -11,9 +11,9 @@
    * @description
    *
    */
-  NavController.$inject = ['authService', 'characterService', '$modal', '$state', 'globalData', '_'];
+  NavController.$inject = ['_', 'authService', 'characterService', '$modal', '$state', 'globalData'];
 
-  function NavController(authService, characterService, $modal, $state, globalData, _) {
+  function NavController(_, authService, characterService, $modal, $state, globalData) {
     var vm = this,
       user = globalData.userData.user,
       status = globalData.userData.status;

@@ -32,7 +32,7 @@ var jsFilesToInject = [
   'vendor/angular/js/angular.min.js',
 
   //Others
-  'vendor/**/*.js',
+  'vendor/**/js/*.js',
 
   // Dependencies
   'js/dependencies/xtForm.js',

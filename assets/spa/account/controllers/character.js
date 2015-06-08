@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('CharacterController', CharacterController);
 
-  CharacterController.$inject = ['_', 'characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout'];
+  CharacterController.$inject = ['_', 'characterService', 'authService', 'toastr', '$state', 'globalData', '$timeout', '$sails'];
 
   /**
    * @ngdoc controller
@@ -13,7 +13,7 @@
    * @description
    *
    */
-  function CharacterController(_, characterService, authService, toastr, $state, globalData, $timeout) {
+  function CharacterController(_, characterService, authService, toastr, $state, globalData, $timeout, $sails) {
     var vm = this,
       user = globalData.userData.user,
       _csrf = globalData.tokenData._csrf;
@@ -33,6 +33,7 @@
     // PRIVATE FUNCTIONS
     function activate() {
       getAccount();
+      socket();
     }
 
     function createCharacter(viewCharacter) {
@@ -104,6 +105,16 @@
           vm.characters.push(characters[key]);
         }
       });
+    }
+    
+    function socket() {
+      $sails.get('/subscribe');
+      if (!$sails.alreadyListening) {
+        $sails.alreadyListening = true;
+        $sails.on('user', function(response) {
+          user = response.data.user;
+        });
+      }
     }
 
     function updateCharacter(viewCharacter) {

@@ -28,6 +28,7 @@ module.exports = {
       User.update(user.id, {
         profile: profile.id
       }).then(function (user) {
+        User.publishUpdate(user[0].id, {user: user[0]});
         res.send(200, {msg: 'Success.User.Profile.Created', profile: profile});
       }).catch(function (error) {
         res.send(500, {msg: 'Error.User.Profile'});
