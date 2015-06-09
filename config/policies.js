@@ -64,6 +64,7 @@ module.exports.policies = {
 
   ProfileController: {
     '*': ['passport', 'sessionAuth'],
+    'username': ['passport'],
     'update': ['passport', 'sessionAuth', 'userOwnership'],
     'destroy': false,
     'remove': false,

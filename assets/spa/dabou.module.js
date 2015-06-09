@@ -13,6 +13,7 @@
 
     // Custom modules
     'dabou.main',
+    'dabou.public',
     'dabou.auth',
     'dabou.account',
     'dabou.tabards'

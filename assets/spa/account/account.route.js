@@ -73,24 +73,6 @@
           globalData: globalData
         }
       })
-      .state('profile', {
-        url: '/profile/{username:[a-z0-9.\-_]{3,16}}',
-        views: {
-          'nav': {
-            templateUrl: '/spa/main/views/nav.html',
-            controller: 'NavController',
-            controllerAs: 'vm'
-          },
-          'page': {
-            templateUrl: '/spa/account/views/profile.html',
-            controller: 'ProfileController',
-            controllerAs: 'vm'
-          }
-        },
-        resolve: {
-          globalData: globalData
-        }
-      })
       .state('username', {
         url: '/username',
         views: {

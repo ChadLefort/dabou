@@ -2,14 +2,14 @@
   'use strict';
 
   angular
-    .module('dabou.account')
+    .module('dabou.public')
     .controller('ProfileController', ProfileController);
 
   ProfileController.$inject = ['_', 'accountService', 'globalData', '$stateParams'];
 
   /**
    * @ngdoc controller
-   * @name dabou.account.controller:ProfileController
+   * @name dabou.public.controller:ProfileController
    * @description
    *
    */
