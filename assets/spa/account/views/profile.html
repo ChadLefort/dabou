@@ -1,13 +1,44 @@
 <div class="container push-down">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-success">
-        <div class="panel-heading">Profile</div>
-        <div class="panel-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
+                    <div ng-if="vm.noProfile" class="text-center">
+                        <p>Can't find profile</p>
+                    </div>
+                    <div class="row" ng-if="!vm.noProfile">
+                        <img ng-src="{{vm.user.gravatar}}" class="col-md-3 center-block img-responsive img-circle">
+                        <div class="col-md-12">
+                            <div class="page-header">
+                                <h4><i class="fa fa-user"></i> General</h4>
+                            </div>
 
+                            <label class="control-label col-md-1">Username</label>
+                            <p>{{vm.user.username}}</p>
 
+                            <label class="control-label col-md-1">Name</label>
+                            <p>{{vm.profile.name}}</p>
+                    
+
+                            <label class="control-label col-md-1">Gender</label>
+                            <p>{{vm.profile.gender}}</p>
+     
+                            <div class="page-header">
+                                <h4><i class="fa fa-location-arrow"></i> Location</h4>
+                            </div>
+
+                            <p>{{vm.profile.location}}</p>
+
+                            <div class="page-header">
+                                <h4><i class="fa fa-book"></i> Bio</h4>
+                            </div>
+
+                            <p>{{vm.profile.bio}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

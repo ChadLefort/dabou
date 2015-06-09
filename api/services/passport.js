@@ -87,6 +87,7 @@ passport.connect = function (req, query, profile, next) {
 
     Gravatar.getImageUrl({
       emailAddress: profile.emails[0].value,
+      gravatarSize: 2048,
       defaultImage: 'http://chadlefort.com/content/images/default_avatar.png',
       rating: 'g',
       useHttps: true
@@ -106,10 +107,6 @@ passport.connect = function (req, query, profile, next) {
 
   if (profile.hasOwnProperty('battletag')) {
     user.username = profile.battletag;
-  }
-
-  if (profile.hasOwnProperty('displayName')) {
-    user.displayName = profile.displayName;
   }
 
   // If neither an email or a username was available in the profile, we don't

@@ -74,7 +74,7 @@
         }
       })
       .state('profile', {
-        url: '/profile',
+        url: '/profile/{username:[a-z0-9.\-_]{3,16}}',
         views: {
           'nav': {
             templateUrl: '/spa/main/views/nav.html',

@@ -66,4 +66,11 @@ module.exports.routes = {
   'get  /auth/:provider/callback': 'AuthController.callback',
   'get  /auth/:provider/:action': 'AuthController.callback',
   'get  /subscribe': 'AuthController.subscribe',
+
+  /**
+   * Profile Routes
+   *
+   * @description :: These routes are all associated with profiles
+   */
+   'get  /profile/:username': 'ProfileController.username',
 };

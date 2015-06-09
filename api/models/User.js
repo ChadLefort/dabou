@@ -18,9 +18,6 @@ var User = {
       type: 'email',
       unique: true
     },
-    displayName: {
-      type: 'string'
-    },
     gravatar: {
       type: 'string',
       defaultsTo: 'https://localhost:1337/images/default_avatar.png'

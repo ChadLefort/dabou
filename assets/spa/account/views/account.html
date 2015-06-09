@@ -103,72 +103,31 @@
               </div>
               <div class="form-group">
                 <div class="col-md-10 center-block">
-                  <div class="input-group">
-                    <input type="date" id="birthday" name="birthday" class="form-control"
-                           datepicker-popup="{{'MM-dd-yyyy'}}" datepicker-mode="'year'"
-                           ng-model="vm.profile.birthday" is-open="vm.opened" placeholder="Birthday">
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="vm.openDatepicker($event)"><i
-                  class="fa fa-calendar"></i></button>
-              </span>
-                  </div>
-                  <div class="text-center">
-                    <xt-validation-inline for="birthday"></xt-validation-inline>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
                   <input class="form-control" type="text" id="location" name="location"
                          ng-model="vm.profile.location" placeholder="Location">
                 </div>
               </div>
-              <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
-                <div class="form-group">
-                  <div class="col-md-10 center-block">
-                    <input class="form-control" type="email" id="email" name="email" ng-model="vm.profile.email"
-                           placeholder="Email">
-
-                    <div class="text-center">
-                      <xt-validation-inline for="email"></xt-validation-inline>
-                    </div>
-                  </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio"
+                            placeholder="A breif description about yourself..."
+                            required=""></textarea>
                 </div>
-                <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <input class="form-control" type="text" id="website" name="website" ng-model="vm.profile.website"
-                             placeholder="Website">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio"
-                                placeholder="A breif description about yourself..."
-                                required=""></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()"
-                              type="submit">Create Profile
-                      </button>
-                      <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()"
-                              type="submit">Edit Profile
-                      </button>
-                    </div>
-                  </div>
-                </form>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 center-block">
+                  <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()"
+                          type="submit">Create Profile
+                  </button>
+                  <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()"
+                          type="submit">Edit Profile
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
 
-
           <tabset ng-if="!vm.noProfile" justified="true">
-            <tab heading="Preview Profile">
-              <div class="text-center push-down">
-                <p ng-if="vm.noProfile">You currently don't have a profile. Please click <a
-                  ng-click="vm.selectCreateTab()">here</a> to create one.</p></p></p>
-              </div>
-            </tab>
             <tab heading="Edit Profile" active="vm.createTab">
               <div class="form-horizontal push-down">
                 <form role="form" name="profileForm" xt-form novalidate>
@@ -210,6 +169,12 @@
                     </div>
                   </div>
                 </form>
+              </div>
+            </tab>
+            <tab heading="Preview Profile">
+              <div class="text-center push-down">
+                <p ng-if="vm.noProfile">You currently don't have a profile. Please click <a
+                  ng-click="vm.selectCreateTab()">here</a> to create one.</p></p></p>
               </div>
             </tab>
             <tab heading="Delete Profile">

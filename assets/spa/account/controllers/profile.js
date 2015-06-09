@@ -5,7 +5,7 @@
     .module('dabou.account')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['accountService', 'globalData'];
+  ProfileController.$inject = ['_', 'accountService', 'globalData', '$stateParams'];
 
   /**
    * @ngdoc controller
@@ -13,9 +13,10 @@
    * @description
    *
    */
-  function ProfileController(accountService, globalData) {
+  function ProfileController(_, accountService, globalData, $stateParams) {
     var vm = this,
-      user = globalData.userData.user;
+      user = globalData.userData.user,
+      username = $stateParams.username;
 
     // PUBLIC PROPERTIES
     vm.profile = {};
@@ -27,17 +28,22 @@
 
     // PRIVATE FUNCTIONS
     function activate() {
-      getProfile(user.id);
+      getProfile(username);
     }
 
-    function getProfile(userId) {
-      accountService.getProfile(userId)
+    /*
+     * @private
+     * @function
+     * @param {Stromg} username - A user's username
+     * @description :: Get's a user's profile by username
+     */
+    function getProfile(username) {
+      accountService.getProfileByUsername(username)
         .then(function (data) {
-          if (data.status == 404) {
-            vm.noProfile = true;
-          } else {
-            vm.profile = data;
-          }
+          vm.user = data.user;
+          vm.profile = data.profile;
+        }).catch(function (error) {
+          vm.noProfile = true;
         });
     }
 

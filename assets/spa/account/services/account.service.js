@@ -29,6 +29,13 @@
         });
     }
 
+    function getProfileByUsername(username) {
+      return $http.get('/profile/' + username)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     function createProfile(profile) {
       return $http.post(urlRoot + '/profile/', profile)
         .then(function (response) {
@@ -60,6 +67,7 @@
     return {
       getPassports: getPassports,
       getProfile: getProfile,
+      getProfileByUsername: getProfileByUsername,
       createProfile: createProfile,
       unlinkPassport: unlinkPassport,
       updateProfile: updateProfile,

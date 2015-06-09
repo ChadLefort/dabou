@@ -20,8 +20,6 @@
 
     // PUBLIC PROPERTIES
     vm.username = null;
-    vm.email = null;
-    vm.displayName = '';
     vm.isLoggedIn = false;
 
     // PUBLIC FUNCTIONS
@@ -40,16 +38,11 @@
         vm.isLoggedIn = true;
         vm.setUsername = true;
         vm.username = user.username;
-        vm.email = user.email;
         vm.gravatar = user.gravatar;
         if (!_.isNull(_.get(user, 'character'))) {
           getCharacter();
-        } else if (user.displayName) {
-          vm.displayName = user.displayName;
-        } else if (user.username) {
-          vm.displayName = user.username;
         } else {
-          vm.displayName = user.email;
+          vm.username = user.username;
         }
       } else if (status && !user.setUsername) {
         vm.isLoggedIn = true;
@@ -61,7 +54,6 @@
     function getCharacter() {
       characterService.getCharacter(user.id)
         .then(function (data) {
-          vm.displayName = data.name;
           vm.gravatar = 'https://us.battle.net/static-render/us/' 
           + data.thumbnail 
           + '?alt=/wow/static/images/2d/avatar/' + data.race + '-' 

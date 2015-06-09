@@ -63,6 +63,28 @@ module.exports = {
     }).catch(function (error) {
       res.send(500, {msg: 'Error.User.Profile.Updated'});
     });
+  },
+
+  /**
+   * Find a user's profile by username
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  username: function (req, res) {
+    var username = req.param('username');
+
+    User.findOne({username: username})
+      .then(function (user) {
+        Profile.findOne(user.profile)
+          .then(function (profile) {
+            res.send(200, {profile: profile, user: user});
+          }).catch(function (error) {
+            res.send(500);
+          });
+      }).catch(function (error) {
+        res.send(404);
+      });
   }
 
 };

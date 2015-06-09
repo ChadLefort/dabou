@@ -40,8 +40,6 @@
     vm.deleteProfile = deleteProfile;
     vm.editProfile = editProfile;
     vm.getProfile = getProfile;
-    vm.openDatepicker = openDatepicker;
-    vm.selectCreateTab = selectCreateTab;
     vm.unlinkPassport = unlinkPassport;
     vm.updateUsername = updateUsername;
 
@@ -57,8 +55,8 @@
     function activate() {
       if (!$state.includes('username')) {
         getProfile(user.id);
-        getPassports(user.id);
       }
+      getPassports(user.id);
       socket();
     }
 
@@ -81,6 +79,12 @@
         });
     }
 
+    /*
+     * @public
+     * @function
+     * 
+     * @description :: Opens the ui-bootstrap model to delete a profile
+     */
     function deleteProfile() {
       $modal.open({
         templateUrl: 'spa/account/views/delete.profile.html'
@@ -126,6 +130,12 @@
         });
     }
 
+    /*
+     * @private
+     * @function
+     * @param {Interger} userId - The id of the user
+     * @description :: Gets the profile for the current logged in user
+     */
     function getProfile(userId) {
       accountService.getProfile(userId)
         .then(function (data) {
@@ -138,16 +148,12 @@
         });
     }
 
-    function openDatepicker($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      vm.opened = true;
-    }
-
-    function selectCreateTab() {
-      vm.createTab = true;
-    }
-    
+    /*
+     * @private
+     * @function
+     * 
+     * @description :: Uses sockets to keep the user model up to date with the server
+     */
     function socket() {
       $sails.get('/subscribe');
       $sails.on('user', function(response) {
@@ -155,6 +161,12 @@
       });
     }
 
+    /*
+     * @public
+     * @function
+     * @param {String} provider - The third party provider
+     * @description :: Allows a user to remove a linked third party provider token
+     */
     function unlinkPassport(provider) {
       accountService.unlinkPassport(provider)
         .then(function (data) {
@@ -173,6 +185,12 @@
         });
     }
 
+    /*
+     * @public
+     * @function
+     * @
+     * @description :: Updates a username for the current logged in user
+     */
     function updateUsername() {
       accountService.updateUsername(user.id, vm.user)
         .then(function (data) {
