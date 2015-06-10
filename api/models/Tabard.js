@@ -16,6 +16,12 @@ var Tabard = {
     },
     name: {
       type: 'string'
+    },
+    icon: {
+      type: 'string'
+    },
+    quality: {
+      type: 'integer'
     }
   }
 };

@@ -17,6 +17,7 @@
     var vm = this;
 
     // PUBLIC PROPERTIES
+    vm.loading = true;
     vm.tabards = {};
 
     // PUBLIC FUNCTIONS
@@ -33,6 +34,7 @@
       tabardsService.getTabards()
         .then(function (data) {
           vm.tabards = data;
+          vm.loading = false;
         });
     }
 

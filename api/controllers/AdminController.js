@@ -37,7 +37,9 @@ module.exports = {
           if (item.inventoryType == 19) {
             Tabard.create({
               item: item.id,
-              name: item.name
+              name: item.name,
+              icon: item.icon,
+              quality: item.quality
             }).then(function (item) {
               resolve(item.id);
             }).catch(function (error) {
