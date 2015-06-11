@@ -14,7 +14,15 @@
    *
    */
   function TabardsController(tabardsService) {
-    var vm = this;
+    var vm = this,
+      qualities = [
+        {id: 0, type: 'Poor', color: '#676767'},
+        {id: 1, type: 'Common', color: '#D2D2D2'},
+        {id: 2, type: 'Uncommon', color: '#1BA608'},
+        {id: 3, type: 'Rare', color: '#0354A3'},
+        {id: 4, type: 'Epic', color: '#7026A3'},
+        {id: 5, type: 'Legendary', color: '#C36608'}
+      ];
 
     // PUBLIC PROPERTIES
     vm.loading = true;
@@ -32,8 +40,11 @@
 
     function getTabards() {
       tabardsService.getTabards()
-        .then(function (data) {
-          vm.tabards = data;
+        .then(function (data) {          
+          vm.tabards = _.map(data, function (tabard) {
+            return _.merge(tabard, {quality: _.findWhere(qualities, {id: tabard.quality})});
+          });
+
           vm.loading = false;
         });
     }

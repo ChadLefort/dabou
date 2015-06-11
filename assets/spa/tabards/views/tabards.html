@@ -7,7 +7,7 @@
                     <div class="fx-fade-normal fx-speed-2000" ng-repeat="tabard in vm.tabards">
                         <div class="col-md-4">
                             <div class="panel panel-default">
-                                <div class="panel-heading" style="background-color: #000000">
+                                <div class="panel-heading" style="background-color: {{tabard.quality.color}}">
                                     {{tabard.name}}
                                 </div>
                                 <div class="panel-body preferred-character">
