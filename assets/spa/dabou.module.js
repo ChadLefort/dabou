@@ -16,7 +16,7 @@
     'dabou.public',
     'dabou.auth',
     'dabou.account',
-    'dabou.tabards'
+    'dabou.tabards',
 
     // 3rd Party Modules
   ]);

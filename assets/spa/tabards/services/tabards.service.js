@@ -15,15 +15,25 @@
    */
   function tabardsService($http, urlRoot) {
 
-    function getTabards() {
-      return $http.get(urlRoot + '/tabard?limit=200')
+    function getTabardsPaged(pageNumber) {
+      var skipAmount = 15 * pageNumber - 15;
+
+      return $http.get(urlRoot + '/tabard?skip=' + skipAmount)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    function sort(string, order) {
+      return $http.get(urlRoot + '/tabard?sort=' + string + ' ' + order)
         .then(function (response) {
           return response.data;
         });
     }
 
     return {
-      getTabards: getTabards,
+      getTabardsPaged: getTabardsPaged,
+      sort: sort
     };
   }
 

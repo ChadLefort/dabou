@@ -17,6 +17,7 @@
 
     // 3rd Party Modules
     'ui.router',
-    'ngFx'
+    'ngFx',
+    'angularUtils.directives.dirPagination'
   ]);
 })();

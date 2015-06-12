@@ -18,7 +18,8 @@
     "jasny-bootstrap": "~3.1.3",
     "ngFx": "~1.1.0",
     "lodash": "~3.9.3",
-    "angular-sails": "~1.1.3"
+    "angular-sails": "~1.1.3",
+    "angular-utils-pagination": "~0.8.2"
   },
   "name": "dabou",
   "version": "0.0.0",
@@ -71,6 +72,10 @@
     },
     "angular-sails": {
       "js": "dist/*.min.js"
+    },
+    "angular-utils-pagination": {
+      "js": "dirPagination.js",
+      "html": "dirPagination.tpl.html"
     }
   }
 }

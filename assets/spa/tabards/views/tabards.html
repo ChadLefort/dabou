@@ -2,9 +2,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-success">
-                <div class="panel-heading">Tabards</div>
+                <div class="panel-heading">
+                    Tabards
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Sort<span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-click="vm.sort('quality', 'ASC')">Quality Ascending</a></li>
+                            <li><a ng-click="vm.sort('quality', 'DESC')">Quality Decending</a></li>
+                            <li><a ng-click="vm.sort('name', 'ASC')">Name Ascending</a></li>
+                            <li><a ng-click="vm.sort('name', 'DESC')">Name Decending</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="panel-body">
-                    <div class="fx-fade-normal fx-speed-2000" ng-repeat="tabard in vm.tabards">
+                    <div dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
                         <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background-color: {{tabard.quality.color}}">
@@ -18,11 +29,19 @@
                     </div>
                     <div class="clearfix" ng-if="$index%3==0"></div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <dir-pagination-controls on-page-change="vm.getTabardsPaged(newPageNumber)"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
                 <div class="row" ng-if="vm.loading">
                 <div class="col-md-12 text-center">
                   <h3>Loading</h3><i class="fa fa-spinner fa-spin fa-4x"></i>
                 </div>
               </div>
+
             </div>
         </div>
     </div>

@@ -29,24 +29,36 @@
     vm.tabards = {};
 
     // PUBLIC FUNCTIONS
+    vm.getTabardsPaged = getTabardsPaged;
+    vm.sort = sort;
 
     // init
     activate();
 
     // PRIVATE FUNCTIONS
     function activate() {
-      getTabards();
+      getTabardsPaged(1);
     }
 
-    function getTabards() {
-      tabardsService.getTabards()
+    function getTabardsPaged(newPageNumber) {
+      tabardsService.getTabardsPaged(newPageNumber)
         .then(function (data) {          
-          vm.tabards = _.map(data, function (tabard) {
-            return _.merge(tabard, {quality: _.findWhere(qualities, {id: tabard.quality})});
-          });
-
+          vm.tabards = mapTabards(data);
           vm.loading = false;
         });
+    }
+
+    function mapTabards(tabards) {
+       return _.map(tabards, function (tabard) {
+          return _.merge(tabard, {quality: _.findWhere(qualities, {id: tabard.quality})});
+      });
+    }
+
+    function sort(string, order) {
+      tabardsService.sort(string, order)
+        .then(function (data) {
+          vm.tabards = mapTabards(data);
+        }) 
     }
 
   }
