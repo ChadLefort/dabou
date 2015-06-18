@@ -45,6 +45,24 @@
         resolve: {
           globalData: globalData
         }
+      })
+      .state('tabard', {
+        url: '/tabard',
+        views: {
+          'nav': {
+            templateUrl: '/spa/main/views/nav.html',
+            controller: 'NavController',
+            controllerAs: 'vm'
+          },
+          'page': {
+            templateUrl: '/spa/tabards/views/tabard.html',
+            controller: 'ViewerController',
+            controllerAs: 'vm'
+          }
+        },
+        resolve: {
+          globalData: globalData
+        }
       });
   }
 })();

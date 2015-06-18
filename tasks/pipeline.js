@@ -26,6 +26,7 @@ var jsFilesToInject = [
 
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
+  'js/dependencies/three.js',
 
   //From grunt-bower-task
   'vendor/jquery/js/jquery.min.js',
@@ -35,7 +36,13 @@ var jsFilesToInject = [
   'vendor/**/js/*.js',
 
   // Dependencies
-  'js/dependencies/xtForm.js',
+  'js/dependencies/*.js',
+
+  //Three
+  'spa/tabards/three/scene.js',
+  'spa/tabards/three/setup.js',
+  'spa/tabards/three/camera.js',
+  'spa/tabards/three/wrangler.js',
 
   //Angular Spa
   'spa/**/dabou.module.js',
