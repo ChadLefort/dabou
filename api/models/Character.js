@@ -20,7 +20,7 @@ var Character = {
       type: 'string'
     },
     race: {
-      type: 'integer'
+      model: 'Race'
     },
     gender: {
       type: 'integer'

@@ -1,29 +1,25 @@
 /**
- * Tabard.js
+ * Gender.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
-var Tabard = {
+var Gender = {
   // Enforce model schema in the case of schemaless databases
   schema: true,
-
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
-    id: {
+    value: {
       type: 'integer',
       unique: true
     },
     name: {
-      type: 'string'
-    },
-    icon: {
-      type: 'string'
-    },
-    quality: {
-      type: 'integer'
+      type: 'string',
+      unique: true
     }
   }
 };
 
-module.exports = Tabard;
+module.exports = Gender;

@@ -33,7 +33,9 @@
                 containerId: 'viewer-container'
             });
 
-            loadJSON('/tabards/orc_Male.js', 'orc_Male', '/tabards/52252/');
+            loadOBJ(52252, 'worgen', 'female', '/tabards/52252/worgenfemale.obj', 'worgenfemale');
+            //loadJSON('/tabards/draeneifemale_hd.js', 'draeneifemale_hd', '/tabards/52252/');
+            //loadOBJMTL('/tabards/52252/taurenfemale_hd.obj', '/tabards/52252/taurenfemale_hd.mtl', 'taurenfemale_hd');
         }
 
         /**
@@ -51,7 +53,31 @@
 	        };
 
 	        viewerService.loadJSON(info);
-        };
+        }
+
+        function loadOBJ(id, race, gender, obj, name) {
+            var info = {
+                id: id,
+                race: race,
+                gender: gender,
+                obj: obj,
+                name: name,
+                type: 'obj'
+            }
+
+            viewerService.loadOBJ(info);
+        }
+
+        function loadOBJMTL(obj, mtl, name) {
+            var info = {
+                obj: obj,
+                mtl: mtl,
+                name: name,
+                type: 'objmtl'
+            };
+
+            viewerService.loadOBJMTL(info);
+        }
 
         function changeRace() {
             loadJSON('/tabards/pandaren_Male.js', 'pandaren_Male', '/tabards/52252/');

@@ -50,7 +50,10 @@ module.exports.routes = {
    * @description :: These routes are all associated with a admin access level
    * end points
    */
-  'get /admin/generateTabards': 'AdminController.generateTabards',
+  'get /admin/tabards': 'AdminController.tabards',
+  'get /admin/races': 'AdminController.races',
+  'get /admin/genders': 'AdminController.genders',
+  'get /admin/folders': 'AdminController.folders',
 
   /**
    * Authenication Routes

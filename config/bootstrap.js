@@ -20,10 +20,12 @@ module.exports.bootstrap = function (cb) {
     promiseImplementation: sails.Promise
   });
   sails.fs = sails.Promise.promisifyAll(require('fs'));
+  sails.mkdirp = require('mkdirp');
   sails.bnet = require('battlenet-api')(sails.config.bnet.key);
   sails.getItem = sails.Promise.promisify(sails.bnet.wow.item.item);
   sails.wowAccount = sails.Promise.promisify(sails.bnet.account.wow);
   sails.wowClasses = sails.Promise.promisify(sails.bnet.wow.data.characterClasses);
+  sails.wowRaces = sails.Promise.promisify(sails.bnet.wow.data.characterRaces);
   sails.services.passport.loadStrategies();
   cb();
 };
