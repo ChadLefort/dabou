@@ -1,11 +1,11 @@
 /**
- * Tabard.js
+ * Spell.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
-var Tabard = {
+var Spell = {
   // Enforce model schema in the case of schemaless databases
   schema: true,
   autoCreatedAt: false,
@@ -19,43 +19,19 @@ var Tabard = {
     name: {
       type: 'string'
     },
-    description: {
-      type: 'string'
-    },
     icon: {
       type: 'string'
     },
-    quality: {
-      type: 'integer'
-    },
-    buyPrice: {
-      type: 'integer'
-    },
-    sellPrice: {
-      type: 'integer'
-    },
-    itemLevel: {
-      type: 'integer'
-    },
-    spell: {
-      model: 'Spell'
-    },
-    minReputation: {
-      type: 'integer'
-    },
-    sourceType: {
+    description: {
       type: 'string'
     },
-    quest: {
-      model: 'Quest'
+    castTime: {
+      type: 'string'
     },
-    achievement: {
-      model: 'Achievement'
-    },
-    vendor: {
-      type: 'integer'
+    tabard: {
+      model: 'Tabard'
     }
   }
 };
 
-module.exports = Tabard;
+module.exports = Spell;

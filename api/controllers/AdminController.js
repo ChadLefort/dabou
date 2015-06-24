@@ -37,11 +37,89 @@ module.exports = {
                     id: id
                 }).then(function(item) {
                     if (item.inventoryType == 19) {
+                        var spellId = null,
+                            questId = null,
+                            achievementId = null,
+                            vendorId = null;
+
+                        // If the tabard has a spell associated to it
+                        if (!_.isEmpty(item.itemSpells)) {
+                            _.each(item.itemSpells, function(value, key) {
+                                if (!_.isEmpty(value.spell.description)) {
+                                    spellId = value.spell.id;
+
+                                    Spell.create({
+                                        id: value.spell.id,
+                                        name: value.spell.name,
+                                        icon: value.spell.icon,
+                                        description: value.spell.description,
+                                        castTime: value.spell.castTime,
+                                        tabard: item.id
+                                    }).catch(function(error) {
+                                        console.log(error);
+                                    });
+                                };
+                            });
+                        }
+
+                        // If the tabard has a quest associated to it
+                        if (item.itemSource.sourceType == 'REWARD_FOR_QUEST') {
+                            questId = item.itemSource.sourceId;
+                            sails.wowQuest({
+                                origin: 'us',
+                                id: questId
+                            }).then(function(quest) {
+                                Quest.create({
+                                    id: quest.id,
+                                    title: quest.title,
+                                    reqLevel: quest.reqLevel,
+                                    tabard: item.id
+                                }).catch(function(error) {
+                                    console.log(error);
+                                });
+                            });
+                        }
+
+                        // If the tabard has a achievement associated to it
+                        if (item.itemSource.sourceType == 'ACHIEVEMENT_REWARD') {
+                            achievementId = item.itemSource.sourceId;
+                            sails.wowAchievement({
+                                origin: 'us',
+                                id: achievementId
+                            }).then(function(achievement) {
+                                Achievement.create({
+                                    id: achievement.id,
+                                    title: achievement.title,
+                                    points: achievement.points,
+                                    description: achievement.description,
+                                    accountWide: achievement.accountWide,
+                                    tabard: item.id
+                                }).catch(function(error) {
+                                    console.log(error);
+                                });
+                            });
+                        }
+
+                         // If the tabard has a vendor associated to it
+                        if (item.itemSource.sourceType == 'VENDOR') {
+                            vendorId = item.itemSource.sourceId;
+                        }
+
                         Tabard.create({
                             id: item.id,
                             name: item.name,
+                            description: item.description,
                             icon: item.icon,
-                            quality: item.quality
+                            quality: item.quality,
+                            buyPrice: item.buyPrice,
+                            sellPrice: item.sellPrice,
+                            itemLevel: item.itemLevel,
+                            spell: spellId,
+                            minReputation: item.minReputation,
+                            sourceType: item.itemSource.sourceType,
+                            quest: questId,
+                            achievement: achievementId,
+                            vendor: vendorId
                         }).then(function(item) {
                             resolve(item.id);
                         }).catch(function(error) {

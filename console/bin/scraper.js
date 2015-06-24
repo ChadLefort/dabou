@@ -7,7 +7,6 @@ var program = require('commander'),
   Promise = require("bluebird"),
   fs = Promise.promisifyAll(require('fs')),
   converter = require('json-2-csv'),
-  lupus = require('lupus'),
   cheerio = require('cheerio'),
   json2csv = Promise.promisify(converter.json2csv),
   itemIds = [];

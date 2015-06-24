@@ -26,6 +26,8 @@ module.exports.bootstrap = function (cb) {
   sails.wowAccount = sails.Promise.promisify(sails.bnet.account.wow);
   sails.wowClasses = sails.Promise.promisify(sails.bnet.wow.data.characterClasses);
   sails.wowRaces = sails.Promise.promisify(sails.bnet.wow.data.characterRaces);
+  sails.wowQuest = sails.Promise.promisify(sails.bnet.wow.quest);
+  sails.wowAchievement = sails.Promise.promisify(sails.bnet.wow.achievement);
   sails.services.passport.loadStrategies();
   cb();
 };
