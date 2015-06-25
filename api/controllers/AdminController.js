@@ -37,10 +37,15 @@ module.exports = {
                     id: id
                 }).then(function(item) {
                     if (item.inventoryType == 19) {
-                        var spellId = null,
+                        var description = null,
+                            spellId = null,
                             questId = null,
                             achievementId = null,
                             vendorId = null;
+
+                        if (!_.isEmpty(item.description)) {
+                            description = item.description;
+                        }
 
                         // If the tabard has a spell associated to it
                         if (!_.isEmpty(item.itemSpells)) {
@@ -73,6 +78,8 @@ module.exports = {
                                     id: quest.id,
                                     title: quest.title,
                                     reqLevel: quest.reqLevel,
+                                    category: quest.category,
+                                    level: quest.level,
                                     tabard: item.id
                                 }).catch(function(error) {
                                     console.log(error);
@@ -100,7 +107,7 @@ module.exports = {
                             });
                         }
 
-                         // If the tabard has a vendor associated to it
+                        // If the tabard has a vendor associated to it
                         if (item.itemSource.sourceType == 'VENDOR') {
                             vendorId = item.itemSource.sourceId;
                         }
@@ -108,8 +115,9 @@ module.exports = {
                         Tabard.create({
                             id: item.id,
                             name: item.name,
-                            description: item.description,
+                            description: description,
                             icon: item.icon,
+                            itemBind: item.itemBind,
                             quality: item.quality,
                             buyPrice: item.buyPrice,
                             sellPrice: item.sellPrice,
@@ -135,12 +143,14 @@ module.exports = {
     },
 
     /**
-     * Populate all the races based upon the WoW API
+     * Populate all the look up tables
      *
      * @param {Object} req
      * @param {Object} res
      */
-    races: function(req, res) {
+    lookup: function(req, res) {
+
+        // For races based on the WoW API
         sails.wowRaces({
             origin: 'us'
         }).then(function(data) {
@@ -152,37 +162,115 @@ module.exports = {
             }).catch(function(error) {
                 console.log(error);
             });
-        }).then(function() {
-            res.send(200, 'All races have been imported!');
         }).catch(function(error) {
             res.send(400, {
                 msg: error
             });
         });
-    },
 
-    /**
-     * Populate all the genders
-     *
-     * @param {Object} req
-     * @param {Object} res
-     */
-    genders: function(req, res) {
-        Gender.create({
+        // For genders
+        var genders = [{
             value: 0,
             name: 'Male'
-        }).catch(function(error) {
-            console.log(error);
-        });
-
-        Gender.create({
+        }, {
             value: 1,
             name: 'Female'
-        }).catch(function(error) {
-            console.log(error);
+        }];
+
+        _.each(genders, function(gender, key) {
+            Gender.create({
+                value: gender.value,
+                name: gender.name
+            }).catch(function(error) {
+                console.log(error);
+            });
         });
 
-        res.send(200, 'All genders have been imported!');
+        // For reputations
+        var reputations = [{
+            id: 1,
+            name: 'Hated'
+        }, {
+            id: 2,
+            name: 'Unfriendly'
+        }, {
+            id: 3,
+            name: 'Neutral'
+        }, {
+            id: 4,
+            name: 'Friendly'
+        }, {
+            id: 5,
+            name: 'Honored'
+        }, {
+            id: 6,
+            name: 'Revered'
+        }, {
+            id: 7,
+            name: 'Exalted'
+        }];
+
+        _.each(reputations, function(reputation, key) {
+            Reputation.create({
+                id: reputation.id,
+                name: reputation.name
+            }).catch(function(error) {
+                console.log(error);
+            });
+        });
+
+        // For item binding propteries
+        var itemBinds = [{
+            id: 1,
+            name: 'Binds when picked up'
+        }, {
+            id: 2,
+            name: 'Binds when equipped'
+        }, {
+            id: 3,
+            name: 'Binds on use'
+        }, {
+            id: 4,
+            name: 'Quest Item'
+        }];
+
+        _.each(itemBinds, function(itemBind, key) {
+            ItemBind.create({
+                id: itemBind.id,
+                name: itemBind.name
+            }).catch(function(error) {
+                console.log(error);
+            });
+        });
+
+        // For quality
+        var qualities = [{
+            id: 1,
+            name: 'Common'
+        }, {
+            id: 2,
+            name: 'Uncommon'
+        }, {
+            id: 3,
+            name: 'Rare'
+        }, {
+            id: 4,
+            name: 'Epic'
+        }, {
+            id: 5,
+            name: 'Legendary'
+        }];
+
+        _.each(qualities, function(quality, key) {
+            Quality.create({
+                id: quality.id,
+                name: quality.name
+            }).catch(function(error) {
+                console.log(error);
+            });
+        });
+
+        res.send(200, 'All lookup tables have been imported!');
     },
 
 

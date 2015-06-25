@@ -25,7 +25,6 @@
         function init(params) {
             home = new Viewer.Scene(params);
             $timeout(function () {
-                console.log('Loaded!');
             }, 1500);
             animate();
         }
@@ -57,7 +56,6 @@
          * @param {!{obj: string, mtl: string, name: string, type: string}} info
          */
         function loadOBJMTL(info){
-            console.log(info);
             home.wrangler.loadOBJMTL(info.obj, info.mtl, info.name);
         }   
 
@@ -66,7 +64,6 @@
          * @param {!{url: string, name: string, path: string, type: string}} info
          */
         function loadJSON(info) {
-            console.log(info);
             home.wrangler.loadJSON(info.url, info.name, info.path);
         }
 

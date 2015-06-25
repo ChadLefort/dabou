@@ -16,7 +16,6 @@
   function TabardsController(tabardsService) {
     var vm = this,
       qualities = [
-        {id: 0, type: 'Poor', color: '#676767'},
         {id: 1, type: 'Common', color: '#D2D2D2'},
         {id: 2, type: 'Uncommon', color: '#1BA608'},
         {id: 3, type: 'Rare', color: '#0354A3'},
@@ -50,7 +49,7 @@
 
     function mapTabards(tabards) {
        return _.map(tabards, function (tabard) {
-          return _.merge(tabard, {quality: _.findWhere(qualities, {id: tabard.quality})});
+          return _.merge(tabard, {quality: _.findWhere(qualities, {id: tabard.quality.id})});
       });
     }
 

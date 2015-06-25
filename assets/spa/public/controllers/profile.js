@@ -34,7 +34,7 @@
     /*
      * @private
      * @function
-     * @param {Stromg} username - A user's username
+     * @param {String} username - A user's username
      * @description :: Get's a user's profile by username
      */
     function getProfile(username) {

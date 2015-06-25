@@ -24,6 +24,13 @@
         });
     }
 
+    function getTabard(id) {
+      return $http.get(urlRoot + '/tabard/' + id)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     function sort(string, order) {
       return $http.get(urlRoot + '/tabard?sort=' + string + ' ' + order)
         .then(function (response) {
@@ -33,6 +40,7 @@
 
     return {
       getTabardsPaged: getTabardsPaged,
+      getTabard: getTabard,
       sort: sort
     };
   }

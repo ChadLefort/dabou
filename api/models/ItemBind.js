@@ -1,11 +1,11 @@
 /**
- * Quest.js
+ * ItemBind.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
-var Quest = {
+var ItemBind = {
   // Enforce model schema in the case of schemaless databases
   schema: true,
   autoCreatedAt: false,
@@ -16,22 +16,11 @@ var Quest = {
       type: 'integer',
       unique: true
     },
-    title: {
-      type: 'string'
-    },
-    reqLevel: {
-      type: 'integer'
-    },
-    category: {
-      type: 'string'
-    },
-    level: {
-      type: 'integer'
-    },
-    tabard: {
-      model: 'Tabard'
+    name: {
+      type: 'string',
+      unique: true
     }
   }
 };
 
-module.exports = Quest;
+module.exports = ItemBind;

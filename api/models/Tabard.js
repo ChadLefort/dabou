@@ -25,8 +25,11 @@ var Tabard = {
     icon: {
       type: 'string'
     },
+    itemBind: {
+      model: 'ItemBind'
+    },
     quality: {
-      type: 'integer'
+      model: 'Quality'
     },
     buyPrice: {
       type: 'integer'
@@ -41,7 +44,7 @@ var Tabard = {
       model: 'Spell'
     },
     minReputation: {
-      type: 'integer'
+      model: 'Reputation'
     },
     sourceType: {
       type: 'string'

@@ -51,8 +51,7 @@ module.exports.routes = {
    * end points
    */
   'get /admin/tabards': 'AdminController.tabards',
-  'get /admin/races': 'AdminController.races',
-  'get /admin/genders': 'AdminController.genders',
+  'get /admin/lookup': 'AdminController.lookup',
   'get /admin/folders': 'AdminController.folders',
 
   /**

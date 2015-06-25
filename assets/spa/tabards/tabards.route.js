@@ -47,7 +47,7 @@
         }
       })
       .state('tabard', {
-        url: '/tabard',
+        url: '/tabard/{id}',
         views: {
           'nav': {
             templateUrl: '/spa/main/views/nav.html',

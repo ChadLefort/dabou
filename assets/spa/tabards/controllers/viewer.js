@@ -11,10 +11,11 @@
      * @description
      *
      */
-    ViewerController.$inject = ['viewerService'];
+    ViewerController.$inject = ['viewerService', 'tabardsService', '$stateParams'];
 
-    function ViewerController(viewerService) {
-        var vm = this;
+    function ViewerController(viewerService, tabardsService, $stateParams) {
+        var vm = this,
+            tabardId = $stateParams.id;
 
         // PUBLIC PROPERTIES
 
@@ -33,9 +34,25 @@
                 containerId: 'viewer-container'
             });
 
-            loadOBJ(52252, 'worgen', 'female', '/tabards/52252/worgenfemale.obj', 'worgenfemale');
+            //loadOBJ(52252, 'worgen', 'female', '/tabards/52252/worgenfemale.obj', 'worgenfemale');
             //loadJSON('/tabards/draeneifemale_hd.js', 'draeneifemale_hd', '/tabards/52252/');
-            //loadOBJMTL('/tabards/52252/taurenfemale_hd.obj', '/tabards/52252/taurenfemale_hd.mtl', 'taurenfemale_hd');
+            loadOBJMTL('/tabards/52252/2/0/model.obj', '/tabards/52252/2/0/model.mtl', 'model');
+            getTabard(tabardId);
+        }
+
+        /*
+         * @private
+         * @function
+         * @param {Integer} id - A tabard's id
+         * @description :: Get's a tabard by id
+         */
+        function getTabard(tabardId) {
+          tabardsService.getTabard(tabardId)
+            .then(function (data) {
+              vm.tabard = data;
+            }).catch(function (error) {
+              vm.noTabard = true;
+            });
         }
 
         /**
@@ -80,7 +97,7 @@
         }
 
         function changeRace() {
-            loadJSON('/tabards/pandaren_Male.js', 'pandaren_Male', '/tabards/52252/');
+            loadOBJMTL('/tabards/52252/1/0/model.obj', '/tabards/52252/1/0/model.mtl', 'model');
         }
     }
 })();
