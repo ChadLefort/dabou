@@ -54,11 +54,21 @@
                     <div dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
                         <div class="col-md-4">
                             <div class="panel panel-default">
-                                <div class="panel-heading" style="background-color: {{tabard.quality.color}}">
-                                    {{tabard.name}}
+                                <div class="panel-heading" ng-class="{'panel-heading-border-bottom': !vm.isLoggedIn}" style="background-color: {{tabard.quality.color}}">
+                                    <div class="col-md-10">
+                                        <a ui-sref="tabard({id: tabard.id})">{{tabard.name}}</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-responsive img-rounded">
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="panel-body preferred-character">
-                                    <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
+                                <div ng-if="vm.isLoggedIn" class="panel-body">
+                                    <div class="text-center">                                    
+                                        <i class="fa fa-2x fa-check"></i>
+                                        <i class="fa fa-2x fa-star"></i>
+                                        <i class="fa fa-2x fa-times"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
     .module('dabou.tabards')
     .controller('TabardsController', TabardsController);
 
-  TabardsController.$inject = ['tabardsService'];
+  TabardsController.$inject = ['tabardsService', 'globalData'];
 
   /**
    * @ngdoc controller
@@ -13,8 +13,10 @@
    * @description
    *
    */
-  function TabardsController(tabardsService) {
+  function TabardsController(tabardsService, globalData) {
     var vm = this,
+      user = globalData.userData.user,
+      status = globalData.userData.status,
       qualities = [
         {id: 1, type: 'Common', color: '#D2D2D2'},
         {id: 2, type: 'Uncommon', color: '#1BA608'},
@@ -37,6 +39,10 @@
     // PRIVATE FUNCTIONS
     function activate() {
       getTabardsPaged(1);
+
+      if (status && user.setUsername) {
+        vm.isLoggedIn = true;
+      }
     }
 
     function getTabardsPaged(newPageNumber) {

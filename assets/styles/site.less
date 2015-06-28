@@ -177,6 +177,27 @@ canvas {
   height: 100% 
 }
 
+.panel-heading > .col-md-10 > a {
+  color: @body-bg;
+}
+
+.panel-heading > .col-md-10 > a:focus, a:hover {
+  color: @gray;
+  text-decoration: none;
+  transition: color ease 1.5s;
+}
+
+.panel-heading > .col-md-10, .col-md-2 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.panel-heading-border-bottom {
+  border-bottom: 0px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 /* ==========================================================================
    2. Toastr
    ========================================================================== */
