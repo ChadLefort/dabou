@@ -18,7 +18,7 @@
       user = globalData.userData.user,
       status = globalData.userData.status,
       qualities = [
-        {id: 1, type: 'Common', color: '#D2D2D2'},
+        {id: 1, type: 'Common', color: '#8B8B8B'},
         {id: 2, type: 'Uncommon', color: '#1BA608'},
         {id: 3, type: 'Rare', color: '#0354A3'},
         {id: 4, type: 'Epic', color: '#7026A3'},
@@ -63,7 +63,7 @@
       tabardsService.sort(string, order)
         .then(function (data) {
           vm.tabards = mapTabards(data);
-        }) 
+        });
     }
 
   }

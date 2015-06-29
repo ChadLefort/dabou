@@ -1,6 +1,6 @@
 <div class="container push-down">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <accordion>
                 <accordion-group is-open="filters.open">
                     <accordion-heading>
@@ -22,36 +22,38 @@
                 </accordion-group>
             </accordion>
         </div>
-        <div class="col-md-4">
-            <accordion>
-                <accordion-group is-open="sort.open">
-                    <accordion-heading>
-                        Sort <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': sort.open, 'fa-chevron-right': !sort.open}"></i>
-                    </accordion-heading>
-                    <div class="container">
-                        <div class="row">
-                            <span>
-                            Name
-                            <i class="fa fa-lg fa-chevron-up" ng-click="vm.sort('name', 'ASC')"></i>
-                            <i class="fa fa-lg fa-chevron-down" ng-click="vm.sort('name', 'DESC')"></i>
-                            </span>
-                            <span>
-                            Quality
-                            <i class="fa fa-lg fa-chevron-up" ng-click="vm.sort('quality', 'ASC')"></i>
-                            <i class="fa fa-lg fa-chevron-down" ng-click="vm.sort('quality', 'DESC')"></i>
-                            </span>
-                        </div>
-                    </div>
-                </accordion-group>
-            </accordion>
-        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-success">
                 <div class="panel-heading">Tabards</div>
                 <div class="panel-body">
-                    <div dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quality</th>
+                                <th>Item Level</th>
+                                <th>Required Level</th>
+                                <th>Faction</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
+                                <td>
+                                    <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
+                                    <a ui-sref="tabard({id: tabard.id})" style="color: {{tabard.quality.color}}"><strong>{{tabard.name}}</strong></a>
+                                </td>
+                                <td>{{tabard.quality.name}}</td>
+                                <td>{{tabard.itemLevel}}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{tabard.sourceType}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
                         <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading" ng-class="{'panel-heading-border-bottom': !vm.isLoggedIn}" style="background-color: {{tabard.quality.color}}">
@@ -72,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="clearfix" ng-if="$index%3==0"></div>
                 </div>
                 <div class="row">

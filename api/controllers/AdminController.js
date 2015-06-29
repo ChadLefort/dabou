@@ -3,6 +3,9 @@
  *
  * @description :: Server-side logic for managing admin end points
  */
+
+var cases = require('../services/cases');
+
 module.exports = {
 
     /**
@@ -124,7 +127,7 @@ module.exports = {
                             itemLevel: item.itemLevel,
                             spell: spellId,
                             minReputation: item.minReputation,
-                            sourceType: item.itemSource.sourceType,
+                            sourceType: cases.toTitleCase(item.itemSource.sourceType.replace(/_/g, ' ')),
                             quest: questId,
                             achievement: achievementId,
                             vendor: vendorId
