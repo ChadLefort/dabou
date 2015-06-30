@@ -40,41 +40,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
+                            <tr dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="vm.totalCount">
                                 <td>
-                                    <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
+                                    <span class="tabard-icon">
+                                        <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
+                                    </span>
                                     <a ui-sref="tabard({id: tabard.id})" style="color: {{tabard.quality.color}}"><strong>{{tabard.name}}</strong></a>
                                 </td>
                                 <td>{{tabard.quality.name}}</td>
                                 <td>{{tabard.itemLevel}}</td>
-                                <td></td>
-                                <td></td>
-                                <td>{{tabard.sourceType}}</td>
+                                <td>{{tabard.reqLevel}}</td>
+                                <td>{{tabard.faction}}</td>
+                                <td ng-if="tabard.attainable">
+                                    <span ng-repeat="sourceType in tabard.sourceType">
+                                        {{sourceType.name}} {{$last ? '' : ', '}}
+                                    </span>
+                                </td>
+                                <td ng-if="!tabard.attainable">Unavailable</td>
                             </tr>
                         </tbody>
                     </table>
-                    <!-- <div dir-paginate="tabard in vm.tabards | itemsPerPage: 15" total-items="115">
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" ng-class="{'panel-heading-border-bottom': !vm.isLoggedIn}" style="background-color: {{tabard.quality.color}}">
-                                    <div class="col-md-10">
-                                        <a ui-sref="tabard({id: tabard.id})">{{tabard.name}}</a>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-responsive img-rounded">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div ng-if="vm.isLoggedIn" class="panel-body">
-                                    <div class="text-center">                                    
-                                        <i class="fa fa-2x fa-check"></i>
-                                        <i class="fa fa-2x fa-star"></i>
-                                        <i class="fa fa-2x fa-times"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="clearfix" ng-if="$index%3==0"></div>
                 </div>
                 <div class="row">

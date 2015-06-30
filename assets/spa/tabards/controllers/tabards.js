@@ -45,6 +45,13 @@
       }
     }
 
+    function getTabardCount(arguments) {
+      tabardsService.getTabardCount()
+        .then(function (data) {          
+          vm.totalCount = data;
+        });
+    }
+
     function getTabardsPaged(newPageNumber) {
       tabardsService.getTabardsPaged(newPageNumber)
         .then(function (data) {          

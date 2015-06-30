@@ -15,6 +15,13 @@
    */
   function tabardsService($http, urlRoot) {
 
+    function getTabardCount() {
+      return $http.get(urlRoot + '/tabard/count')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
     function getTabardsPaged(pageNumber) {
       var skipAmount = 15 * pageNumber - 15;
 
@@ -39,6 +46,7 @@
     }
 
     return {
+      getTabardCount: getTabardCount,
       getTabardsPaged: getTabardsPaged,
       getTabard: getTabard,
       sort: sort

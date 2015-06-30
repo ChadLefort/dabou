@@ -75,4 +75,11 @@ module.exports.routes = {
    * @description :: These routes are all associated with profiles
    */
    'get  /profile/:username': 'ProfileController.username',
+
+   /**
+   * Tabard Routes
+   *
+   * @description :: These routes are all associated with tabards
+   */
+   'get  /api/tabard/count': 'TabardController.count',
 };

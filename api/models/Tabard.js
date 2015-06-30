@@ -40,14 +40,20 @@ var Tabard = {
     itemLevel: {
       type: 'integer'
     },
+    reqLevel: {
+      type: 'integer'
+    },
+    faction: {
+      type: 'string'
+    },
+    attainable: {
+      type: 'boolean'
+    },
     spell: {
       model: 'Spell'
     },
     minReputation: {
       model: 'Reputation'
-    },
-    sourceType: {
-      type: 'string'
     },
     quest: {
       model: 'Quest'
@@ -55,8 +61,9 @@ var Tabard = {
     achievement: {
       model: 'Achievement'
     },
-    vendor: {
-      type: 'integer'
+    sourceType: {
+      collection: 'SourceType',
+      via: 'tabard'
     }
   }
 };

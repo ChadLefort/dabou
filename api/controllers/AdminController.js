@@ -3,9 +3,6 @@
  *
  * @description :: Server-side logic for managing admin end points
  */
-
-var cases = require('../services/cases');
-
 module.exports = {
 
     /**
@@ -22,8 +19,16 @@ module.exports = {
             var items = JSON.parse(data);
             return items;
         }).map(function(item, index) {
+            var params = {
+                id: item.id,
+                reqLevel: item.reqLevel,
+                attainable: item.attainable,
+                faction: item.faction,
+                sourceType: item.sourceType
+            }
+
             sails.promiseThrottle.add(function() {
-                return create(item.id);
+                return create(params);
             });
         }).then(function() {
             res.send(200, 'All tabards have been imported!');
@@ -33,22 +38,32 @@ module.exports = {
             });
         });
 
-        function create(id) {
+        function create(params) {
             return new sails.Promise(function(resolve, reject) {
                 sails.getItem({
                     origin: 'us',
-                    id: id
+                    id: params.id
                 }).then(function(item) {
                     if (item.inventoryType == 19) {
                         var description = null,
                             spellId = null,
                             questId = null,
-                            achievementId = null,
-                            vendorId = null;
+                            achievementId = null;
 
                         if (!_.isEmpty(item.description)) {
                             description = item.description;
                         }
+
+                        // Create source types for every tabard
+                        _.each(params.sourceType, function (value, key) {
+                            SourceType.create({
+                                value: value.id,
+                                name: value.name,
+                                tabard: item.id
+                            }).catch(function(error) {
+                                console.log(error);
+                            });
+                        });
 
                         // If the tabard has a spell associated to it
                         if (!_.isEmpty(item.itemSpells)) {
@@ -125,12 +140,13 @@ module.exports = {
                             buyPrice: item.buyPrice,
                             sellPrice: item.sellPrice,
                             itemLevel: item.itemLevel,
+                            reqLevel: params.reqLevel,
+                            faction: params.faction,
+                            attainable: params.attainable,
                             spell: spellId,
                             minReputation: item.minReputation,
-                            sourceType: cases.toTitleCase(item.itemSource.sourceType.replace(/_/g, ' ')),
                             quest: questId,
-                            achievement: achievementId,
-                            vendor: vendorId
+                            achievement: achievementId
                         }).then(function(item) {
                             resolve(item.id);
                         }).catch(function(error) {
