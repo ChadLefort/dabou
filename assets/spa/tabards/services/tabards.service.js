@@ -23,7 +23,7 @@
     }
 
     function getTabardsPaged(pageNumber) {
-      var skipAmount = 15 * pageNumber - 15;
+      var skipAmount = 25 * pageNumber - 25;
 
       return $http.get(urlRoot + '/tabard?skip=' + skipAmount)
         .then(function (response) {

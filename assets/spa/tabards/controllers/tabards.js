@@ -39,16 +39,17 @@
     // PRIVATE FUNCTIONS
     function activate() {
       getTabardsPaged(1);
+      getTabardCount();
 
       if (status && user.setUsername) {
         vm.isLoggedIn = true;
       }
     }
 
-    function getTabardCount(arguments) {
+    function getTabardCount() {
       tabardsService.getTabardCount()
-        .then(function (data) {          
-          vm.totalCount = data;
+        .then(function (data) {         
+          vm.totalCount = data.count;
         });
     }
 
