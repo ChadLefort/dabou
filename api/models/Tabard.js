@@ -43,11 +43,11 @@ var Tabard = {
     reqLevel: {
       type: 'integer'
     },
-    faction: {
-      type: 'string'
-    },
     attainable: {
       type: 'boolean'
+    },
+    faction: {
+      model: 'Faction'
     },
     spell: {
       model: 'Spell'

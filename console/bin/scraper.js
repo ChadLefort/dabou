@@ -25,8 +25,8 @@ if (!program.get) {
     console.log('----------------------------------------------');
 
 
-    getItemIds().then(function (results) {
-      generateFile(results);
+    getItemIds().then(function(results) {
+        generateFile(results);
     });
 
     function getItemIds() {
@@ -44,31 +44,32 @@ if (!program.get) {
                     var tabard = {
                         id: value.id,
                         attainable: 1,
+                        faction: value.side,
                         sourceType: []
                     };
 
-                    _.each(value.source, function (value, key) {
-                      var sourceType = {
-                        id: value
-                      }
+                    _.each(value.source, function(value, key) {
+                        var sourceType = {
+                            id: value
+                        }
 
-                      if (value == 2) {
-                        sourceType.name = 'Drop';
-                      } else if (value == 3) {
-                        sourceType.name = 'PvP';
-                      } else if (value == 4) {
-                        sourceType.name = 'Quest';
-                      } else if (value == 5) {
-                        sourceType.name = 'Vendor';
-                      } else if (value == 8) {
-                        sourceType.name = 'Redemption'
-                      } else if (value == 11) {
-                        sourceType.name = 'World Event'
-                      } else if (value == 12) {
-                        sourceType.name = 'Achievement'
-                      }
+                        if (value == 2) {
+                            sourceType.name = 'Drop';
+                        } else if (value == 3) {
+                            sourceType.name = 'PvP';
+                        } else if (value == 4) {
+                            sourceType.name = 'Quest';
+                        } else if (value == 5) {
+                            sourceType.name = 'Vendor';
+                        } else if (value == 8) {
+                            sourceType.name = 'Redemption'
+                        } else if (value == 11) {
+                            sourceType.name = 'World Event'
+                        } else if (value == 12) {
+                            sourceType.name = 'Achievement'
+                        }
 
-                      tabard.sourceType.push(sourceType);
+                        tabard.sourceType.push(sourceType);
                     });
 
                     if (_.has(value, 'attainable') && value.attainable == 2) {
@@ -79,12 +80,8 @@ if (!program.get) {
                         tabard.reqLevel = value.reqlevel;
                     }
 
-                    if (_.has(value, 'side')) {
-                        if (value.side == 1) {
-                          tabard.faction = 'Alliance';
-                        } else {
-                          tabard.faction = 'Horde';
-                        }
+                    if (value.side != 1 && value.side != 2) {
+                        tabard.faction = 3;
                     }
 
                     tabards.push(tabard);
@@ -104,10 +101,10 @@ if (!program.get) {
     }
 
     function generateFile(results) {
-      fs.writeFileAsync('tabardsIds.json', JSON.stringify(results, null, 2)).then(function () {
-        console.log(chalk.green('File Generated!'));
-      }).catch(function (error) {
-        console.log(chalk.red('Error: ' + error));
-      });
+        fs.writeFileAsync('tabardsIds.json', JSON.stringify(results, null, 2)).then(function() {
+            console.log(chalk.green('File Generated!'));
+        }).catch(function(error) {
+            console.log(chalk.red('Error: ' + error));
+        });
     }
 }

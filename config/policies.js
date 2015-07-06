@@ -72,7 +72,11 @@ module.exports.policies = {
   },
 
   TabardController: {
-    '*': true
+    '*': true,
+    'update': false,
+    'destroy': false,
+    'remove': false,
+    'add': false
   }
 
   // RabbitController: {

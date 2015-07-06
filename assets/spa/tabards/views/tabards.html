@@ -2,21 +2,35 @@
     <div class="row">
         <div class="col-md-12">
             <accordion>
-                <accordion-group is-open="filters.open">
+                <accordion-group is-open="vm.filters.open">
                     <accordion-heading>
-                        Filters <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': filters.open, 'fa-chevron-right': !filters.open}"></i>
+                        Filters <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': vm.filters.open, 'fa-chevron-right': !vm.filters.open}"></i>
                     </accordion-heading>
-                    <div class="container">
-                        <div class="row">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Horde
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Alliance
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Neutral
-                            </label>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="page-header">
+                                <h5>Faction</h5>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Show {{vm.activeTitle}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-click="vm.showActive()">All</a></li>
+                                    <li><a ng-click="vm.showActive(true)">Alliance</a></li>
+                                    <li><a ng-click="vm.showActive(false)">Horde</a></li>
+                                    <li><a ng-click="vm.showActive(false)">Neutral</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="page-header">
+                                <h5>Search</h5>
+                            </div>                            
+                            <div class="input-group">
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-change="vm.search(vm.filters.search)" no-enter>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="vm.clearSearch()">Clear</button>
+                                </span>
+                            </div>                       
                         </div>
                     </div>
                 </accordion-group>
@@ -31,16 +45,17 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Quality</th>
-                                <th>Item Level</th>
-                                <th>Required Level</th>
-                                <th>Faction</th>
+                                <th ng-repeat="tableHeader in vm.tableHeaders">
+                                    <a ng-click="vm.sort($index, vm.sortOrder)">
+                                    {{tableHeader.name}}
+                                    <i class="fa" ng-class="{'fa-sort': !vm.sortIcons[$index].asc && !vm.sortIcons[$index].desc, 'fa-sort-asc': vm.sortIcons[$index].asc, 'fa-sort-desc': vm.sortIcons[$index].desc}"></i></a>
+                                </th>
                                 <th>Source</th>
+                                <th ng-if="vm.isLoggedIn">Your Collection</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="tabard in vm.tabards | itemsPerPage: 25" total-items="vm.totalCount">
+                            <tr dir-paginate="tabard in vm.tabards | itemsPerPage: vm.pageSize" total-items="vm.totalCount">
                                 <td>
                                     <span class="tabard-icon">
                                         <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
@@ -50,13 +65,18 @@
                                 <td>{{tabard.quality.name}}</td>
                                 <td>{{tabard.itemLevel}}</td>
                                 <td>{{tabard.reqLevel}}</td>
-                                <td>{{tabard.faction}}</td>
+                                <td>{{tabard.faction.name}}</td>
                                 <td ng-if="tabard.attainable">
                                     <span ng-repeat="sourceType in tabard.sourceType">
                                         {{sourceType.name}} {{$last ? '' : ', '}}
                                     </span>
                                 </td>
                                 <td ng-if="!tabard.attainable">Unavailable</td>
+                                <td ng-if="vm.isLoggedIn">
+                                    <i class="fa fa-check"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-times"></i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="text-center">
-                            <dir-pagination-controls on-page-change="vm.getTabardsPaged(newPageNumber)"></dir-pagination-controls>
+                            <dir-pagination-controls on-page-change="vm.newPage(newPageNumber)"></dir-pagination-controls>
                         </div>
                     </div>
                 </div>

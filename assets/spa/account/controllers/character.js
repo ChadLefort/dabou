@@ -59,7 +59,7 @@
     function getAccount() {
       characterService.getAccount()
         .then(function (data) {
-          var account = data.characters;
+          var account = characterService.mapCharacterColors(data.characters);
           getCharacter(account);
         }).catch(function (error) {
           if (error.status == 404) {
@@ -82,29 +82,8 @@
 
           vm.noBnet = false;
           vm.loading = false;
-          mapCharacters(account, data);
+          vm.characters = characterService.mapPreferredCharacter(account, data);
         });
-    }
-
-    function mapCharacters(account, data) {
-      var characters = _.map(account, function (character) {
-        if (character.name == data.name && character.realm == data.realm) {
-          return _.extend({}, character, {preferred: true});
-        } else {
-          return _.extend({}, character, {preferred: false});
-        }
-      });
-
-      _.each(characters, function (value, key) {
-        var preferredKey = _.indexOf(characters, (_.find(characters, {preferred: true})));
-
-        if (key == preferredKey) {
-          vm.characters.splice(key, 1);
-          vm.characters.unshift(characters[key]);
-        } else {
-          vm.characters.push(characters[key]);
-        }
-      });
     }
     
     function socket() {

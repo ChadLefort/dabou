@@ -107,7 +107,7 @@ module.exports = {
             _.each(sourceTypes, function(value, key) {
                 SourceType.create({
                     value: value.id,
-                    name: name.name,
+                    name: value.name,
                     tabard: tabardId
                 }).catch(function(error) {
                     console.log(error);
@@ -294,6 +294,27 @@ module.exports = {
             Quality.create({
                 id: quality.id,
                 name: quality.name
+            }).catch(function(error) {
+                console.log(error);
+            });
+        });
+
+        // For faction
+        var factions = [{
+            id: 1,
+            name: 'Alliance'
+        }, {
+            id: 2,
+            name: 'Horde'
+        }, {
+            id: 3,
+            name: 'Neutral'
+        }];
+
+        _.each(factions, function(faction, key) {
+            Faction.create({
+                id: faction.id,
+                name: faction.name
             }).catch(function(error) {
                 console.log(error);
             });
