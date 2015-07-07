@@ -15,12 +15,18 @@
    */
   function tabardsService(_, $http, urlRoot) {
 
-    function getTabardCount(search) {
-      var url = '/tabard/count';
+    function buildUrl(baseUrl, params, skipAmount) {
+      var url = baseUrl + '?sort=' + params.sortBy + ' ' + params.sortOrder + '&skip=' + skipAmount;
 
-      if (!_.isNull(search)) {
-        url += '?where={"name":{"contains":"' + search + '"}}'
-      }
+      url += '&where={"name":{"contains":"' + params.search + '"},';
+      url += '"quality":{"contains":"' + params.quality + '"},';
+      url += '"faction":{"contains":"' + params.faction + '"}}';
+
+      return url;
+    }
+
+    function getTabardCount(params) {
+      var url = buildUrl('/tabard/count', params);
 
       return $http.get(urlRoot + url)
         .then(function (response) {
@@ -30,11 +36,7 @@
 
     function getTabards(params) {
       var skipAmount = 25 * params.pageNumber - 25,
-          url = '/tabard?sort=' + params.sortBy + ' ' + params.sortOrder + '&skip=' + skipAmount;
-
-      if (!_.isNull(params.search)) {
-        url += '&where={"name":{"contains":"' + params.search + '"}}'
-      }
+          url = buildUrl('/tabard', params, skipAmount);
 
       return $http.get(urlRoot + url)
         .then(function (response) {

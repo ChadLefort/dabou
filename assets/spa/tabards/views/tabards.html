@@ -7,30 +7,73 @@
                         Filters <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': vm.filters.open, 'fa-chevron-right': !vm.filters.open}"></i>
                     </accordion-heading>
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="page-header">
-                                <h5>Faction</h5>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Show {{vm.activeTitle}} <span class="caret"></span></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a ng-click="vm.showActive()">All</a></li>
-                                    <li><a ng-click="vm.showActive(true)">Alliance</a></li>
-                                    <li><a ng-click="vm.showActive(false)">Horde</a></li>
-                                    <li><a ng-click="vm.showActive(false)">Neutral</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="page-header">
                                 <h5>Search</h5>
                             </div>                            
                             <div class="input-group">
-                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-change="vm.search(vm.filters.search)" no-enter>
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-change="vm.search(vm.filters.search)">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" ng-click="vm.clearSearch()">Clear</button>
                                 </span>
                             </div>                       
+                        </div>
+                        <div class="col-md-2 col-md-2-5">
+                            <div class="page-header">
+                                <h5>Quality</h5>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{vm.qualityName}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-click="vm.showQuality()">All</a></li>
+                                    <li><a ng-click="vm.showQuality(1, 'Common')">Common</a></li>
+                                    <li><a ng-click="vm.showQuality(2, 'Uncommon')">Uncommon</a></li>
+                                    <li><a ng-click="vm.showQuality(3, 'Rare')">Rare</a></li>
+                                    <li><a ng-click="vm.showQuality(4, 'Epic')">Epic</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="page-header">
+                                <h5>Item Level</h5>
+                            </div>
+                            <div class="row no-gutter"> 
+                                <div class="col-md-12">                         
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="col-md-2">
+                            <div class="page-header">
+                                <h5>Required Level</h5>
+                            </div>
+                            <div class="row no-gutter"> 
+                                <div class="col-md-12">                         
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="col-md-2 col-md-2-5">
+                            <div class="page-header">
+                                <h5>Faction</h5>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{vm.factionName}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-click="vm.showFaction()">All</a></li>
+                                    <li><a ng-click="vm.showFaction(1, 'Alliance')">Alliance</a></li>
+                                    <li><a ng-click="vm.showFaction(2, 'Horde')">Horde</a></li>
+                                    <li><a ng-click="vm.showFaction(3, 'Neutral')">Neutral</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </accordion-group>

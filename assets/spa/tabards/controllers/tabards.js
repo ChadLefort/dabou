@@ -20,12 +20,16 @@
       pageNumber = 1,
       params = {
           pageNumber: pageNumber,
-          search: null,
+          search: '',
+          quality: '',
+          faction: '',
           sortBy: 'name',
           sortOrder: 'asc'
       };
 
     // PUBLIC PROPERTIES
+    vm.factionName = 'All';
+    vm.factionState = null;
     vm.filters = {
         search: params.search
     };
@@ -42,11 +46,15 @@
             {id: 'faction', name: 'Faction'}
         ];
     vm.tabards = {};
+    vm.qualityName = 'All';
+    vm.qualityState = null;
 
     // PUBLIC FUNCTIONS
     vm.clearSearch = clearSearch;
     vm.newPage = newPage;
     vm.search = search;
+    vm.showFaction = showFaction;
+    vm.showQuality = showQuality;
     vm.sort = sort;
 
     // init
@@ -66,7 +74,7 @@
 
     function clearSearch() {
         vm.filters.search = null;
-        params.search = null;
+        params.search = '';
         getTabards(params);
         getTabardCount(params);
     }
@@ -78,7 +86,7 @@
      }
 
     function getTabardCount(params) {
-      tabardsService.getTabardCount(params.search)
+      tabardsService.getTabardCount(params)
         .then(function (data) {         
           vm.totalCount = data.count;
         });
@@ -99,8 +107,9 @@
 
     function search(query) {
         if (!query || query.length == 0) {
-            params.search = null;
+            params.search = '';
             getTabards(params);
+            getTabardCount(params);
         }
 
         $timeout(function() {
@@ -111,6 +120,36 @@
                 getTabardCount(params);
             }
         }, 500);
+    }
+
+    function showFaction(factionState, factionName) {
+        if (_.isUndefined(factionState)) {
+            vm.factionName = 'All';
+            vm.factionState = null;
+            params.faction = '';
+        } else {
+            vm.factionName = factionName;
+            vm.factionState = factionState;
+            params.faction = factionState;
+        }
+
+        getTabards(params);
+        getTabardCount(params);
+    }
+
+    function showQuality(qualityState, qualityName) {
+        if (_.isUndefined(qualityState)) {
+            vm.qualityName = 'All';
+            vm.qualityState = null;
+            params.quality = '';
+        } else {
+            vm.qualityName = qualityName;
+            vm.qualityState = qualityState;
+            params.quality = qualityState;
+        }
+
+        getTabards(params);
+        getTabardCount(params);
     }
 
     function sort(index, sortOrder) {
