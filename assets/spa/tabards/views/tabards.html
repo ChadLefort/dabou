@@ -12,7 +12,7 @@
                                 <h5>Search</h5>
                             </div>                            
                             <div class="input-group">
-                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-change="vm.search(vm.filters.search)">
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-model-options="{debounce: 500}" ng-change="vm.search()">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" ng-click="vm.clearSearch()">Clear</button>
                                 </span>
@@ -40,9 +40,9 @@
                             <div class="row no-gutter"> 
                                 <div class="col-md-12">                         
                                     <div class="input-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" ng-model="vm.filters.itemLevelStart" ng-model-options="{debounce: 500}" ng-change="vm.changeItemLevel()">
                                         <span class="input-group-addon">-</span>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" ng-model="vm.filters.itemLevelEnd" ng-model-options="{debounce: 500}" ng-change="vm.changeItemLevel()">
                                     </div>
                                 </div>
                             </div>
@@ -54,9 +54,9 @@
                             <div class="row no-gutter"> 
                                 <div class="col-md-12">                         
                                     <div class="input-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" ng-model="vm.filters.reqLevelStart" ng-change="vm.changeReqLevel()">
                                         <span class="input-group-addon">-</span>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" ng-model="vm.filters.reqLevelEnd" ng-change="vm.changeReqLevel()">
                                     </div>
                                 </div>
                             </div>

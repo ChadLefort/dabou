@@ -15,18 +15,52 @@
    */
   function tabardsService(_, $http, urlRoot) {
 
-    function buildUrl(baseUrl, params, skipAmount) {
-      var url = baseUrl + '?sort=' + params.sortBy + ' ' + params.sortOrder + '&skip=' + skipAmount;
+    function buildUrl(baseUrl, params, route) {
+      var url = baseUrl,
+          whereClause = [],
+          hasFilter = false;
 
-      url += '&where={"name":{"contains":"' + params.search + '"},';
-      url += '"quality":{"contains":"' + params.quality + '"},';
-      url += '"faction":{"contains":"' + params.faction + '"}}';
+      if (!_.isNull(params.filters.search)) {
+        whereClause.push('"name":{"contains":"' + params.filters.search + '"}');
+      }
+
+      if (!_.isNull(params.filters.quality)) {
+        whereClause.push('"quality":' + params.filters.quality);
+      }
+
+      if (!_.isNull(params.filters.faction)) {
+        whereClause.push('"faction":' + params.filters.faction);
+      }
+
+      if (!_.isNull(params.filters.itemLevelStart) && !_.isNull(params.filters.itemLevelEnd)) {
+        whereClause.push('"itemLevel":{">=":' + params.filters.itemLevelStart + ',"<=":' + params.filters.itemLevelEnd + '}')
+      }
+
+      if (!_.isNull(params.filters.reqLevelStart) && !_.isNull(params.filters.reqLevelEnd)) {
+        whereClause.push('"reqLevel":{">=":' + params.filters.reqLevelStart + ',"<=":' + params.filters.reqLevelEnd + '}')
+      }
+
+      _.each(params.filters, function (value, key) {
+        if (!_.isNull(value)) {
+          hasFilter = true;
+        }
+      });
+
+      if (hasFilter) {
+        if (route == 'count') {
+          url += '?';
+        } else {
+          url += '&';
+        }
+
+        url += 'where={' + whereClause.join(',') + '}';
+      }
 
       return url;
     }
 
     function getTabardCount(params) {
-      var url = buildUrl('/tabard/count', params);
+      var url = buildUrl('/tabard/count', params, 'count');
 
       return $http.get(urlRoot + url)
         .then(function (response) {
@@ -36,7 +70,7 @@
 
     function getTabards(params) {
       var skipAmount = 25 * params.pageNumber - 25,
-          url = buildUrl('/tabard', params, skipAmount);
+          url = buildUrl('/tabard?sort=' + params.sortBy + ' ' + params.sortOrder + '&skip=' + skipAmount, params, 'tabard');
 
       return $http.get(urlRoot + url)
         .then(function (response) {
