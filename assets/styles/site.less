@@ -129,8 +129,12 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid {
   transition: background-color ease 1.5s;
 }
 
-.nav > li > a {
+.nav > li {
   text-align: center;
+}
+
+.nav > li > p {
+  color: @body-bg
 }
 
 .navmenu > img {
@@ -274,7 +278,7 @@ td > i {
 }
 
 .panel-default > .panel-heading {
-  color: #ffffff
+  color: @body-bg;
 }
 
 .preferred-character {

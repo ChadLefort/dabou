@@ -70,6 +70,13 @@ module.exports.routes = {
   'get  /subscribe': 'AuthController.subscribe',
 
   /**
+   * Lookup Routes
+   *
+   * @description :: These routes are all associated with lookup tables
+   */
+   'get  /api/lookup': 'LookupController.lookup',
+
+  /**
    * Profile Routes
    *
    * @description :: These routes are all associated with profiles

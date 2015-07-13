@@ -1,15 +1,43 @@
 <div id="viewer-container" class="container push-down">
     <div class="row">
         <div class="col-md-12">
+            <accordion>
+                <accordion-group is-open="vm.viewer.open">
+                    <accordion-heading>
+                        Change Race & Gender <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': vm.viewer.open, 'fa-chevron-right': !vm.viewer.open}"></i>
+                    </accordion-heading>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-2">
+                            <div class="page-header">
+                                <h5>Race</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <select id="race" name="race" class="form-control" ng-model="vm.viewer.race" ng-change="vm.changeModel()" ng-options="r.id as r.name for r in vm.races">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="page-header">
+                                <h5>Gender</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <select id="gender" name="gender" class="form-control" ng-model="vm.viewer.gender" ng-change="vm.changeModel()" ng-options="g.value as g.name for g in vm.genders">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel panel-success">
                 <div class="panel-heading">{{vm.tabard.name}}</div>
                 <div class="panel-body">
                     <div class="text-center">
                     </div>
                     <canvas id="viewer" select></canvas>
-                    <div class="text-center">
-                        <button class="btn btn-success" ng-click="vm.changeRace()">Change Race</button>
-                    </div>
                 </div>
             </div>
         </div>

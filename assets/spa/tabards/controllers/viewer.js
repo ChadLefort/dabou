@@ -11,16 +11,22 @@
      * @description
      *
      */
-    ViewerController.$inject = ['viewerService', 'tabardsService', '$stateParams'];
+    ViewerController.$inject = ['_', 'viewerService', 'tabardsService', 'mainService', '$stateParams'];
 
-    function ViewerController(viewerService, tabardsService, $stateParams) {
+    function ViewerController(_, viewerService, tabardsService, mainService, $stateParams) {
         var vm = this,
             tabardId = $stateParams.id;
 
         // PUBLIC PROPERTIES
+        vm.loading = true;
+        vm.viewer = {
+          gender: 0,
+          race: 2,
+          open: true
+        };
 
         // PUBLIC FUNCTIONS
-        vm.changeRace = changeRace;
+        vm.changeModel = changeModel;
 
         // init
         activate();
@@ -34,11 +40,29 @@
                 containerId: 'viewer-container'
             });
 
-            //loadOBJ(52252, 'worgen', 'female', '/tabards/52252/worgenfemale.obj', 'worgenfemale');
-            //loadJSON('/tabards/draeneifemale_hd.js', 'draeneifemale_hd', '/tabards/52252/');
-            loadOBJMTL('/tabards/52252/2/0/model.obj', '/tabards/52252/2/0/model.mtl', 'model');
+            getLookups();
             getTabard(tabardId);
+            loadOBJMTL('/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
         }
+
+        /*
+         * @private
+         * @function
+         * 
+         * @description :: Get all of the lookup tables
+         */
+        function getLookups() {
+          mainService.getLookups()
+            .then(function (data) {
+              vm.races = _.filter(data.lookups.races, function(race) {
+                if (race.id != 25 && race.id != 26) {
+                  return race;
+                }
+              });
+              vm.genders = data.lookups.genders;
+            });
+        }
+
 
         /*
          * @private
@@ -53,23 +77,6 @@
             }).catch(function (error) {
               vm.noTabard = true;
             });
-        }
-
-        /**
-         * @export
-         *
-         *  Load a JSON file
-         *  https://github.com/mrdoob/three.js/wiki
-         */
-        function loadJSON(url, name, path) {
-	        var info = {
-	            url: url,
-	            name: name,
-                path: path,
-	            type: 'JSON'
-	        };
-
-	        viewerService.loadJSON(info);
         }
 
         function loadOBJ(id, race, gender, obj, name) {
@@ -96,8 +103,12 @@
             viewerService.loadOBJMTL(info);
         }
 
-        function changeRace() {
-            loadOBJMTL('/tabards/52252/1/0/model.obj', '/tabards/52252/1/0/model.mtl', 'model');
+        function changeModel() {
+            if(vm.viewer.race == 22) {
+              loadOBJ(52252, 22, vm.viewer.gender, '/tabards/52252/22/' + vm.viewer.gender + '/model.obj', 'model');
+            } else {
+              loadOBJMTL('/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
+            }
         }
     }
 })();

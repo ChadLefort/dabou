@@ -53,13 +53,8 @@ module.exports.policies = {
     'add': false
   },
 
-  UserController: {
-    '*': ['passport', 'sessionAuth'],
-    'create': false,
-    'update': ['passport', 'sessionAuth', 'userOwnership'],
-    'destroy': false,
-    'remove': false,
-    'add': false
+  LookUpController: {
+    '*': true
   },
 
   ProfileController: {
@@ -74,6 +69,15 @@ module.exports.policies = {
   TabardController: {
     '*': true,
     'update': false,
+    'destroy': false,
+    'remove': false,
+    'add': false
+  },
+
+  UserController: {
+    '*': ['passport', 'sessionAuth'],
+    'create': false,
+    'update': ['passport', 'sessionAuth', 'userOwnership'],
     'destroy': false,
     'remove': false,
     'add': false

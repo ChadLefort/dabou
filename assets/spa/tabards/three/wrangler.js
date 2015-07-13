@@ -40,7 +40,7 @@
         loadDefaultFiles: function(id, race, gender) {
             // This is just for worgen's right now. Can't load hair texture and they
             // will only load as obj files not as json.
-            var tex = '/tabards/' + id + '/' + race + gender + '_Body.png';
+            var tex = '/tabards/' + id + '/' + race + '/' + gender + '/' + 'model_Body.png';
             this.loadNormalTexture(tex);
         },
 

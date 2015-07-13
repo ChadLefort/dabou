@@ -5,7 +5,7 @@
         .module('dabou.tabards')
         .factory('viewerService', viewerService);
 
-    viewerService.$inject = ['$timeout'];
+    viewerService.$inject = [];
 
     /**
      * @ngdoc service
@@ -13,7 +13,7 @@
      * @description
      *
      */
-    function viewerService($timeout) {
+    function viewerService() {
 
         var home,
             intersected;
@@ -24,8 +24,6 @@
          */
         function init(params) {
             home = new Viewer.Scene(params);
-            $timeout(function () {
-            }, 1500);
             animate();
         }
 
