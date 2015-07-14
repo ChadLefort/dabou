@@ -7,7 +7,7 @@
           <form role="form" name="createUsernameForm" xt-form novalidate>
             <div class="form-group">
               <div class="col-md-10 center-block">
-                <input class="form-control" type="text" id="username" name="username" ng-model="vm.user.username"
+                <input class="form-control" type="text" id="username" name="username" ng-model="vm.setUser.username"
                        placeholder="Username" ng-pattern="/^[a-zA-Z0-9.\-_]{3,16}$/" ng-minlength="3" ng-maxlength="16" required>
 
                 <div class="text-center">
@@ -17,7 +17,7 @@
             </div>
             <div ng-if="vm.bnet || vm.twitter" class="form-group">
               <div class="col-md-10 center-block">
-                <input class="form-control" type="email" id="email" name="email" ng-model="vm.user.email"
+                <input class="form-control" type="email" id="email" name="email" ng-model="vm.setUser.email"
                        placeholder="Email">
 
                 <div class="text-center">

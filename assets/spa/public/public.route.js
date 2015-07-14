@@ -28,8 +28,8 @@
     }];
 
     $stateProvider
-      .state('profile', {
-        url: '/profile/{username:[a-z0-9.\-_]{3,16}}',
+      .state('user', {
+        url: '/user/{username:[a-z0-9.\-_]{3,16}}',
         views: {
           'nav': {
             templateUrl: '/spa/main/views/nav.html',

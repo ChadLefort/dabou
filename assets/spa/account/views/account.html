@@ -172,9 +172,11 @@
               </div>
             </tab>
             <tab heading="Preview Profile">
-              <div class="text-center push-down">
-                <p ng-if="vm.noProfile">You currently don't have a profile. Please click <a
-                  ng-click="vm.selectCreateTab()">here</a> to create one.</p></p></p>
+              <div class="push-down">
+                  <div class="text-center">
+                    <a ui-sref="user({username: vm.user.username})" class="btn btn-success">View Profile</a>
+                  </div>
+                  <div ng-include src="'/spa/shared/views/profile.html'" class="push-down"></div>
               </div>
             </tab>
             <tab heading="Delete Profile">

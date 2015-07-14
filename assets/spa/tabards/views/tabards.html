@@ -7,16 +7,11 @@
                         Filters <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': vm.filters.open, 'fa-chevron-right': !vm.filters.open}"></i>
                     </accordion-heading>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3 col-md-offset-1">
                             <div class="page-header">
                                 <h5>Search</h5>
                             </div>                            
-                            <div class="input-group">
-                                <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-model-options="{debounce: 500}" ng-change="vm.search()">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" ng-click="vm.clearSearch()">Clear</button>
-                                </span>
-                            </div>                       
+                            <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-model-options="{debounce: 500}" ng-change="vm.search()">                     
                         </div>
                         <div class="col-md-2 col-md-2-5">
                             <div class="page-header">

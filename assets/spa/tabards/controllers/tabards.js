@@ -71,7 +71,6 @@
         // PUBLIC FUNCTIONS
         vm.changeItemLevel = changeItemLevel;
         vm.changeReqLevel = changeReqLevel;
-        vm.clearSearch = clearSearch;
         vm.newPage = newPage;
         vm.search = search;
         vm.showFaction = showFaction;
@@ -141,13 +140,6 @@
               getTabards(params);
               getTabardCount(params);
             }
-        }
-
-        function clearSearch() {
-            vm.filters.search = null;
-            params.filters.search = null;
-            getTabards(params);
-            getTabardCount(params);
         }
 
         function generateSortIconsOrder() {

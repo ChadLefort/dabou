@@ -33,7 +33,7 @@
     ];
     vm.createTab = false;
     vm.profileTitle = 'Create Profile';
-    vm.user = {_csrf: _csrf};
+    vm.setUser = {_csrf: _csrf};
 
     // PUBLIC FUNCTIONS
     vm.createProfile = createProfile;
@@ -58,6 +58,7 @@
       }
       getPassports(user.id);
       socket();
+      vm.user = user;
     }
 
     /*
@@ -192,7 +193,7 @@
      * @description :: Updates a username for the current logged in user
      */
     function updateUsername() {
-      accountService.updateUsername(user.id, vm.user)
+      accountService.updateUsername(user.id, vm.setUser)
         .then(function (data) {
           toastr.success(data.msg);
           $state.go('index');
