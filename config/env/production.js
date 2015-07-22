@@ -37,6 +37,8 @@ module.exports = {
 
   bnet: {
     key: process.env.BNET_KET
-  }
+  },
+
+  hookTimeout: 50000
 
 };

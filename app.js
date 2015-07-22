@@ -19,9 +19,7 @@
  */
 
 // Setup local environment variables
-if (!process.env.NODE_ENV) {
-  require('dotenv').load();
-}
+require('dotenv').load();
 
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
