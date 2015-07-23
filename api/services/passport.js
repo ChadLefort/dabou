@@ -88,7 +88,7 @@ passport.connect = function (req, query, profile, next) {
     Gravatar.getImageUrl({
       emailAddress: profile.emails[0].value,
       gravatarSize: 2048,
-      defaultImage: 'http://chadlefort.com/content/images/default_avatar.png',
+      defaultImage: process.env.S3_BUCKET_URL + '/assets/images/default_avatar.png',
       rating: 'g',
       useHttps: true
     }).exec({
@@ -341,7 +341,7 @@ passport.loadStrategies = function () {
         , callback = strategies[key].callback;
 
       if (!callback) {
-        callback = 'auth/' + key + '/callback';
+        callback =  process.env.ROOT_URL + '/auth/' + key + '/callback';
       }
 
       Strategy = strategies[key].strategy;

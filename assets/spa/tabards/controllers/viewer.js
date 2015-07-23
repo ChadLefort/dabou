@@ -11,9 +11,9 @@
      * @description
      *
      */
-    ViewerController.$inject = ['_', 'viewerService', 'tabardsService', 'mainService', '$stateParams'];
+    ViewerController.$inject = ['_', 'urlS3Bucket', 'viewerService', 'tabardsService', 'mainService', '$stateParams'];
 
-    function ViewerController(_, viewerService, tabardsService, mainService, $stateParams) {
+    function ViewerController(_, urlS3Bucket, viewerService, tabardsService, mainService, $stateParams) {
         var vm = this,
             tabardId = $stateParams.id;
 
@@ -42,7 +42,7 @@
 
             getLookups();
             getTabard(tabardId);
-            loadOBJMTL('/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
+            loadOBJMTL(urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
         }
 
         /*
@@ -81,6 +81,7 @@
 
         function loadOBJ(id, race, gender, obj, name) {
             var info = {
+                s3bucket: urlS3Bucket,
                 id: id,
                 race: race,
                 gender: gender,
@@ -105,9 +106,9 @@
 
         function changeModel() {
             if(vm.viewer.race == 22) {
-              loadOBJ(52252, 22, vm.viewer.gender, '/tabards/52252/22/' + vm.viewer.gender + '/model.obj', 'model');
+              loadOBJ(52252, 22, vm.viewer.gender, urlS3Bucket +  '/assets/tabards/52252/22/' + vm.viewer.gender + '/model.obj', 'model');
             } else {
-              loadOBJMTL('/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
+              loadOBJMTL(urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
             }
         }
     }

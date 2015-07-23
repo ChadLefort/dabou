@@ -45,7 +45,7 @@
          * @param {!{obj: string, name: string, type: string}} info
          */
         function loadOBJ(info) {
-            home.wrangler.loadDefaultFiles(info.id, info.race, info.gender);
+            home.wrangler.loadDefaultFiles(info.s3bucket, info.id, info.race, info.gender);
             home.wrangler.loadOBJ(info.obj, info.name);
         }
 

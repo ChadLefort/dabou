@@ -53,7 +53,7 @@ exports.register = function (req, res, next) {
   Gravatar.getImageUrl({
     emailAddress: req.param('email'),
     gravatarSize: 2048,
-    defaultImage: 'http://chadlefort.com/content/images/default_avatar.png',
+    defaultImage: process.env.S3_BUCKET_URL + '/assets/images/default_avatar.png',
     rating: 'g',
     useHttps: true
   }).exec({

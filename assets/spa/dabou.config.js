@@ -12,6 +12,7 @@
     .module('dabou')
     .config(configPagination)
     .constant('urlRoot', location.protocol + '//' + location.hostname + ':' + location.port + '/api')
+    .constant('urlS3Bucket', 'https://dabou.s3-us-west-2.amazonaws.com')
     .constant('_', _);
 
     configPagination.$inject = ['paginationTemplateProvider'];

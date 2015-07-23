@@ -37,10 +37,10 @@
             };
         },
 
-        loadDefaultFiles: function(id, race, gender) {
+        loadDefaultFiles: function(s3bucket, id, race, gender) {
             // This is just for worgen's right now. Can't load hair texture and they
             // will only load as obj files not as json.
-            var tex = '/tabards/' + id + '/' + race + '/' + gender + '/' + 'model_Body.png';
+            var tex = s3bucket + '/assets/tabards/' + id + '/' + race + '/' + gender + '/' + 'model_Body.png';
             this.loadNormalTexture(tex);
         },
 
@@ -53,6 +53,7 @@
             this.removeFromScene();
             this.name = name;
             // Load an obj and mtl texture
+            this.objMtlLoader.crossOrigin = '';
             this.objMtlLoader.load(obj, mtl, function(object) {
                 object.position.y -= 1.1;
                 object.name = name;
@@ -97,7 +98,6 @@
         loadJSON: function(url, name, path) {
             this.removeFromScene();
             this.name = name;
-
             this.jsLoader.load(url, function(geometry, materials) {
                 var object = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
                 object.position.y -= 1.1;
@@ -115,6 +115,7 @@
         loadNormalTexture: function(tex){
             // Load an image texture to use on an OBJ
             var texture = new THREE.Texture();
+            this.imgLoader.crossOrigin = '';
             this.imgLoader.load(tex, function (image) {
                 texture.image = image;
                 texture.needsUpdate = true;
