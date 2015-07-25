@@ -1,18 +1,102 @@
 <div class="jumbotron">
-  <div class="container">
-    <div class="col-md-10">
-      <h1>Welcome to Dabou!</h1>
-
-      <p>Stash your collection of tabards, pick favorites, and interact with other members of the community.</p>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="center-flex">
+                <h1>Dabou</h1>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="center-flex">
+                <h3>Signing up is quck and easy</h3>
+            </div>
+            <form class="form-horizontal" role="form" name="registerForm" xt-form novalidate>
+                <div class="form-group center-flex">
+                    <div class="col-md-3">
+                        <input class="form-control" type="text" id="username" name="username" ng-model="vm.user.username" placeholder="Username" ng-pattern="/^[a-zA-Z0-9.\-_]{3,16}$/" ng-minlength="3" ng-maxlength="16" required>
+                        <div class="text-center">
+                            <xt-validation-inline for="username"></xt-validation-inline>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="email" id="email" name="email" ng-model="vm.user.email" placeholder="Email" required>
+                        <div class="text-center">
+                            <xt-validation-inline for="email"></xt-validation-inline>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group center-flex">
+                    <div class="col-md-3">
+                        <input class="form-control" type="password" id="password" name="password" ng-model="vm.user.password" placeholder="Password" ng-minlength="8" required>
+                        <div class="text-center">
+                            <xt-validation-inline for="password"></xt-validation-inline>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" ng-model="vm.user.confirmPassword" placeholder="Confirm Password" compare-to="vm.user.password" required>
+                        <div class="text-center">
+                            <xt-validation-inline for="confirmPassword"></xt-validation-inline>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group center-flex">
+                    <div class="col-md-6">
+                        <button class="btn btn-success col-md-12" type="submit" ng-click="vm.addLocalUser()" ng-disabled="registerForm.$invalid">Sign up
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <p class="text-center">Login with one of the following</p>
+            <div class="form-group center-flex">
+                <div class="col-md-2">
+                    <a href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Battle.net</a>
+                </div>
+                <div class="col-md-2">
+                    <a href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i
+                class="fa fa-twitter"></i> Twitter</a>
+                </div>
+                <div class="col-md-2">
+                    <a href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i
+                class="fa fa-facebook"></i> Facebook</a>
+                </div>
+                <div class="col-md-2">
+                    <a href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i
+                class="fa fa-google"></i> Google</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-2">
-      <img src="https://dabou.s3-us-west-2.amazonaws.com/assets/images/orc.png" class="pull-right" width="100%">
-    </div>
-  </div>
 </div>
-
 <div class="container">
-  <div class="row">
-
-  </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="text-center">
+                        <h3>Track your Tabards</h3>
+                    </div>
+                    <p>Manage your collection of tabards my adding the ones you currently own, excluding the ones you will never get, or just have a wish list of the ones you would love to have.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="text-center">
+                        <h3>View on Models</h3>
+                    </div>
+                    <p>View every single tabard on any race or gender in the game with our nice fancy model viewer. This gives you an idea of what a tabard will look like on your main toon.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="text-center">
+                        <h3>Link your Battle.net</h3>
+                    </div>
+                    <p>Link your battle.net account to have access to all of your characters on the site. This will give you access to set a your main character which will be used throughout the site.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
