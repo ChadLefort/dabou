@@ -42,7 +42,7 @@
 
             getLookups();
             getTabard(tabardId);
-            loadOBJMTL(urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
+            loadOBJMTL(urlS3Bucket + '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
         }
 
         /*
@@ -106,9 +106,9 @@
 
         function changeModel() {
             if(vm.viewer.race == 22) {
-              loadOBJ(52252, 22, vm.viewer.gender, urlS3Bucket +  '/assets/tabards/52252/22/' + vm.viewer.gender + '/model.obj', 'model');
+              loadOBJ(52252, 22, vm.viewer.gender, urlS3Bucket +  '/tabards/52252/22/' + vm.viewer.gender + '/model.obj', 'model');
             } else {
-              loadOBJMTL(urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/assets/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
+              loadOBJMTL(urlS3Bucket + '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.obj', urlS3Bucket + '/tabards/52252/' + vm.viewer.race + '/' +  vm.viewer.gender + '/model.mtl', 'model');
             }
         }
     }

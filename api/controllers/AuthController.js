@@ -99,13 +99,11 @@ module.exports = {
         // Mark the session as authenticated to work with default Sails sessionAuth.js policy
         req.session.authenticated = true;
 
-        // Upon successful login, send the user to the homepage were req.user
-        // will be available.
         if (req.session.redirect == 'account') {
           var flashSuccess = req.flash('success');
           res.view('layouts/layout', {success: flashSuccess, state: 'account'});
         } else {
-          res.redirect('/#/index');
+          res.redirect('/#/account');
         }
       });
     });

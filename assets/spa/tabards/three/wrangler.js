@@ -40,7 +40,7 @@
         loadDefaultFiles: function(s3bucket, id, race, gender) {
             // This is just for worgen's right now. Can't load hair texture and they
             // will only load as obj files not as json.
-            var tex = s3bucket + '/assets/tabards/' + id + '/' + race + '/' + gender + '/' + 'model_Body.png';
+            var tex = s3bucket + '/tabards/' + id + '/' + race + '/' + gender + '/' + 'model_Body.png';
             this.loadNormalTexture(tex);
         },
 

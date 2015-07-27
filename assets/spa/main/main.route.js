@@ -22,7 +22,10 @@
       var deferred = $q.defer();
       authService.authenticated()
         .then(function (userData) {
-          deferred.resolve({userData: userData});
+          authService.csrfToken()
+            .then(function (tokenData) {
+              deferred.resolve({userData: userData, tokenData: tokenData});
+            });
         });
       return deferred.promise;
     }];
@@ -37,7 +40,9 @@
             controllerAs: 'vm'
           },
           'page': {
-            templateUrl: '/spa/main/views/index.html'
+            templateUrl: '/spa/main/views/index.html',
+            controller: 'RegisterController',
+            controllerAs: 'vm'
           }
         },
         resolve: {

@@ -11,9 +11,9 @@
    * @description
    *
    */
-  RegisterController.$inject = ['_', 'authService', '$state', 'toastr', 'globalData'];
+  RegisterController.$inject = ['_', 'urlS3Bucket', 'authService', '$state', 'toastr', 'globalData'];
 
-  function RegisterController(_, authService, $state, toastr, globalData) {
+  function RegisterController(_, urlS3Bucket, authService, $state, toastr, globalData) {
     var vm = this,
       _csrf = globalData.tokenData._csrf;
 
@@ -21,6 +21,7 @@
     vm.title = 'Register';
     vm.user = {};
     vm.state = $state.current.name;
+    vm.urlS3Bucket = urlS3Bucket;
 
     // PUBLIC FUNCTIONS
     vm.addLocalUser = addLocalUser;
@@ -42,8 +43,8 @@
               toastr.error(errors[key]);
             });
           } else {
-            $state.go('login');
-            toastr.success(data.msg);
+            $state.go('account');
+            toastr.success('Success.Passport.User.Created');
           }
         })
     }

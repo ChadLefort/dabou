@@ -1,64 +1,66 @@
 <div class="jumbotron">
     <div class="container">
         <div class="col-md-12">
-            <div class="center-flex">
-                <h1>Dabou</h1>
+            <div class="row">
+                <div class="center-flex">
+                    <h1>Dabou</h1>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="center-flex">
-                <h3>Signing up is quck and easy</h3>
+            <div class="row">
+                <div class="center-flex">
+                    <h3>Signing up is quck and easy</h3>
+                </div>
+                <form class="form-horizontal" role="form" name="registerForm" xt-form novalidate>
+                    <div class="row no-gutter">
+                        <div class="col-md-3 input-push-down col-md-offset-3">
+                            <input class="form-control" type="text" id="username" name="username" ng-model="vm.user.username" placeholder="Username" ng-pattern="/^[a-zA-Z0-9.\-_]{3,16}$/" ng-minlength="3" ng-maxlength="16" required>
+                            <div class="text-center">
+                                <xt-validation-inline for="username"></xt-validation-inline>
+                            </div>
+                        </div>
+                        <div class="col-md-3 input-push-down">
+                            <input class="form-control" type="email" id="email" name="email" ng-model="vm.user.email" placeholder="Email" required>
+                            <div class="text-center">
+                                <xt-validation-inline for="email"></xt-validation-inline>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 input-push-down col-md-offset-3">
+                            <input class="form-control" type="password" id="password" name="password" ng-model="vm.user.password" placeholder="Password" ng-minlength="8" required>
+                            <div class="text-center">
+                                <xt-validation-inline for="password"></xt-validation-inline>
+                            </div>
+                        </div>
+                        <div class="col-md-3 input-push-down">
+                            <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" ng-model="vm.user.confirmPassword" placeholder="Confirm Password" compare-to="vm.user.password" required>
+                            <div class="text-center">
+                                <xt-validation-inline for="confirmPassword"></xt-validation-inline>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 input-push-down col-md-offset-3">
+                            <button class="btn btn-success auth-btn" type="submit" ng-click="vm.addLocalUser()" ng-disabled="registerForm.$invalid">Sign up
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <form class="form-horizontal" role="form" name="registerForm" xt-form novalidate>
-                <div class="form-group center-flex">
-                    <div class="col-md-3">
-                        <input class="form-control" type="text" id="username" name="username" ng-model="vm.user.username" placeholder="Username" ng-pattern="/^[a-zA-Z0-9.\-_]{3,16}$/" ng-minlength="3" ng-maxlength="16" required>
-                        <div class="text-center">
-                            <xt-validation-inline for="username"></xt-validation-inline>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="email" id="email" name="email" ng-model="vm.user.email" placeholder="Email" required>
-                        <div class="text-center">
-                            <xt-validation-inline for="email"></xt-validation-inline>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group center-flex">
-                    <div class="col-md-3">
-                        <input class="form-control" type="password" id="password" name="password" ng-model="vm.user.password" placeholder="Password" ng-minlength="8" required>
-                        <div class="text-center">
-                            <xt-validation-inline for="password"></xt-validation-inline>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" ng-model="vm.user.confirmPassword" placeholder="Confirm Password" compare-to="vm.user.password" required>
-                        <div class="text-center">
-                            <xt-validation-inline for="confirmPassword"></xt-validation-inline>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group center-flex">
-                    <div class="col-md-6">
-                        <button class="btn btn-success col-md-12" type="submit" ng-click="vm.addLocalUser()" ng-disabled="registerForm.$invalid">Sign up
-                        </button>
-                    </div>
-                </div>
-            </form>
             <p class="text-center">Login with one of the following</p>
-            <div class="form-group center-flex">
-                <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-2 input-push-down col-md-offset-2">
                     <a href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Battle.net</a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 input-push-down">
                     <a href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i
                 class="fa fa-twitter"></i> Twitter</a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 input-push-down">
                     <a href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i
                 class="fa fa-facebook"></i> Facebook</a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 input-push-down">
                     <a href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i
                 class="fa fa-google"></i> Google</a>
                 </div>
@@ -70,6 +72,9 @@
     <div class="row">
         <div class="col-md-4">
             <div class="thumbnail">
+                <div class="thumbnail-image">
+                    <img ng-src="{{vm.urlS3Bucket}}/images/tabard.png" class="img-rounded">
+                </div>
                 <div class="caption">
                     <div class="text-center">
                         <h3>Track your Tabards</h3>
@@ -80,6 +85,9 @@
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
+                <div class="thumbnail-image">
+                    <img src="{{vm.urlS3Bucket}}/images/model.png" class="img-rounded">
+                </div>
                 <div class="caption">
                     <div class="text-center">
                         <h3>View on Models</h3>
@@ -90,6 +98,9 @@
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
+                <div class="thumbnail-image">
+                    <img src="{{vm.urlS3Bucket}}/images/battlenet.png" class="img-rounded">
+                </div>
                 <div class="caption">
                     <div class="text-center">
                         <h3>Link your Battle.net</h3>

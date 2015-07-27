@@ -43,7 +43,7 @@
               toastr.error(errors[key]);
             });
           } else {
-            $state.go('index');
+            $state.go('account');
           }
         });
     }
