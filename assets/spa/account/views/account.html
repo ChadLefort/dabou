@@ -1,193 +1,168 @@
 <div class="container push-down">
-  <div class="row">
-    <div class="col-md-5">
-      <div class="panel panel-success">
-        <div class="panel-heading">Link Accounts</div>
-        <div class="panel-body">
-          <div class="form-group">
-            <div class="col-md-10 center-block">
-              <a ng-if="vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">Link Accounts</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-10 center-block">
+                            <a ng-if="vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i>
                 Unlink Local</a>
-              <a ng-if="!vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i>
+                            <a ng-if="!vm.local" href="#" role="button" class="btn btn-default auth-btn"><i class="fa fa-user"></i>
                 Link Local</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-10 center-block">
-              <a ng-if="vm.bnet" ng-click="vm.unlinkPassport('bnet')" role="button" class="btn btn-bnet auth-btn">Unlink
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 center-block">
+                            <a ng-if="vm.bnet" ng-click="vm.unlinkPassport('bnet')" role="button" class="btn btn-bnet auth-btn">Unlink
                 Battle.net</a>
-              <a ng-if="!vm.bnet" href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Link
+                            <a ng-if="!vm.bnet" href="/auth/bnet?state={{vm.state}}" role="button" class="btn btn-bnet auth-btn">Link
                 Battle.net</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-10 center-block">
-              <a ng-if="vm.twitter" ng-click="vm.unlinkPassport('twitter')" role="button"
-                 class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
-              <a ng-if="!vm.twitter" href="/auth/twitter?state={{vm.state}}" role="button"
-                 class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-10 center-block">
-              <a ng-if="vm.facebook" ng-click="vm.unlinkPassport('facebook')" role="button"
-                 class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
-              <a ng-if="!vm.facebook" href="/auth/facebook?state={{vm.state}}" role="button"
-                 class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-10 center-block">
-              <a ng-if="vm.google" ng-click="vm.unlinkPassport('google')" role="button" class="btn btn-google auth-btn"><i
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 center-block">
+                            <a ng-if="vm.twitter" ng-click="vm.unlinkPassport('twitter')" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Unlink Twitter</a>
+                            <a ng-if="!vm.twitter" href="/auth/twitter?state={{vm.state}}" role="button" class="btn btn-twitter auth-btn"><i class="fa fa-twitter"></i> Link Twitter</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 center-block">
+                            <a ng-if="vm.facebook" ng-click="vm.unlinkPassport('facebook')" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Unlink Facebook</a>
+                            <a ng-if="!vm.facebook" href="/auth/facebook?state={{vm.state}}" role="button" class="btn btn-facebook auth-btn"><i class="fa fa-facebook"></i> Link Facebook</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 center-block">
+                            <a ng-if="vm.google" ng-click="vm.unlinkPassport('google')" role="button" class="btn btn-google auth-btn"><i
                 class="fa fa-google"></i> Unlink Google</a>
-              <a ng-if="!vm.google" href="/auth/google?state={{vm.state}}" role="button"
-                 class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
+                            <a ng-if="!vm.google" href="/auth/google?state={{vm.state}}" role="button" class="btn btn-google auth-btn"><i class="fa fa-google"></i> Link Google</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="panel panel-success" ng-if="vm.local">
+                <div class="panel-heading">Change Password</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <input class="form-control" type="text" id="currentPassword" name="currentPassword" placeholder="Current Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <input class="form-control" type="text" id="newPassword" name="newPassword" placeholder="New Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <input class="form-control" type="text" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <button class="btn btn-success auth-btn" type="submit">Change Password</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="panel panel-success" ng-if="vm.local">
-        <div class="panel-heading">Change Password</div>
-        <div class="panel-body">
-          <div class="form-group">
-            <form role="form" name="loginForm" novalidate="" class="ng-pristine ng-valid">
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="currentPassword" name="currentPassword"
-                         placeholder="Current Password">
+        <div class="col-md-7">
+            <div class="panel panel-success">
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
+                    <div ng-if="vm.noProfile" class="form-horizontal">
+                        <form role="form" name="profileForm" xt-form novalidate>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender" ng-options="g.value as g.value for g in vm.genders">
+                                        <option selected="selected" disabled="disabled" value="">Gender</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <input class="form-control" type="text" id="location" name="location" ng-model="vm.profile.location" placeholder="Location">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio" placeholder="A breif description about yourself..." required=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 center-block">
+                                    <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Create Profile
+                                    </button>
+                                    <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()" type="submit">Edit Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <tabset ng-if="!vm.noProfile" justified="true">
+                        <tab heading="Edit Profile" active="vm.createTab">
+                            <div class="form-horizontal push-down">
+                                <form role="form" name="profileForm" xt-form novalidate>
+                                    <div class="form-group">
+                                        <div class="col-md-10 center-block">
+                                            <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10 center-block">
+                                            <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender" ng-options="g.value as g.value for g in vm.genders">
+                                                <option selected="selected" disabled="disabled" value="">Gender</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10 center-block">
+                                            <input class="form-control" type="text" id="location" name="location" ng-model="vm.profile.location" placeholder="Location">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10 center-block">
+                                            <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio" placeholder="A breif description about yourself..." required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10 center-block">
+                                            <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()" type="submit">Create Profile
+                                            </button>
+                                            <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()" type="submit">Edit Profile
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </tab>
+                        <tab heading="Preview Profile">
+                            <div class="push-down">
+                                <div class="text-center">
+                                    <a ui-sref="user({username: vm.user.username})" class="btn btn-success">View Profile</a>
+                                </div>
+                                <div ng-include src="'/spa/shared/views/profile.html'" class="push-down"></div>
+                            </div>
+                        </tab>
+                        <tab heading="Delete Profile">
+                            <div class="col-md-10 center-block push-down">
+                                <button class="btn btn-success auth-btn" ng-click="vm.deleteProfile()" type="submit">Delete Profile
+                                </button>
+                            </div>
+                        </tab>
+                    </tabset>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="newPassword" name="newPassword"
-                         placeholder="New Password">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="confirmNewPassword" name="confirmNewPassword"
-                         placeholder="Confirm New Password">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <button class="btn btn-success auth-btn" type="submit">Change Password</button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-
-    <div class="col-md-7">
-      <div class="panel panel-success">
-        <div class="panel-heading">Profile</div>
-        <div class="panel-body">
-          <div ng-if="vm.noProfile" class="form-horizontal">
-            <form role="form" name="profileForm" xt-form novalidate>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name"
-                         placeholder="Name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender"
-                          ng-options="g.value as g.value for g in vm.genders">
-                    <option selected="selected" disabled="disabled" value="">Gender</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <input class="form-control" type="text" id="location" name="location"
-                         ng-model="vm.profile.location" placeholder="Location">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio"
-                            placeholder="A breif description about yourself..."
-                            required=""></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 center-block">
-                  <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()"
-                          type="submit">Create Profile
-                  </button>
-                  <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()"
-                          type="submit">Edit Profile
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <tabset ng-if="!vm.noProfile" justified="true">
-            <tab heading="Edit Profile" active="vm.createTab">
-              <div class="form-horizontal push-down">
-                <form role="form" name="profileForm" xt-form novalidate>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <input class="form-control" type="text" id="name" name="name" ng-model="vm.profile.name"
-                             placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <select class="form-control" id="gender" name="gender" ng-model="vm.profile.gender"
-                              ng-options="g.value as g.value for g in vm.genders">
-                        <option selected="selected" disabled="disabled" value="">Gender</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <input class="form-control" type="text" id="location" name="location"
-                             ng-model="vm.profile.location" placeholder="Location">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <textarea rows="15" class="form-control" type="text" id="bio" name="bio" ng-model="vm.profile.bio"
-                                placeholder="A breif description about yourself..."
-                                required=""></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10 center-block">
-                      <button ng-if="vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.createProfile()"
-                              type="submit">Create Profile
-                      </button>
-                      <button ng-if="!vm.noProfile" class="btn btn-success auth-btn" ng-click="vm.editProfile()"
-                              type="submit">Edit Profile
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </tab>
-            <tab heading="Preview Profile">
-              <div class="push-down">
-                  <div class="text-center">
-                    <a ui-sref="user({username: vm.user.username})" class="btn btn-success">View Profile</a>
-                  </div>
-                  <div ng-include src="'/spa/shared/views/profile.html'" class="push-down"></div>
-              </div>
-            </tab>
-            <tab heading="Delete Profile">
-              <div class="col-md-10 center-block push-down">
-                <button class="btn btn-success auth-btn" ng-click="vm.deleteProfile()" type="submit">Delete Profile
-                </button>
-              </div>
-            </tab>
-          </tabset>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

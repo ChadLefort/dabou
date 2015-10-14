@@ -5,15 +5,15 @@
         .module('dabou.tabards')
         .controller('TabardsController', TabardsController);
 
-    TabardsController.$inject = ['tabardsService', 'globalData', '$timeout'];
+    TabardsController.$inject = ['_', 'tabardsService', 'globalData'];
 
     /**
      * @ngdoc controller
      * @name dabou.tabards.controller:TabardsController
      * @description
-     *
      */
-    function TabardsController(tabardsService, globalData, $timeout) {
+
+    function TabardsController(_, tabardsService, globalData) {
         var vm = this,
             user = globalData.userData.user,
             status = globalData.userData.status,
@@ -94,56 +94,56 @@
 
         function changeItemLevel() {
             if (!vm.filters.itemLevelStart) {
-              vm.filters.itemLevelStart = null;
-              params.filters.itemLevelStart = null;
+                vm.filters.itemLevelStart = null;
+                params.filters.itemLevelStart = null;
             }
 
             if (!vm.filters.itemLevelEnd) {
-              vm.filters.itemLevelEnd = null;
-              params.filters.itemLevelEnd = null;
+                vm.filters.itemLevelEnd = null;
+                params.filters.itemLevelEnd = null;
             }
 
             params.filters.itemLevelStart = vm.filters.itemLevelStart;
             params.filters.itemLevelEnd = vm.filters.itemLevelEnd;
 
             if (vm.filters.itemLevelStart && vm.filters.itemLevelEnd) {
-              vm.loading = true;   
-              getTabards(params);
-              getTabardCount(params);
+                vm.loading = true;
+                getTabards(params);
+                getTabardCount(params);
             } else if (!vm.filters.itemLevelStart && !vm.filters.itemLevelEnd) {
-              vm.loading = true;   
-              getTabards(params);
-              getTabardCount(params);
+                vm.loading = true;
+                getTabards(params);
+                getTabardCount(params);
             }
         }
 
         function changeReqLevel() {
             if (!vm.filters.reqLevelStart) {
-              vm.filters.reqLevelStart = null;
-              params.filters.reqLevelStart = null;
+                vm.filters.reqLevelStart = null;
+                params.filters.reqLevelStart = null;
             }
 
             if (!vm.filters.reqLevelEnd) {
-              vm.filters.reqLevelEnd = null;
-              params.filters.reqLevelEnd = null;
+                vm.filters.reqLevelEnd = null;
+                params.filters.reqLevelEnd = null;
             }
 
             params.filters.reqLevelStart = vm.filters.reqLevelStart;
             params.filters.reqLevelEnd = vm.filters.reqLevelEnd;
 
             if (vm.filters.reqLevelStart && vm.filters.reqLevelEnd) {
-              vm.loading = true;   
-              getTabards(params);
-              getTabardCount(params);
+                vm.loading = true;
+                getTabards(params);
+                getTabardCount(params);
             } else if (!vm.filters.reqLevelStart && !vm.filters.reqLevelEnd) {
-              vm.loading = true;   
-              getTabards(params);
-              getTabardCount(params);
+                vm.loading = true;
+                getTabards(params);
+                getTabardCount(params);
             }
         }
 
         function generateSortIconsOrder() {
-            _.each(vm.tableHeaders, function(value, key) {
+            _.each(vm.tableHeaders, function() {
                 vm.sortIcons.push({
                     asc: false,
                     desc: false
@@ -221,10 +221,10 @@
             vm.sortIcons = [];
             generateSortIconsOrder();
 
-            if (sortOrder == 'desc') {
+            if (sortOrder === 'desc') {
                 vm.sortOrder = 'asc';
                 vm.sortIcons[index].asc = true;
-            } else if (sortOrder == 'asc') {
+            } else if (sortOrder === 'asc') {
                 vm.sortOrder = 'desc';
                 vm.sortIcons[index].desc = true;
             }
@@ -234,6 +234,5 @@
 
             getTabards(params);
         }
-
-    }
+    }  
 })();

@@ -1,23 +1,23 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  /**
-   * @ngdoc module
-   * @name dabou.tabards
-   * @module dabou.tabards
-   * @description
-   *
-   */
-  angular.module('dabou.tabards', [
-    // Angular modules
-    'ngAnimate',
+    /**
+     * @ngdoc module
+     * @name dabou.tabards
+     * @module dabou.tabards
+     * @description
+     */
+     
+    angular.module('dabou.tabards', [
+        // Angular modules
+        'ngAnimate',
 
-    // Custom modules
-    'dabou',
+        // Custom modules
+        'dabou',
 
-    // 3rd Party Modules
-    'ui.router',
-    'ngFx',
-    'angularUtils.directives.dirPagination'
-  ]);
+        // 3rd Party Modules
+        'ui.router',
+        'ngFx',
+        'angularUtils.directives.dirPagination'
+    ]);
 })();

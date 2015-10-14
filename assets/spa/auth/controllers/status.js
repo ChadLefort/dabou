@@ -1,50 +1,50 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  angular
-    .module('dabou.auth')
-    .controller('StatusController', StatusController);
+    angular
+        .module('dabou.auth')
+        .controller('StatusController', StatusController);
 
-  StatusController.$inject = ['$state', 'toastr'];
+    StatusController.$inject = ['$state', 'toastr'];
 
-  /**
-   * @ngdoc controller
-   * @name dabou.auth.controller:StatusController
-   * @description
-   *
-   */
-  function StatusController($state, toastr) {
-    var vm = this;
+    /**
+     * @ngdoc controller
+     * @name dabou.auth.controller:StatusController
+     * @description
+     */
 
-    // PUBLIC PROPERTIES
+    function StatusController($state, toastr) {
+        var vm = this;
 
-    // PUBLIC FUNCTIONS
-    vm.error = error;
-    vm.redirect = redirect;
-    vm.success = success;
+        // PUBLIC PROPERTIES
 
-    // init
-    activate();
+        // PUBLIC FUNCTIONS
+        vm.error = error;
+        vm.redirect = redirect;
+        vm.success = success;
 
-    // PRIVATE FUNCTIONS
-    function activate() {
-      $state.go('index');
+        // init
+        activate();
+
+        // PRIVATE FUNCTIONS
+        function activate() {
+            $state.go('index');
+        }
+
+        function error(msg) {
+            if (msg) {
+                toastr.error(msg);
+            }
+        }
+
+        function success(msg) {
+            if (msg) {
+                toastr.success(msg);
+            }
+        }
+
+        function redirect(state) {
+            $state.go(state);
+        }
     }
-
-    function error(msg) {
-      if (msg) {
-        toastr.error(msg);
-      }
-    }
-
-    function success(msg) {
-      if (msg) {
-        toastr.success(msg);
-      }
-    }
-
-    function redirect(state) {
-      $state.go(state);
-    }
-  }
 })();

@@ -5,10 +5,10 @@
 
     /**
      * @class This is a resource manager and loads individual models.
-     *
      * @struct
      * @constructor
      */
+
     Viewer.Wrangler = function(params) {
         this.context = params.context;
         this.currentModel = null;
@@ -21,18 +21,15 @@
         this.imgFiles = {};
     };
 
-    /**
-     *
-     */
     Viewer.Wrangler.prototype = {
 
-        init: function () {
-            THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+        init: function() {
+            THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
             this.listeners();
         },
 
-        listeners: function () {
-            this.loadingManager.onProgress = function (item, loaded, total) {
+        listeners: function() {
+            this.loadingManager.onProgress = function(item, loaded, total) {
                 console.log(item, loaded, total);
             };
         },
@@ -44,12 +41,7 @@
             this.loadNormalTexture(tex);
         },
 
-        /**
-         * @param {!string} obj
-         * @param {!string} mtl
-         * @param {!string} name
-         */
-        loadOBJMTL: function (obj, mtl, name) {
+        loadOBJMTL: function(obj, mtl, name) {
             this.removeFromScene();
             this.name = name;
             // Load an obj and mtl texture
@@ -62,24 +54,20 @@
             }.bind(this));
         },
 
-        /**
-         * @param {!string} obj
-         * @param {!string} name
-         */
-        loadOBJ: function (obj, name) {
+        loadOBJ: function(obj, name) {
             this.removeFromScene();
             this.name = name;
             // load the OBJapply the UV texture grid
-            this.objLoader.load(obj, function( object) {
+            this.objLoader.load(obj, function(object) {
                 var texture;
-                if(this.imgFiles[name]){
+                if (this.imgFiles[name]) {
                     texture = this.imgFiles[name];
                 } else {
                     texture = this.imgFiles['grid'];
                 }
 
-                object.traverse( function (child) {
-                    if( child instanceof THREE.Mesh) {
+                object.traverse(function(child) {
+                    if (child instanceof THREE.Mesh) {
                         child.material.map = texture;
                     }
                 });
@@ -90,11 +78,6 @@
             }.bind(this));
         },
 
-        /**
-         * @param {!string} url
-         * @param {!string} name
-         * @param {!string} path
-         */
         loadJSON: function(url, name, path) {
             this.removeFromScene();
             this.name = name;
@@ -108,28 +91,21 @@
             }.bind(this), path);
         },
 
-        /**
-         * Loading a normal texture
-         * @param {!string} tex
-         */
-        loadNormalTexture: function(tex){
+        loadNormalTexture: function(tex) {
             // Load an image texture to use on an OBJ
             var texture = new THREE.Texture();
             this.imgLoader.crossOrigin = '';
-            this.imgLoader.load(tex, function (image) {
+            this.imgLoader.load(tex, function(image) {
                 texture.image = image;
                 texture.needsUpdate = true;
                 this.imgFiles['grid'] = texture;
             }.bind(this));
         },
 
-        /**
-         * Removes the old object from the scene
-         */
+        // Removes the old object from the scene
         removeFromScene: function() {
             var obj = this.context.scene.getObjectByName(this.name, true);
             this.context.scene.remove(obj);
         }
     };
-
 })();

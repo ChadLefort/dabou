@@ -9,8 +9,8 @@
      * @ngdoc controller
      * @name dabou.auth.controller:LoginController
      * @description
-     *
      */
+     
     LoginController.$inject = ['_', 'authService', '$state', 'toastr', 'globalData'];
 
     function LoginController(_, authService, $state, toastr, globalData) {

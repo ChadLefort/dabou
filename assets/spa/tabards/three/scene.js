@@ -11,6 +11,7 @@
      * @param params
      * @constructor
      */
+
     Viewer.Scene = function(params) {
         this.parentContainer = $('#' + params.containerId);
         this.container = document.getElementById(params.canvasId);
@@ -58,8 +59,8 @@
             var to = null;
             window.addEventListener('resize', function() {
 
-                // if timeout already set, clear it so you can set a new one
-                // this prevents N resize events from resizing the canvas
+                // If timeout already set, clear it so you can set a new one
+                // This prevents N resize events from resizing the canvas
                 if (to) {
                     clearTimeout(to);
                 }
@@ -69,9 +70,7 @@
             }.bind(this), false);
         },
 
-        /**
-         * Resizes the camera when document is resized.
-         */
+        // Resizes the camera when document is resized.
         onWindowResize: function() {
 
             this.WIDTH = window.innerWidth;
@@ -82,5 +81,4 @@
             this.renderer.setViewport(0, 0, this.WIDTH, this.HEIGHT);
         }
     };
-
 })();

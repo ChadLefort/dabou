@@ -1,26 +1,26 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  /**
-   * @ngdoc module
-   * @name dabou.account
-   * @module dabou.account
-   * @description
-   *
-   */
-  angular.module('dabou.account', [
-    // Angular modules
-    'ngAnimate',
+    /**
+     * @ngdoc module
+     * @name dabou.account
+     * @module dabou.account
+     * @description
+     */
 
-    // Custom modules
-    'dabou',
+    angular.module('dabou.account', [
+        // Angular modules
+        'ngAnimate',
 
-    // 3rd Party Modules
-    'ui.router',
-    'ui.bootstrap',
-    'xtForm',
-    'toastr',
-    'ngFx',
-    'ngSails'
-  ]);
+        // Custom modules
+        'dabou',
+
+        // 3rd Party Modules
+        'ui.router',
+        'ui.bootstrap',
+        'xtForm',
+        'toastr',
+        'ngFx',
+        'ngSails'
+    ]);
 })();

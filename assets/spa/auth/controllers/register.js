@@ -9,8 +9,8 @@
      * @ngdoc controller
      * @name dabou.auth.controller:RegisterController
      * @description
-     *
      */
+
     RegisterController.$inject = ['_', 'urlS3Bucket', 'authService', '$state', 'toastr', 'globalData'];
 
     function RegisterController(_, urlS3Bucket, authService, $state, toastr, globalData) {
@@ -51,7 +51,7 @@
                         $state.go('account');
                         toastr.success('Success.Passport.User.Created');
                     }
-                })
+                });
         }
 
         function authenticated() {

@@ -1,23 +1,23 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  /**
-   * @ngdoc module
-   * @name dabou
-   * @module dabou
-   * @description
-   *
-   */
-  angular.module('dabou', [
-    // Angular modules
+    /**
+     * @ngdoc module
+     * @name dabou
+     * @module dabou
+     * @description
+     */
+     
+    angular.module('dabou', [
+        // Angular modules
 
-    // Custom modules
-    'dabou.main',
-    'dabou.public',
-    'dabou.auth',
-    'dabou.account',
-    'dabou.tabards',
+        // Custom modules
+        'dabou.main',
+        'dabou.public',
+        'dabou.auth',
+        'dabou.account',
+        'dabou.tabards',
 
-    // 3rd Party Modules
-  ]);
+        // 3rd Party Modules
+    ]);
 })();
