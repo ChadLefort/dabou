@@ -1,3 +1,8 @@
+/**
+ * Cases
+ *
+ * @description :: Helper functions for cases
+ */
 module.exports = {
     toTitleCase: function(str) {
         var output,

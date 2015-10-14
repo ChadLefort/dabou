@@ -18,14 +18,14 @@ module.exports = {
         sails.fs.readFileAsync('console/tabardsIds.json', 'utf8').then(function(data) {
             var items = JSON.parse(data);
             return items;
-        }).map(function(item, index) {
+        }).map(function(item) {
             var params = {
                 id: item.id,
                 reqLevel: item.reqLevel,
                 attainable: item.attainable,
                 faction: item.faction,
                 sourceType: item.sourceType
-            }
+            };
 
             sails.promiseThrottle.add(function() {
                 return createTabard(params);
@@ -39,7 +39,7 @@ module.exports = {
         });
 
         function createTabard(params) {
-            return new sails.Promise(function(resolve, reject) {
+            return new sails.Promise(function(resolve) {
                 sails.getItem({
                     origin: 'us',
                     id: params.id
@@ -104,7 +104,7 @@ module.exports = {
         }
 
         function sourceType(sourceTypes, tabardId) {
-            _.each(sourceTypes, function(value, key) {
+            _.each(sourceTypes, function(value) {
                 SourceType.create({
                     value: value.id,
                     name: value.name,
@@ -116,10 +116,8 @@ module.exports = {
         }
 
         function itemSpells(itemSpells, tabardId) {
-            _.each(itemSpells, function(value, key) {
+            _.each(itemSpells, function(value) {
                 if (!_.isEmpty(value.spell.description)) {
-                    spellId = value.spell.id;
-
                     Spell.create({
                         id: value.spell.id,
                         name: value.spell.name,
@@ -130,7 +128,7 @@ module.exports = {
                     }).catch(function(error) {
                         console.log(error);
                     });
-                };
+                }
             });
         }
 
@@ -183,7 +181,7 @@ module.exports = {
         sails.wowRaces({
             origin: 'us'
         }).then(function(data) {
-            return _.uniq(data.races, 'id')
+            return _.uniq(data.races, 'id');
         }).each(function(race) {
             Race.create({
                 id: race.id,
@@ -206,7 +204,7 @@ module.exports = {
             name: 'Female'
         }];
 
-        _.each(genders, function(gender, key) {
+        _.each(genders, function(gender) {
             Gender.create({
                 value: gender.value,
                 name: gender.name
@@ -239,7 +237,7 @@ module.exports = {
             name: 'Exalted'
         }];
 
-        _.each(reputations, function(reputation, key) {
+        _.each(reputations, function(reputation) {
             Reputation.create({
                 id: reputation.id,
                 name: reputation.name
@@ -263,7 +261,7 @@ module.exports = {
             name: 'Quest Item'
         }];
 
-        _.each(itemBinds, function(itemBind, key) {
+        _.each(itemBinds, function(itemBind) {
             ItemBind.create({
                 id: itemBind.id,
                 name: itemBind.name
@@ -290,7 +288,7 @@ module.exports = {
             name: 'Legendary'
         }];
 
-        _.each(qualities, function(quality, key) {
+        _.each(qualities, function(quality) {
             Quality.create({
                 id: quality.id,
                 name: quality.name
@@ -311,7 +309,7 @@ module.exports = {
             name: 'Neutral'
         }];
 
-        _.each(factions, function(faction, key) {
+        _.each(factions, function(faction) {
             Faction.create({
                 id: faction.id,
                 name: faction.name
@@ -349,7 +347,7 @@ module.exports = {
             });
         });
 
-        res.send(200, 'Folder structure created!')
+        res.send(200, 'Folder structure created!');
     }
 
 };

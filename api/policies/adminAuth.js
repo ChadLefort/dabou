@@ -8,12 +8,11 @@
  *
  */
 
-module.exports = function (req, res, next) {
+module.exports = function(req, res, next) {
 
-  if (req.user.admin == true) {
-    return next();
-  } else {
-    return res.forbidden();
-  }
-
+    if (req.user.admin === true) {
+        return next();
+    } else {
+        return res.forbidden();
+    }
 };
