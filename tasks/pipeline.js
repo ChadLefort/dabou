@@ -26,8 +26,9 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
-  // Load sails.io before everything else
+  // Load these before everything else
   'js/dependencies/sails.io.js',
+  'js/site.js',
   'js/dependencies/three.js',
 
   //From grunt-bower-task
