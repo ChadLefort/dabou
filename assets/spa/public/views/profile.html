@@ -1,0 +1,17 @@
+<div class="container push-down">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
+                    <div ng-if="vm.noProfile" class="text-center">
+                        <p>Can't find profile</p>
+                    </div>
+                    <div class="row" ng-if="!vm.noProfile">
+                        <div ng-include src="'/spa/shared/views/profile.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

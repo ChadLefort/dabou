@@ -1,0 +1,139 @@
+<div class="container push-down">
+    <div class="row">
+        <div class="col-md-12">
+            <accordion>
+                <accordion-group is-open="vm.filters.open">
+                    <accordion-heading>
+                        Filters <i class="pull-right fa fa-lg" ng-class="{'fa-chevron-down': vm.filters.open, 'fa-chevron-right': !vm.filters.open}"></i>
+                    </accordion-heading>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="page-header">
+                                <h5>Search</h5>
+                            </div>
+                            <input type="text" id="search" name="search" class="form-control" placeholder="Search" ng-model="vm.filters.search" ng-model-options="{debounce: 500}" ng-change="vm.search()">
+                        </div>
+                        <div class="col-md-2 col-md-2-5">
+                            <div class="page-header">
+                                <h5>Quality</h5>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{vm.qualityName}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-click="vm.showQuality()">All</a></li>
+                                    <li><a ng-click="vm.showQuality(1, 'Common')">Common</a></li>
+                                    <li><a ng-click="vm.showQuality(2, 'Uncommon')">Uncommon</a></li>
+                                    <li><a ng-click="vm.showQuality(3, 'Rare')">Rare</a></li>
+                                    <li><a ng-click="vm.showQuality(4, 'Epic')">Epic</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="page-header">
+                                <h5>Item Level</h5>
+                            </div>
+                            <div class="row no-gutter">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="vm.filters.itemLevelStart" ng-model-options="{debounce: 500}" ng-change="vm.changeItemLevel()">
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" class="form-control" ng-model="vm.filters.itemLevelEnd" ng-model-options="{debounce: 500}" ng-change="vm.changeItemLevel()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="page-header">
+                                <h5>Required Level</h5>
+                            </div>
+                            <div class="row no-gutter">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="vm.filters.reqLevelStart" ng-change="vm.changeReqLevel()">
+                                        <span class="input-group-addon">-</span>
+                                        <input type="text" class="form-control" ng-model="vm.filters.reqLevelEnd" ng-change="vm.changeReqLevel()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-md-2-5">
+                            <div class="page-header">
+                                <h5>Faction</h5>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{vm.factionName}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-click="vm.showFaction()">All</a></li>
+                                    <li><a ng-click="vm.showFaction(1, 'Alliance')">Alliance</a></li>
+                                    <li><a ng-click="vm.showFaction(2, 'Horde')">Horde</a></li>
+                                    <li><a ng-click="vm.showFaction(3, 'Neutral')">Neutral</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">Tabards</div>
+                <div class="panel-body">
+                    <div class="table-responsive ">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="tableHeader in vm.tableHeaders">
+                                        <a ng-click="vm.sort($index, vm.sortOrder)">
+                                    {{tableHeader.name}}
+                                    <i class="fa" ng-class="{'fa-sort': !vm.sortIcons[$index].asc && !vm.sortIcons[$index].desc, 'fa-sort-asc': vm.sortIcons[$index].asc, 'fa-sort-desc': vm.sortIcons[$index].desc}"></i></a>
+                                    </th>
+                                    <th>Source</th>
+                                    <th ng-if="vm.isLoggedIn">Your Collection</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="tabard in vm.tabards | itemsPerPage: vm.pageSize" total-items="vm.totalCount">
+                                    <td>
+                                        <span class="tabard-icon">
+                                        <img ng-src="http://media.blizzard.com/wow/icons/56/{{tabard.icon}}.jpg" class="img-rounded">
+                                    </span>
+                                        <a ui-sref="tabard({id: tabard.id})" style="color: {{tabard.quality.color}}"><strong>{{tabard.name}}</strong></a>
+                                    </td>
+                                    <td>{{tabard.quality.name}}</td>
+                                    <td>{{tabard.itemLevel}}</td>
+                                    <td>{{tabard.reqLevel}}</td>
+                                    <td>{{tabard.faction.name}}</td>
+                                    <td ng-if="tabard.attainable">
+                                        <span ng-repeat="sourceType in tabard.sourceType">
+                                        {{sourceType.name}} {{$last ? '' : ', '}}
+                                    </span>
+                                    </td>
+                                    <td ng-if="!tabard.attainable">Unavailable</td>
+                                    <td ng-if="vm.isLoggedIn">
+                                        <i class="fa fa-check"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-times"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <dir-pagination-controls on-page-change="vm.newPage(newPageNumber)"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.loading">
+                    <div class="col-md-12 text-center">
+                        <h3>Loading</h3><i class="fa fa-spinner fa-spin fa-4x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

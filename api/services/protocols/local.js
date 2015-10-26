@@ -1,6 +1,6 @@
-var validator = require('validator');
-var crypto = require('crypto');
-var Gravatar = require('machinepack-gravatar');
+var validator = require('validator'),
+    crypto = require('crypto'),
+    Gravatar = require('machinepack-gravatar');
 
 /**
  * Local Authentication Protocol
@@ -27,38 +27,46 @@ var Gravatar = require('machinepack-gravatar');
 exports.register = function(req, res, next) {
     var email = req.param('email'),
         username = req.param('username'),
-        password = req.param('password');
+        password = req.param('password'),
+        confirmPassword = req.param('confirmPassword');
 
     if (!email) {
         req.flash('error', 'Error.Passport.Email.Missing');
-        return next(new Error('No email was entered.'));
     }
 
     if (!username) {
         req.flash('error', 'Error.Passport.Username.Missing');
-        return next(new Error('No username was entered.'));
     }
 
     if (!password) {
         req.flash('error', 'Error.Passport.Password.Missing');
-        return next(new Error('No password was entered.'));
+    }
+
+    if (!confirmPassword) {
+        req.flash('error', 'Error.Passport.ConfirmPassword.Missing');
+    }
+
+    if (!email || !username || !password || !confirmPassword) {
+        return next(new Error('Missing requied fields.'));
     }
 
     Gravatar.getImageUrl({
         emailAddress: req.param('email'),
-        defaultImage: 'http://old-blog.chadlefort.com/assets/img/user-images/default_image.png',
+        gravatarSize: 2048,
+        defaultImage: process.env.S3_BUCKET_URL + '/assets/images/default_avatar.png',
         rating: 'g',
         useHttps: true
     }).exec({
         error: function(err) {
-            return res.negotiate(err);
+            return next(err);
         },
         success: function(gravatarUrl) {
 
             User.create({
                 username: username,
                 email: email,
-                gravatar: gravatarUrl
+                gravatar: gravatarUrl,
+                setUsername: true
             }, function(err, user) {
                 if (err) {
                     if (err.code === 'E_VALIDATION') {
@@ -91,7 +99,7 @@ exports.register = function(req, res, next) {
                         });
                     }
 
-                    next(null, user);
+                    return next(null, user);
                 });
             });
         }
@@ -168,7 +176,6 @@ exports.login = function(req, identifier, password, next) {
             } else {
                 req.flash('error', 'Error.Passport.Username.NotFound');
             }
-
             return next(null, false);
         }
 

@@ -1,0 +1,37 @@
+<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
+    <a class="navmenu-brand" href="/#/index">Dabou</a>
+    <ul class="nav navmenu-nav" ng-if="!vm.isLoggedIn">
+        <li><a href="/#/login">Login</a></li>
+        <li><a href="/#/register">Register</a></li>
+        <li><a href="/#/tabards">Tabards</a></li>
+        <li><a href="#">Dressing Room</a></li>
+        <li><a href="#">Tabard Creator</a></li>
+    </ul>
+    <img ng-if="vm.isLoggedIn && vm.setUsername" class="img-circle col-md-5 center-block" ng-src="{{vm.gravatar}}">
+    <ul class="nav navmenu-nav" ng-if="vm.isLoggedIn && vm.setUsername">
+        <li>
+            <p>Welcome {{vm.username}}</p>
+        </li>
+        <li><a href="/#/account">Account</a></li>
+        <li><a href="/#/character">Characters</a></li>
+        <li><a href="/#/tabards">Tabard Collection</a></li>
+        <li><a href="#">Tabard Creator</a></li>
+        <li><a ng-click="vm.logout()">Logout</a></li>
+    </ul>
+    <ul class="nav navmenu-nav" ng-if="vm.isLoggedIn && !vm.setUsername">
+        <li><a ng-click="vm.logout()">Logout</a></li>
+    </ul>
+    <div class="footer text-center">
+        <a href="#" target="_blank" class="footer-icon"><i class="fa fa-twitter-square"></i></a>
+        <a href="#" target="_blank" class="footer-icon"><i class="fa fa-facebook-square"></i></a>
+        <a href="#" target="_blank" class="footer-icon"><i class="fa fa-google-plus-square"></i></a>
+    </div>
+</div>
+<div class="navbar navbar-inverse navbar-fixed-top hidden-md hidden-lg">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/#/index">Dabou</a>
+</div>

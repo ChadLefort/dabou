@@ -22,39 +22,64 @@
 
 module.exports.routes = {
 
-    /***************************************************************************
-     *                                                                          *
-     * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-     * etc. depending on your default view engine) your home page.              *
-     *                                                                          *
-     * (Alternatively, remove this and add an `index.html` file in your         *
-     * `assets` directory)                                                      *
-     *                                                                          *
-     ***************************************************************************/
+  /***************************************************************************
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
-    'get /': 'SiteController.index',
+  'get /': {view: 'layouts/layout'},
 
-    /***************************************************************************
-     *                                                                          *
-     * Custom routes here...                                                    *
-     *                                                                          *
-     *  If a request to a URL doesn't match any of the custom routes above, it  *
-     * is matched against Sails route blueprints. See `config/blueprints.js`    *
-     * for configuration options and examples.                                  *
-     *                                                                          *
-     ***************************************************************************/
+  /***************************************************************************
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   *  If a request to a URL doesn't match any of the custom routes above, it  *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 
-    'get /login': 'AuthController.login',
-    'get /logout': 'AuthController.logout',
-    'get /register': 'AuthController.register',
+  /**
+   * Admin Routes
+   *
+   * @description :: These routes are all associated with a admin access level
+   * end points
+   */
+  'get /admin/tabards': 'AdminController.tabards',
+  'get /admin/lookup': 'AdminController.lookup',
+  'get /admin/folders': 'AdminController.folders',
 
-    'post /auth/local': 'AuthController.callback',
-    'post /auth/local/:action': 'AuthController.callback',
+  /**
+   * Authenication Routes
+   *
+   * @description :: These routes are all associated with passport or to see
+   * if a user is authenicated
+   */
+  'post /auth/local': 'AuthController.callback',
+  'post /auth/local/:action': 'AuthController.callback',
+  'get  /logout': 'AuthController.logout',
+  'get  /auth': 'AuthController.authenticated',
+  'get  /auth/:provider': 'AuthController.provider',
+  'get  /auth/:provider/callback': 'AuthController.callback',
+  'get  /auth/:provider/:action': 'AuthController.callback',
+  'get  /subscribe': 'AuthController.subscribe',
 
-    'get /auth/:provider': 'AuthController.provider',
-    'get /auth/:provider/callback': 'AuthController.callback',
-    'get /auth/:provider/:action': 'AuthController.callback',
+  /**
+   * Lookup Routes
+   *
+   * @description :: These routes are all associated with lookup tables
+   */
+   'get  /api/lookup': 'LookupController.lookup',
 
-    'get /user/account': 'UserController.account',
-    'get /user/unlink/:provider': 'UserController.unlink',
+  /**
+   * Profile Routes
+   *
+   * @description :: These routes are all associated with profiles
+   */
+   'get  /profile/:username': 'ProfileController.username',
 };

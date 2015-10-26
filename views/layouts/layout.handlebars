@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="dabou.auth">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,10 @@
     <title>Dabou</title>
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/vendor/angular-toastr/css/angular-toastr.min.css">
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/vendor/angular-toastr/css/angular-toastr.min.css">
+    <link rel="stylesheet" href="/styles/toastr.css">
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
     <!--STYLES END-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,33 +25,71 @@
 
 <body>
 
-{{> nav}}
-
-<div class="container">
-    {{{ body }}}
+<div ui-view="nav"></div>
+<div class="ui-view-container">
+    <div ui-view="page" class="page-view">
+        <div ui-view>
+          {{> status}}
+        </div>
+    </div>
 </div>
 
 <!--SCRIPTS-->
 <script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/dependencies/three.js"></script>
 <script src="/vendor/jquery/js/jquery.min.js"></script>
 <script src="/vendor/angular/js/angular.min.js"></script>
+<script src="/vendor/angular-animate/js/angular-animate.min.js"></script>
 <script src="/vendor/angular-bootstrap/js/ui-bootstrap-tpls.min.js"></script>
-<script src="/vendor/angular-bootstrap/js/ui-bootstrap.min.js"></script>
-<script src="/vendor/angular-toastr/js/angular-toastr.min.js"></script>
+<script src="/vendor/angular-sails/js/angular-sails.min.js"></script>
 <script src="/vendor/angular-toastr/js/angular-toastr.tpls.min.js"></script>
+<script src="/vendor/angular-utils-pagination/js/dirPagination.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/vendor/gsap/js/TweenMax.min.js"></script>
+<script src="/vendor/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+<script src="/vendor/lodash/js/lodash.min.js"></script>
+<script src="/vendor/ngFx/js/ngFx.min.js"></script>
 <script src="/vendor/ui-router/js/angular-ui-router.min.js"></script>
-<script src="/vendor/xtform/xtForm.js"></script>
-<script src="/js/custom.js"></script>
+<script src="/js/dependencies/DDSLoader.js"></script>
+<script src="/js/dependencies/MTLLoader.js"></script>
+<script src="/js/dependencies/OBJLoader.js"></script>
+<script src="/js/dependencies/OBJMTLLoader.js"></script>
+<script src="/js/dependencies/OrbitControls.js"></script>
+<script src="/js/dependencies/xtForm.js"></script>
+<script src="/spa/tabards/three/scene.js"></script>
+<script src="/spa/tabards/three/setup.js"></script>
+<script src="/spa/tabards/three/camera.js"></script>
+<script src="/spa/tabards/three/wrangler.js"></script>
+<script src="/spa/dabou.module.js"></script>
+<script src="/spa/account/account.module.js"></script>
+<script src="/spa/auth/auth.module.js"></script>
+<script src="/spa/main/main.module.js"></script>
+<script src="/spa/public/public.module.js"></script>
+<script src="/spa/tabards/tabards.module.js"></script>
+<script src="/spa/account/account.route.js"></script>
+<script src="/spa/account/controllers/account.js"></script>
+<script src="/spa/account/controllers/character.js"></script>
+<script src="/spa/account/services/account.service.js"></script>
+<script src="/spa/account/services/character.service.js"></script>
+<script src="/spa/auth/auth.route.js"></script>
+<script src="/spa/auth/controllers/login.js"></script>
+<script src="/spa/auth/controllers/register.js"></script>
+<script src="/spa/auth/controllers/status.js"></script>
+<script src="/spa/auth/directives/compareTo.js"></script>
+<script src="/spa/auth/services/auth.service.js"></script>
+<script src="/spa/dabou.config.js"></script>
+<script src="/spa/main/controllers/nav.js"></script>
+<script src="/spa/main/main.route.js"></script>
+<script src="/spa/main/services/main.service.js"></script>
+<script src="/spa/public/controllers/profile.js"></script>
+<script src="/spa/public/public.route.js"></script>
+<script src="/spa/tabards/controllers/tabards.js"></script>
+<script src="/spa/tabards/controllers/viewer.js"></script>
+<script src="/spa/tabards/services/tabards.service.js"></script>
+<script src="/spa/tabards/services/viewer.service.js"></script>
+<script src="/spa/tabards/tabards.route.js"></script>
 <!--SCRIPTS END-->
-
-<!--TEMPLATES-->
-
-<!--TEMPLATES END-->
-
-{{#if sails.config.livereloadPath}}
-    <script src="{{sails.config.livereloadPath}}"></script>
-{{/if}}
 
 </body>
 </html>

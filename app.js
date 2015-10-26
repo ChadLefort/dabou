@@ -18,12 +18,19 @@
  * `node app.js --silent --port=80 --prod`
  */
 
+// Setup local environment variables
+var env = process.env.NODE_ENV;
+
+if (env == 'development') {
+  require('dotenv').load();
+}
+
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 process.chdir(__dirname);
 
 // Ensure a "sails" can be located:
-(function() {
+(function () {
   var sails;
   try {
     sails = require('sails');
@@ -49,7 +56,9 @@ process.chdir(__dirname);
       console.error('Your `.sailsrc` file(s) will be ignored.');
       console.error('To resolve this, run:');
       console.error('npm install rc --save');
-      rc = function () { return {}; };
+      rc = function () {
+        return {};
+      };
     }
   }
 

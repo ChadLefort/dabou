@@ -13,46 +13,8 @@
  * always omit, customize, or replace this behavior with SASS, SCSS,
  * or any other Grunt tasks you like.)
  */
-
-
 @import '../vendor/bootstrap/less/bootstrap.less';
+@import '../vendor/jasny-bootstrap/less/jasny-bootstrap.less';
 @import 'variables.less';
 @import 'bootswatch.less';
-
-body {
-  padding-top: 100px;
-  background-color: white;
-}
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-
-.col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
-}
-
-.center-block {
-	float: none !important;
-}
-.auth-btn {
-	width: 100%;
-}
-.btn-twitter {
-	color: #ffffff;
-	background-color: #55acee;
-	border-color: transparent;
-}
-.btn-facebook {
-	color: #ffffff;
-	background-color: #3971B6;
-	border-color: transparent;
-}
-.btn-google {
-	color: #ffffff;
-	background-color: #CE443E;
-	border-color: transparent;
-}
+@import 'site.less';

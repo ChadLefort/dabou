@@ -40,10 +40,7 @@
 ################################################
 
 config/local.js
-config/passport.js
-config/connections.js
-config/env/*
-
+.env
 
 
 
@@ -71,7 +68,7 @@ config/env/*
 node_modules
 bower_components
 assets/vendor/*
-
+assets/tabards/*
 
 
 

@@ -15,32 +15,42 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'vendor/**/*.css',
-  'styles/theme/*.css',
-  'styles/**/*.css'
+  'styles/importer.css',
+  'vendor/angular-toastr/css/*.css',
+  'styles/toastr.css',
+  'vendor/font-awesome/css/*.css'
 ];
 
 
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  
-  // Load sails.io before everything else
+
+  // Load these before everything else
   'js/dependencies/sails.io.js',
+  'js/site.js',
+  'js/dependencies/three.js',
 
   //From grunt-bower-task
   'vendor/jquery/js/jquery.min.js',
   'vendor/angular/js/angular.min.js',
 
   //Others
-  'vendor/**/*.js',
+  'vendor/**/js/*.js',
 
-  // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/**/*.js',
+  // Dependencies
+  'js/dependencies/*.js',
 
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  'js/**/*.js'
+  //Three
+  'spa/tabards/three/scene.js',
+  'spa/tabards/three/setup.js',
+  'spa/tabards/three/camera.js',
+  'spa/tabards/three/wrangler.js',
+
+  //Angular Spa
+  'spa/**/dabou.module.js',
+  'spa/**/*.module.js',
+  'spa/**/*.js'
 ];
 
 
@@ -58,16 +68,15 @@ var templateFilesToInject = [
 ];
 
 
-
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where
 // they reside in the first place)
-module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
+module.exports.cssFilesToInject = cssFilesToInject.map(function (path) {
   return '.tmp/public/' + path;
 });
-module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
+module.exports.jsFilesToInject = jsFilesToInject.map(function (path) {
   return '.tmp/public/' + path;
 });
-module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
+module.exports.templateFilesToInject = templateFilesToInject.map(function (path) {
   return 'assets/' + path;
 });

@@ -1,0 +1,20 @@
+<img ng-src="{{vm.user.gravatar}}" class="col-md-3 center-block img-responsive img-circle">
+<div class="col-md-12">
+    <div class="page-header">
+        <h4><i class="fa fa-user"></i> General</h4>
+    </div>
+    <label class="control-label col-md-2">Username</label>
+    <p>{{vm.user.username}}</p>
+    <label class="control-label col-md-2">Name</label>
+    <p>{{vm.profile.name}}</p>
+    <label class="control-label col-md-2">Gender</label>
+    <p>{{vm.profile.gender}}</p>
+    <div class="page-header">
+        <h4><i class="fa fa-location-arrow"></i> Location</h4>
+    </div>
+    <p>{{vm.profile.location}}</p>
+    <div class="page-header">
+        <h4><i class="fa fa-book"></i> Bio</h4>
+    </div>
+    <p>{{vm.profile.bio}}</p>
+</div>
