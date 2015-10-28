@@ -30,9 +30,9 @@ module.exports.session = {
    *                                                                          *
    ***************************************************************************/
 
-  // cookie: {
-  //   maxAge: 90 * 24 * 60 * 60 * 1000
-  // },
+  cookie: {
+    maxAge: 90 * 24 * 60 * 60 * 1000
+  },
 
   /***************************************************************************
    *                                                                          *
@@ -40,7 +40,7 @@ module.exports.session = {
    * session store that can be shared across multiple Sails.js servers        *
    ***************************************************************************/
 
-  adapter: 'redis',
+  // adapter: 'redis',
 
   /***************************************************************************
    *                                                                          *
@@ -51,9 +51,9 @@ module.exports.session = {
    *                                                                          *
    ***************************************************************************/
 
-  host: process.env.PROD_REDIS_HOST,
-  port: process.env.PROD_REDIS_PORT,
-  password: process.env.PROD_REDIS_PASSWORD
+  // host: process.env.PROD_REDIS_HOST,
+  // port: process.env.PROD_REDIS_PORT,
+  // password: process.env.PROD_REDIS_PASSWORD
 
 
   /***************************************************************************
