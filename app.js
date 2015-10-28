@@ -19,9 +19,7 @@
  */
 
 // Setup local environment variables
-var env = process.env.NODE_ENV;
-
-if (env == 'development') {
+if (process.env.NODE_ENV == 'development') {
   require('dotenv').load();
 }
 
@@ -61,7 +59,6 @@ process.chdir(__dirname);
       };
     }
   }
-
 
   // Start server
   sails.lift(rc('sails'));

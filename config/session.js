@@ -20,7 +20,7 @@ module.exports.session = {
    * of your users, forcing them to log in again.                             *
    *                                                                          *
    ***************************************************************************/
-  secret: '6506bda5e1ea3640e7a970997323a7c4',
+  secret: process.env.SESSION_SECERT,
 
 
   /***************************************************************************
@@ -53,7 +53,7 @@ module.exports.session = {
 
   host: process.env.PROD_REDIS_HOST,
   port: process.env.PROD_REDIS_PORT,
-  pass: process.env.PROD_REDIS_PASSWORD
+  password: process.env.PROD_REDIS_PASSWORD
 
 
   /***************************************************************************
