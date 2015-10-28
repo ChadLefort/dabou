@@ -48,7 +48,8 @@ module.exports.sockets = {
 
   host: process.env.PROD_REDIS_HOST,
   port: process.env.PROD_REDIS_PORT,
-  pass: process.env.PROD_REDIS_PASSWORD
+
+  _hookTimeout: 240000
 
   /***************************************************************************
    *                                                                          *
