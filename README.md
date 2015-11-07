@@ -1,23 +1,19 @@
-# README #
+# Dabou #
 
-* Dabou is an web app that allows World of Warcraft fans to track their tabard collections.
-* Version 0.0.1
+Dabou is an web app that allows World of Warcraft fans to track their tabard collections.
 
 ### How do I get set up? ###
 
-* Make sure you have Node.js and NPM installed.
-* MySQL
+* Have the following installed:
+  * Node.js & NPM
+  * MySQL
+  * Redis
 * Open up your terminal to where you want it installed and use npm to install all of the dependencies:
 
 ```
 npm install
 ```
 
-* Navigate to the directory which you cloned this repo to and start the app with:
-
-```
-node app.js
-```
 * Setup various environment variables:
   * General:
     * NODE_ENV
@@ -48,3 +44,9 @@ node app.js
     * DEV_DB_USER
     * DEV_DB_PASSWORD
     * DEV_DB_DATABASE
+
+* Navigate to the directory which you cloned this repo to and start the app with:
+
+    ```
+    node app.js
+    ```
