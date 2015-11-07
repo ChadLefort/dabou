@@ -2,7 +2,7 @@
   "name": "dabou",
   "private": true,
   "version": "0.0.1",
-  "description": "a Sails application",
+  "description": "Allows World of Warcraft fans to track their tabard collections",
   "keywords": [],
   "dependencies": {
     "battlenet-api": "git://github.com/ChadLefort/battlenet-api",
